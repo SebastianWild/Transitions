@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9E4511C32401E6160000E7E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4511C22401E6160000E7E0 /* AppDelegate.swift */; };
-		9E4511C52401E6160000E7E0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4511C42401E6160000E7E0 /* ContentView.swift */; };
+		9E4511C52401E6160000E7E0 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4511C42401E6160000E7E0 /* PreferencesView.swift */; };
 		9E4511C72401E61A0000E7E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E4511C62401E61A0000E7E0 /* Assets.xcassets */; };
 		9E4511CA2401E61A0000E7E0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E4511C92401E61A0000E7E0 /* Preview Assets.xcassets */; };
 		9E4511CD2401E61A0000E7E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E4511CB2401E61A0000E7E0 /* Main.storyboard */; };
@@ -17,7 +17,7 @@
 /* Begin PBXFileReference section */
 		9E4511BF2401E6160000E7E0 /* DarkModeBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DarkModeBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E4511C22401E6160000E7E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9E4511C42401E6160000E7E0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		9E4511C42401E6160000E7E0 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		9E4511C62401E61A0000E7E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9E4511C92401E61A0000E7E0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9E4511CC2401E61A0000E7E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -55,8 +55,8 @@
 		9E4511C12401E6160000E7E0 /* DarkModeBuddy */ = {
 			isa = PBXGroup;
 			children = (
+				9E4511D52401E9600000E7E0 /* Preferences */,
 				9E4511C22401E6160000E7E0 /* AppDelegate.swift */,
-				9E4511C42401E6160000E7E0 /* ContentView.swift */,
 				9E4511C62401E61A0000E7E0 /* Assets.xcassets */,
 				9E4511CB2401E61A0000E7E0 /* Main.storyboard */,
 				9E4511CE2401E61A0000E7E0 /* Info.plist */,
@@ -72,6 +72,14 @@
 				9E4511C92401E61A0000E7E0 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		9E4511D52401E9600000E7E0 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				9E4511C42401E6160000E7E0 /* PreferencesView.swift */,
+			);
+			path = Preferences;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,7 +153,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E4511C52401E6160000E7E0 /* ContentView.swift in Sources */,
+				9E4511C52401E6160000E7E0 /* PreferencesView.swift in Sources */,
 				9E4511C32401E6160000E7E0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
