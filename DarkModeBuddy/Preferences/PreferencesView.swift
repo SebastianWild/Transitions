@@ -19,8 +19,12 @@ struct PreferencesView: View {
             Toggle(isOn: $userData.isStartingOnLogon) {
                 Text("Start on Logon")
             }
-            BrightnessSliderView(selected: $userData.interfaceStyleSwitchTriggerValue,
-                                 range: .constant(0.0...100.0))
+            VStack(alignment: .center, spacing: 0) {
+                Text("Dark Mode Trigger")
+                // TODO: Need my own slider with functionality to show current brightness
+                Slider(value: $userData.interfaceStyleSwitchTriggerValue, in: 0.0...1.0)
+                Text("Move the slider to adjust at what brightness level dark mode is triggered.")
+            }
         }
         .padding()
     }
