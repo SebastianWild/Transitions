@@ -14,11 +14,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     var window: NSWindow!
 
+    private var userData: UserData = UserDefaults.userData
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Create the SwiftUI view that provides the window contents.
         // TODO: Replace with actual data obj
-        let contentView = PreferencesView().environmentObject(UserData())
+        let contentView = PreferencesView().environmentObject(userData)
 
         // Create the window and set the content view. 
         window = NSWindow(
@@ -35,7 +36,5 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
-
-
 }
 

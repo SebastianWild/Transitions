@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct PreferencesView: View {
-    
     @EnvironmentObject private var userData: UserData
     
     var body: some View {

@@ -14,6 +14,7 @@
 		9E4511CD2401E61A0000E7E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E4511CB2401E61A0000E7E0 /* Main.storyboard */; };
 		9E4511D92401F3960000E7E0 /* BrightnessSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4511D82401F3960000E7E0 /* BrightnessSliderView.swift */; };
 		9E4511DC2402026A0000E7E0 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4511DB2402026A0000E7E0 /* UserData.swift */; };
+		9E4511E22402117F0000E7E0 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4511E12402117F0000E7E0 /* UserDefaults+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		9E4511CF2401E61A0000E7E0 /* DarkModeBuddy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DarkModeBuddy.entitlements; sourceTree = "<group>"; };
 		9E4511D82401F3960000E7E0 /* BrightnessSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrightnessSliderView.swift; sourceTree = "<group>"; };
 		9E4511DB2402026A0000E7E0 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		9E4511E12402117F0000E7E0 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 		9E4511C12401E6160000E7E0 /* DarkModeBuddy */ = {
 			isa = PBXGroup;
 			children = (
+				9E4511E02402116C0000E7E0 /* Extensions */,
 				9E4511DA2402025B0000E7E0 /* UserData */,
 				9E4511D52401E9600000E7E0 /* Preferences */,
 				9E4511C22401E6160000E7E0 /* AppDelegate.swift */,
@@ -94,6 +97,14 @@
 				9E4511DB2402026A0000E7E0 /* UserData.swift */,
 			);
 			path = UserData;
+			sourceTree = "<group>";
+		};
+		9E4511E02402116C0000E7E0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9E4511E12402117F0000E7E0 /* UserDefaults+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,6 +178,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E4511E22402117F0000E7E0 /* UserDefaults+Extensions.swift in Sources */,
 				9E4511C52401E6160000E7E0 /* PreferencesView.swift in Sources */,
 				9E4511C32401E6160000E7E0 /* AppDelegate.swift in Sources */,
 				9E4511DC2402026A0000E7E0 /* UserData.swift in Sources */,
