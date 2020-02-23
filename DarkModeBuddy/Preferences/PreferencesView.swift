@@ -9,15 +9,28 @@
 import SwiftUI
 
 struct PreferencesView: View {
+    
+    @EnvironmentObject private var userData: UserData
+    
     var body: some View {
-        Text("Hello, World!")
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        VStack(alignment: .leading) {
+            Toggle(isOn: $userData.isAppEnabled) {
+                Text("Enabled")
+            }
+            Toggle(isOn: $userData.isStartingOnLogon) {
+                Text("Start on Logon")
+            }
+            BrightnessSliderView(selected: $userData.interfaceStyleSwitchTriggerValue,
+                                 range: .constant(0.0...100.0))
+        }
+        .padding()
     }
 }
 
 
-struct ContentView_Previews: PreviewProvider {
+struct PreferencesView_Previews: PreviewProvider {
     static var previews: some View {
         PreferencesView()
+            .environmentObject(UserData())
     }
 }

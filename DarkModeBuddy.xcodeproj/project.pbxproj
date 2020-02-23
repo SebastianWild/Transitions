@@ -12,6 +12,8 @@
 		9E4511C72401E61A0000E7E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E4511C62401E61A0000E7E0 /* Assets.xcassets */; };
 		9E4511CA2401E61A0000E7E0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E4511C92401E61A0000E7E0 /* Preview Assets.xcassets */; };
 		9E4511CD2401E61A0000E7E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E4511CB2401E61A0000E7E0 /* Main.storyboard */; };
+		9E4511D92401F3960000E7E0 /* BrightnessSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4511D82401F3960000E7E0 /* BrightnessSliderView.swift */; };
+		9E4511DC2402026A0000E7E0 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4511DB2402026A0000E7E0 /* UserData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +25,8 @@
 		9E4511CC2401E61A0000E7E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9E4511CE2401E61A0000E7E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E4511CF2401E61A0000E7E0 /* DarkModeBuddy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DarkModeBuddy.entitlements; sourceTree = "<group>"; };
+		9E4511D82401F3960000E7E0 /* BrightnessSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrightnessSliderView.swift; sourceTree = "<group>"; };
+		9E4511DB2402026A0000E7E0 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +59,7 @@
 		9E4511C12401E6160000E7E0 /* DarkModeBuddy */ = {
 			isa = PBXGroup;
 			children = (
+				9E4511DA2402025B0000E7E0 /* UserData */,
 				9E4511D52401E9600000E7E0 /* Preferences */,
 				9E4511C22401E6160000E7E0 /* AppDelegate.swift */,
 				9E4511C62401E61A0000E7E0 /* Assets.xcassets */,
@@ -78,8 +83,17 @@
 			isa = PBXGroup;
 			children = (
 				9E4511C42401E6160000E7E0 /* PreferencesView.swift */,
+				9E4511D82401F3960000E7E0 /* BrightnessSliderView.swift */,
 			);
 			path = Preferences;
+			sourceTree = "<group>";
+		};
+		9E4511DA2402025B0000E7E0 /* UserData */ = {
+			isa = PBXGroup;
+			children = (
+				9E4511DB2402026A0000E7E0 /* UserData.swift */,
+			);
+			path = UserData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,6 +169,8 @@
 			files = (
 				9E4511C52401E6160000E7E0 /* PreferencesView.swift in Sources */,
 				9E4511C32401E6160000E7E0 /* AppDelegate.swift in Sources */,
+				9E4511DC2402026A0000E7E0 /* UserData.swift in Sources */,
+				9E4511D92401F3960000E7E0 /* BrightnessSliderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
