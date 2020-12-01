@@ -12,21 +12,18 @@ import SwiftUI
 struct BrightnessSliderView: View {
     @Binding var selected: Double
     @Binding var range: ClosedRange<Double>
-
     private let stepping = 0.025
 
     var body: some View {
-        VStack(spacing: 0) {
-            Text("Dark Mode Trigger")
-            // TODO: Need my own slider with functionality to show current brightness
-            Slider(value: $selected, in: range)
-            Text("Move the slider to adjust at what brightness level dark mode is triggered.")
-        }
+        Text("Hi")
     }
 }
 
 struct BrightnessSliderView_Previews: PreviewProvider {
     static var previews: some View {
-        BrightnessSliderView(selected: .constant(50), range: .constant(0.0 ... 1.0))
+        Group {
+            BrightnessSliderView(selected: .constant(50), range: .constant(0.0 ... 1.0))
+            Slider(value: .constant(0.5), in: 0.0 ... 50)
+        }
     }
 }
