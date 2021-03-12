@@ -15,15 +15,24 @@ struct BrightnessSliderView: View {
     private let stepping = 0.025
 
     var body: some View {
-        Text("Hi")
+        ZStack {
+            Rectangle()
+            Slider(
+                value: $selected,
+                in: range,
+                step: stepping
+            )
+        }
     }
 }
 
 struct BrightnessSliderView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            BrightnessSliderView(selected: .constant(50), range: .constant(0.0 ... 1.0))
-            Slider(value: .constant(0.5), in: 0.0 ... 50)
+            BrightnessSliderView(
+                selected: .constant(0.5),
+                range: .constant(0.0 ... 1.0)
+            )
         }
     }
 }

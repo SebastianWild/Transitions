@@ -54,6 +54,6 @@ struct PositionIndicatorView: View {
 struct PositionIndicatorView_Previews: PreviewProvider {
     static var previews: some View {
         PositionIndicatorView(cornerRadius: 1)
-            .frame(width: 10, height: 10, alignment: .center)
+            .frame(width: 30, height: 30, alignment: .center)
     }
 }
