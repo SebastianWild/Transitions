@@ -1,6 +1,6 @@
 //
 //  UserDefaults+Save.swift
-//  DarkModeBuddy
+//  Transitions
 //
 //  Created by Sebastian Wild on 2/22/20.
 //  Copyright © 2020 Sebastian Wild. All rights reserved.

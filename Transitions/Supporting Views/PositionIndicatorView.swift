@@ -1,6 +1,6 @@
 //
 //  PositionIndicatorView.swift
-//  DarkModeBuddy
+//  Transitions
 //
 //  Created by Sebastian Wild on 2/23/20.
 //  Copyright © 2020 Sebastian Wild. All rights reserved.
