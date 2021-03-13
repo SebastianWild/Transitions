@@ -1,2 +1,4 @@
 --swiftversion 5.3
 --exclude BuildTools/*
+
+--disable trailingCommas

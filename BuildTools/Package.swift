@@ -14,7 +14,7 @@ let package = Package(
     platforms: [.macOS(.v10_15)],
     dependencies: [
         .package(url: "https://github.com/realm/SwiftLint", from: "0.43.0"),
-        .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.47.12"),
+        .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.47.12")
     ]
     // targets: [.target(name: "BuildTools", path: "")]
 )
