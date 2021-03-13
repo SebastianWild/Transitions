@@ -17,6 +17,7 @@
 		9E4511DC2402026A0000E7E0 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4511DB2402026A0000E7E0 /* UserData.swift */; };
 		9E4511E22402117F0000E7E0 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4511E12402117F0000E7E0 /* UserDefaults+Extensions.swift */; };
 		9EC555D025FC56F200AFC0BA /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 9EC555CF25FC56F200AFC0BA /* .swiftlint.yml */; };
+		9EE3E33B25FC64D70063BAFF /* CodableUserDefaultProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE3E33A25FC64D70063BAFF /* CodableUserDefaultProperty.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		9E4511E12402117F0000E7E0 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		9EC555CA25FC559E00AFC0BA /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		9EC555CF25FC56F200AFC0BA /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		9EE3E33A25FC64D70063BAFF /* CodableUserDefaultProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableUserDefaultProperty.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,15 +49,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9E41946D24037EA5003B5E87 /* Supporting Views */ = {
-			isa = PBXGroup;
-			children = (
-				9E41946E24037EF2003B5E87 /* PositionIndicatorView.swift */,
-				9E4511D82401F3960000E7E0 /* BrightnessSliderView.swift */,
-			);
-			path = "Supporting Views";
-			sourceTree = "<group>";
-		};
 		9E4511B62401E6160000E7E0 = {
 			isa = PBXGroup;
 			children = (
@@ -76,15 +69,15 @@
 		9E4511C12401E6160000E7E0 /* Transitions */ = {
 			isa = PBXGroup;
 			children = (
-				9E41946D24037EA5003B5E87 /* Supporting Views */,
-				9E4511E02402116C0000E7E0 /* Extensions */,
-				9E4511DA2402025B0000E7E0 /* UserData */,
-				9E4511D52401E9600000E7E0 /* Preferences */,
+				9E4511CF2401E61A0000E7E0 /* Transitions.entitlements */,
+				9E4511CE2401E61A0000E7E0 /* Info.plist */,
 				9E4511C22401E6160000E7E0 /* AppDelegate.swift */,
 				9E4511C62401E61A0000E7E0 /* Assets.xcassets */,
 				9E4511CB2401E61A0000E7E0 /* Main.storyboard */,
-				9E4511CE2401E61A0000E7E0 /* Info.plist */,
-				9E4511CF2401E61A0000E7E0 /* Transitions.entitlements */,
+				9E4511E02402116C0000E7E0 /* Extensions */,
+				9EE3E33525FC640B0063BAFF /* Models */,
+				9EE3E33625FC641D0063BAFF /* Views */,
+				9EE3E33925FC64BE0063BAFF /* Utilities */,
 				9E4511C82401E61A0000E7E0 /* Preview Content */,
 			);
 			path = Transitions;
@@ -106,14 +99,6 @@
 			path = Preferences;
 			sourceTree = "<group>";
 		};
-		9E4511DA2402025B0000E7E0 /* UserData */ = {
-			isa = PBXGroup;
-			children = (
-				9E4511DB2402026A0000E7E0 /* UserData.swift */,
-			);
-			path = UserData;
-			sourceTree = "<group>";
-		};
 		9E4511E02402116C0000E7E0 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +114,40 @@
 				9EC555CA25FC559E00AFC0BA /* Package.swift */,
 			);
 			path = BuildTools;
+			sourceTree = "<group>";
+		};
+		9EE3E33525FC640B0063BAFF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9E4511DB2402026A0000E7E0 /* UserData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9EE3E33625FC641D0063BAFF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9EE3E33725FC64370063BAFF /* Helpers */,
+				9E4511D52401E9600000E7E0 /* Preferences */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9EE3E33725FC64370063BAFF /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				9E41946E24037EF2003B5E87 /* PositionIndicatorView.swift */,
+				9E4511D82401F3960000E7E0 /* BrightnessSliderView.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		9EE3E33925FC64BE0063BAFF /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				9EE3E33A25FC64D70063BAFF /* CodableUserDefaultProperty.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -227,6 +246,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EE3E33B25FC64D70063BAFF /* CodableUserDefaultProperty.swift in Sources */,
 				9E4511E22402117F0000E7E0 /* UserDefaults+Extensions.swift in Sources */,
 				9E4511C52401E6160000E7E0 /* PreferencesView.swift in Sources */,
 				9E4511C32401E6160000E7E0 /* AppDelegate.swift in Sources */,

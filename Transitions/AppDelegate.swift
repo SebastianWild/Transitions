@@ -13,7 +13,8 @@ import SwiftUI
 class AppDelegate: NSObject, NSApplicationDelegate {
     var window: NSWindow!
 
-    private var userData: UserData = UserDefaults.userData
+    @CodableUserDefaultProperty(UserDefaults.Keys.userData, defaultValue: UserData())
+    private var userData: UserData
 
     func applicationDidFinishLaunching(_: Notification) {
         // Create the SwiftUI view that provides the window contents.

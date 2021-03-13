@@ -25,7 +25,7 @@ final class UserData: ObservableObject {
             .sink { [weak self] _ in
                 guard let self = self else { return }
 
-                UserDefaults.set(userData: self)
+                try? self.userDefaults.save(item: self, for: UserDefaults.Keys.userData)
             }
     }
 }
