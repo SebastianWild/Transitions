@@ -16,11 +16,6 @@ final class StatusBarController: NSObject {
         statusBar = NSStatusBar()
         statusItem = statusBar.statusItem(withLength: 28.0)
 
-        if let statusBarButton = statusItem.button {
-            statusBarButton.image = NSImage(named: "sun.min")
-            statusBarButton.image?.size = NSSize(width: 18, height: 18)
-            // We want the image to change color with the system theme change as well
-            statusBarButton.image?.isTemplate = true
-        }
+        statusItem.button?.image = .statusBarIcon
     }
 }
