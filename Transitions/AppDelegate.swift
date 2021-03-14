@@ -12,12 +12,18 @@ import SwiftUI
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     var statusBar: StatusBarController?
+    lazy var popover = NSPopover()
 
     @CodableUserDefaultProperty(UserDefaults.Keys.userData, defaultValue: UserData())
     private var userData: UserData
 
     func applicationDidFinishLaunching(_: Notification) {
-        statusBar = StatusBarController()
+        let contentView = PreferencesView().environmentObject(userData)
+
+        popover.contentSize = NSSize(width: 360, height: 360)
+        popover.contentViewController = NSHostingController(rootView: contentView)
+
+        statusBar = StatusBarController(popover)
     }
 
     func applicationWillTerminate(_: Notification) {
