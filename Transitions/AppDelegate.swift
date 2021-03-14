@@ -12,13 +12,12 @@ import SwiftUI
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     var window: NSWindow!
+    var statusBar: StatusBarController?
 
     @CodableUserDefaultProperty(UserDefaults.Keys.userData, defaultValue: UserData())
     private var userData: UserData
 
     func applicationDidFinishLaunching(_: Notification) {
-        // Create the SwiftUI view that provides the window contents.
-        // TODO: Replace with actual data obj
         let contentView = PreferencesView().environmentObject(userData)
 
         // Create the window and set the content view.
@@ -28,10 +27,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             backing: .buffered, defer: false
         )
         window.center()
-        window.title = "Preferences" // TODO: Localize
         window.setFrameAutosaveName("Main Window")
         window.contentView = NSHostingView(rootView: contentView)
         window.makeKeyAndOrderFront(nil)
+
+        statusBar = StatusBarController()
     }
 
     func applicationWillTerminate(_: Notification) {

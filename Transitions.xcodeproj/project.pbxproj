@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E0CF33F25FD8D9200699170 /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0CF33E25FD8D9200699170 /* StatusBarController.swift */; };
 		9E41946F24037EF2003B5E87 /* PositionIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E41946E24037EF2003B5E87 /* PositionIndicatorView.swift */; };
 		9E4511C32401E6160000E7E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4511C22401E6160000E7E0 /* AppDelegate.swift */; };
 		9E4511C52401E6160000E7E0 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4511C42401E6160000E7E0 /* PreferencesView.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9E0CF33E25FD8D9200699170 /* StatusBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
 		9E41946E24037EF2003B5E87 /* PositionIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionIndicatorView.swift; sourceTree = "<group>"; };
 		9E4511BF2401E6160000E7E0 /* Transitions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Transitions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E4511C22401E6160000E7E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +51,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9E0CF33D25FD8D6500699170 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9E0CF33E25FD8D9200699170 /* StatusBarController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		9E4511B62401E6160000E7E0 = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +87,7 @@
 				9E4511E02402116C0000E7E0 /* Extensions */,
 				9EE3E33525FC640B0063BAFF /* Models */,
 				9EE3E33625FC641D0063BAFF /* Views */,
+				9E0CF33D25FD8D6500699170 /* Controllers */,
 				9EE3E33925FC64BE0063BAFF /* Utilities */,
 				9E4511C82401E61A0000E7E0 /* Preview Content */,
 			);
@@ -250,6 +261,7 @@
 				9E4511E22402117F0000E7E0 /* UserDefaults+Extensions.swift in Sources */,
 				9E4511C52401E6160000E7E0 /* PreferencesView.swift in Sources */,
 				9E4511C32401E6160000E7E0 /* AppDelegate.swift in Sources */,
+				9E0CF33F25FD8D9200699170 /* StatusBarController.swift in Sources */,
 				9E41946F24037EF2003B5E87 /* PositionIndicatorView.swift in Sources */,
 				9E4511DC2402026A0000E7E0 /* UserData.swift in Sources */,
 				9E4511D92401F3960000E7E0 /* BrightnessSliderView.swift in Sources */,
