@@ -7,11 +7,13 @@
 //
 
 import Cocoa
+import Combine
 
 final class StatusBarController: NSObject {
     private var statusBar: NSStatusBar
     private var statusItem: NSStatusItem
     private var popover: NSPopover
+    private var eventSubscriber: AnyCancellable?
 
     init(_ popover: NSPopover) {
         statusBar = NSStatusBar()
@@ -24,12 +26,28 @@ final class StatusBarController: NSObject {
 
         statusItem.button?.action = #selector(togglePopOver(sender:))
         statusItem.button?.target = self
+
+        eventSubscriber = Publishers.Merge(
+            NSEvent.publisher(for: .leftMouseDown),
+            NSEvent.publisher(for: .rightMouseDown)
+        )
+        .sink { [weak self] _ in
+            guard let self = self else { return }
+            self.hidePopOver(self)
+        }
     }
 
-    @objc func togglePopOver(sender: AnyObject) {
-        if popover.isShown {
-            popover.performClose(sender)
-        } else if let button = statusItem.button {
+    @objc
+    func togglePopOver(sender: AnyObject) {
+        popover.isShown ? hidePopOver(sender) : showPopover()
+    }
+
+    private func hidePopOver(_ sender: AnyObject) {
+        popover.performClose(sender)
+    }
+
+    private func showPopover() {
+        if let button = statusItem.button {
             popover.show(relativeTo: button.bounds, of: button, preferredEdge: .maxY)
         }
     }
