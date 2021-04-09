@@ -28,6 +28,11 @@ struct PreferencesView: View {
                     step: 0.1
                 )
                 Text("Move the slider to adjust at what brightness level dark mode is triggered.")
+                    .lineLimit(nil)
+            }
+            HStack {
+                Spacer()
+                Button("Quit", action: { exit(0) })
             }
         }
         .padding()
