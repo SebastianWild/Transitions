@@ -21,8 +21,12 @@ struct PreferencesView: View {
             }
             VStack(alignment: .center, spacing: 0) {
                 Text("Dark Mode Trigger")
-                // TODO: Need my own slider with functionality to show current brightness
-                Slider(value: $userData.interfaceStyleSwitchTriggerValue, in: 0.0 ... 1.0, step: 0.1)
+                BrightnessSliderView(
+                    value: .constant(0.5),
+                    innerValue: .constant(0.5),
+                    range: 0.0 ... 1.0,
+                    step: 0.1
+                )
                 Text("Move the slider to adjust at what brightness level dark mode is triggered.")
             }
         }

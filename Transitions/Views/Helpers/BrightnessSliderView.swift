@@ -10,20 +10,23 @@ import Foundation
 import SwiftUI
 
 struct BrightnessSliderView: View {
-    @State var selected: Double
-    @Binding var range: ClosedRange<Double>
+    @Binding var value: Double
+    @Binding var innerValue: Double
+    let range: ClosedRange<Double>
     let step: Double
 
     @State private var indicatorPosition: CGPoint
 
     init(
-        selected: Double,
-        range: Binding<ClosedRange<Double>>,
+        value: Binding<Double>,
+        innerValue: Binding<Double>,
+        range: ClosedRange<Double>,
         step: Double
     ) {
-        _selected = State(initialValue: selected)
-        _indicatorPosition = State(initialValue: CGPoint(x: selected, y: Double(CGFloat.indicatorYOffset * -1)))
-        _range = range
+        _value = value
+        _innerValue = innerValue
+        _indicatorPosition = State(initialValue: CGPoint(x: value.wrappedValue, y: Double(CGFloat.indicatorYOffset * -1)))
+        self.range = range
         self.step = step
     }
 
@@ -72,7 +75,7 @@ struct BrightnessSliderView: View {
     var drag: some Gesture {
         DragGesture()
             .onEnded { value in
-                self.selected = Double(value.location.y)
+                self.value = Double(value.location.y)
             }
     }
 }
@@ -100,15 +103,16 @@ struct BrightnessSliderView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             BrightnessSliderView(
-                selected: 0.5,
-                range: .constant(0.0 ... 1.0),
-                step: 0.1
-            )
-            Slider(
                 value: .constant(0.5),
-                in: 0 ... 1,
+                innerValue: .constant(0.5),
+                range: 0.0 ... 1.0,
                 step: 0.1
             )
+//            Slider(
+//                value: .constant(0.5),
+//                in: 0 ... 1,
+//                step: 0.1
+//            )
         }
     }
 }
