@@ -36,18 +36,19 @@ struct PositionIndicatorView: View {
                 path.addQuadCurve(to: .init(x: width, y: cornerRadius),
                                   control: topRight)
                 // Middle right corner
-                // TODO: Add Quad curve!
                 path.addLine(to: rightCenter)
                 // Bottom center
                 path.addLine(to: bottomCenter)
                 // Left center
-                // TODO: Add quad curve!
                 path.addLine(to: leftCenter)
                 // Top Left
                 path.addLine(to: .init(x: topLeft.x, y: topLeft.y + cornerRadius))
                 path.addQuadCurve(to: .init(x: topLeft.x + cornerRadius, y: topLeft.y), control: .zero)
             }
         }
+        .foregroundColor(.white)
+        .padding(2.0)
+        .shadow(color: .black.opacity(0.3), radius: 2, x: 0, y: 1.5)
     }
 }
 

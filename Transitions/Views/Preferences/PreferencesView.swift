@@ -24,8 +24,7 @@ struct PreferencesView: View {
                 BrightnessSliderView(
                     value: .constant(0.5),
                     innerValue: .constant(0.5),
-                    range: 0.0 ... 1.0,
-                    step: 0.1
+                    range: 0.0 ... 1.0
                 )
                 Text("Move the slider to adjust at what brightness level dark mode is triggered.")
                     .lineLimit(nil)
