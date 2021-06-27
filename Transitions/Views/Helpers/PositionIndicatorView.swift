@@ -46,7 +46,7 @@ struct PositionIndicatorView: View {
                 path.addQuadCurve(to: .init(x: topLeft.x + cornerRadius, y: topLeft.y), control: .zero)
             }
         }
-        .foregroundColor(.white)
+        .foregroundColor(Color.Controls.slider_thumb)
         .padding(2.0)
         .shadow(color: .black.opacity(0.3), radius: 2, x: 0, y: 1.5)
     }

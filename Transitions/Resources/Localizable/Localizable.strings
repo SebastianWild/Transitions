@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  Transitions
+
+  Created by Sebastian Wild on 6/27/21.
+  Copyright © 2021 Sebastian Wild. All rights reserved.
+*/
+// MARK: - Preferences
+"quit" = "Quit";
+"preferences_enabled" = "Enabled";
+"start_on_logon" = "Start On Logon";
+"slider_header_text" = "Dark Mode Trigger";
+"slider_footnote_text" = "Move the slider to adjust at what brightness level dark mode is triggered.";

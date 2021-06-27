@@ -3,10 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E0614902689221D00F34D59 /* Sliders in Frameworks */ = {isa = PBXBuildFile; productRef = 9E06148F2689221D00F34D59 /* Sliders */; };
+		9E061494268940D900F34D59 /* Color+Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E061493268940D900F34D59 /* Color+Library.swift */; };
+		9E061496268941F200F34D59 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9E061495268941F200F34D59 /* Localizable.strings */; };
+		9E0614982689421300F34D59 /* AppStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0614972689421300F34D59 /* AppStrings.swift */; };
 		9E0CF33F25FD8D9200699170 /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0CF33E25FD8D9200699170 /* StatusBarController.swift */; };
 		9E0CF34425FD953600699170 /* NSImage+Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0CF34325FD953600699170 /* NSImage+Library.swift */; };
 		9E0CF34725FD98C000699170 /* NSSize+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0CF34625FD98C000699170 /* NSSize+Extensions.swift */; };
@@ -25,6 +29,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9E061493268940D900F34D59 /* Color+Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Library.swift"; sourceTree = "<group>"; };
+		9E061495268941F200F34D59 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		9E0614972689421300F34D59 /* AppStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStrings.swift; sourceTree = "<group>"; };
 		9E0CF33E25FD8D9200699170 /* StatusBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
 		9E0CF34325FD953600699170 /* NSImage+Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Library.swift"; sourceTree = "<group>"; };
 		9E0CF34625FD98C000699170 /* NSSize+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSSize+Extensions.swift"; sourceTree = "<group>"; };
@@ -51,12 +58,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E0614902689221D00F34D59 /* Sliders in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9E06149126893E6400F34D59 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9E06149226893E6B00F34D59 /* Localizable */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		9E06149226893E6B00F34D59 /* Localizable */ = {
+			isa = PBXGroup;
+			children = (
+				9E061495268941F200F34D59 /* Localizable.strings */,
+			);
+			path = Localizable;
+			sourceTree = "<group>";
+		};
 		9E0CF33D25FD8D6500699170 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -89,13 +113,14 @@
 				9E4511CE2401E61A0000E7E0 /* Info.plist */,
 				9E4511C22401E6160000E7E0 /* AppDelegate.swift */,
 				9E4511C62401E61A0000E7E0 /* Assets.xcassets */,
-				9E4511CB2401E61A0000E7E0 /* Main.storyboard */,
-				9E4511E02402116C0000E7E0 /* Extensions */,
-				9EE3E33525FC640B0063BAFF /* Models */,
-				9EE3E33625FC641D0063BAFF /* Views */,
 				9E0CF33D25FD8D6500699170 /* Controllers */,
-				9EE3E33925FC64BE0063BAFF /* Utilities */,
+				9E4511E02402116C0000E7E0 /* Extensions */,
+				9E4511CB2401E61A0000E7E0 /* Main.storyboard */,
+				9EE3E33525FC640B0063BAFF /* Models */,
 				9E4511C82401E61A0000E7E0 /* Preview Content */,
+				9E06149126893E6400F34D59 /* Resources */,
+				9EE3E33925FC64BE0063BAFF /* Utilities */,
+				9EE3E33625FC641D0063BAFF /* Views */,
 			);
 			path = Transitions;
 			sourceTree = "<group>";
@@ -119,9 +144,10 @@
 		9E4511E02402116C0000E7E0 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				9E4511E12402117F0000E7E0 /* UserDefaults+Extensions.swift */,
+				9E061493268940D900F34D59 /* Color+Library.swift */,
 				9E0CF34325FD953600699170 /* NSImage+Library.swift */,
 				9E0CF34625FD98C000699170 /* NSSize+Extensions.swift */,
+				9E4511E12402117F0000E7E0 /* UserDefaults+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -139,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				9E4511DB2402026A0000E7E0 /* UserData.swift */,
+				9E0614972689421300F34D59 /* AppStrings.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -188,6 +215,9 @@
 				9EC148942403392600EBC6D2 /* PBXTargetDependency */,
 			);
 			name = Transitions;
+			packageProductDependencies = (
+				9E06148F2689221D00F34D59 /* Sliders */,
+			);
 			productName = DarkModeBuddy;
 			productReference = 9E4511BF2401E6160000E7E0 /* Transitions.app */;
 			productType = "com.apple.product-type.application";
@@ -217,6 +247,7 @@
 			);
 			mainGroup = 9E4511B62401E6160000E7E0;
 			packageReferences = (
+				9E06148E2689221D00F34D59 /* XCRemoteSwiftPackageReference "swiftui-sliders" */,
 			);
 			productRefGroup = 9E4511C02401E6160000E7E0 /* Products */;
 			projectDirPath = "";
@@ -236,6 +267,7 @@
 				9E4511CD2401E61A0000E7E0 /* Main.storyboard in Resources */,
 				9E4511CA2401E61A0000E7E0 /* Preview Assets.xcassets in Resources */,
 				9E4511C72401E61A0000E7E0 /* Assets.xcassets in Resources */,
+				9E061496268941F200F34D59 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,6 +298,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E0614982689421300F34D59 /* AppStrings.swift in Sources */,
 				9EE3E33B25FC64D70063BAFF /* CodableUserDefaultProperty.swift in Sources */,
 				9E0CF34725FD98C000699170 /* NSSize+Extensions.swift in Sources */,
 				9E4511E22402117F0000E7E0 /* UserDefaults+Extensions.swift in Sources */,
@@ -275,6 +308,7 @@
 				9E41946F24037EF2003B5E87 /* PositionIndicatorView.swift in Sources */,
 				9E4511DC2402026A0000E7E0 /* UserData.swift in Sources */,
 				9E4511D92401F3960000E7E0 /* BrightnessSliderView.swift in Sources */,
+				9E061494268940D900F34D59 /* Color+Library.swift in Sources */,
 				9E0CF34A25FD99D700699170 /* NSEventPublisher.swift in Sources */,
 				9E0CF34425FD953600699170 /* NSImage+Library.swift in Sources */,
 			);
@@ -421,7 +455,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Transitions/Transitions.entitlements;
-				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "Transitions/Preview\\ Content/Preview\\ Assets.xcassets";
@@ -445,7 +478,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Transitions/Transitions.entitlements;
-				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "Transitions/Preview\\ Content/Preview\\ Assets.xcassets";
@@ -488,6 +520,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		9E06148E2689221D00F34D59 /* XCRemoteSwiftPackageReference "swiftui-sliders" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/spacenation/swiftui-sliders";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		9EC148922403391C00EBC6D2 /* XCRemoteSwiftPackageReference "Mint" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/yonaskolb/Mint.git";
@@ -499,6 +539,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		9E06148F2689221D00F34D59 /* Sliders */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9E06148E2689221D00F34D59 /* XCRemoteSwiftPackageReference "swiftui-sliders" */;
+			productName = Sliders;
+		};
 		9EC148932403392600EBC6D2 /* mint */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9EC148922403391C00EBC6D2 /* XCRemoteSwiftPackageReference "Mint" */;

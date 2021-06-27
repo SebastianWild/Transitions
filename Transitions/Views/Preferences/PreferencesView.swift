@@ -14,24 +14,24 @@ struct PreferencesView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Toggle(isOn: $userData.isAppEnabled) {
-                Text("Enabled")
+                Text(LocalizedStringKeys.Preferences.enabled.rawValue)
             }
             Toggle(isOn: $userData.isStartingOnLogon) {
-                Text("Start on Logon")
+                Text(LocalizedStringKeys.Preferences.start_on_logon.rawValue)
             }
             VStack(alignment: .center, spacing: 0) {
-                Text("Dark Mode Trigger")
+                Text(LocalizedStringKeys.Preferences.slider_header_text.rawValue)
                 BrightnessSliderView(
                     value: .constant(0.5),
                     innerValue: .constant(0.5),
                     range: 0.0 ... 1.0
                 )
-                Text("Move the slider to adjust at what brightness level dark mode is triggered.")
+                Text(LocalizedStringKeys.Preferences.slider_footnote_text.rawValue)
                     .lineLimit(nil)
             }
             HStack {
                 Spacer()
-                Button("Quit", action: { exit(0) })
+                Button(LocalizedStringKeys.Preferences.quit.rawValue, action: { exit(0) })
             }
         }
         .padding()
@@ -40,7 +40,9 @@ struct PreferencesView: View {
 
 struct PreferencesView_Previews: PreviewProvider {
     static var previews: some View {
-        PreferencesView()
-            .environmentObject(UserData())
+        Group {
+            PreferencesView()
+                .environmentObject(UserData())
+        }
     }
 }
