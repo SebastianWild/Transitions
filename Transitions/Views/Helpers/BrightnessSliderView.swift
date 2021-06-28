@@ -34,9 +34,12 @@ struct BrightnessSliderView: View {
                         .frame(height: 6)
                         .cornerRadius(3),
                     thumb: PositionIndicatorView(cornerRadius: 1.0)
+                        .frame(width: 27, height: 27)
                         .offset(x: 0.0, y: -12.0)
                 )
             )
+            .padding([.top, .bottom])
+            .fixedSize(horizontal: false, vertical: true)
     }
 
     var track: some View {
