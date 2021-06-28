@@ -7,14 +7,15 @@
 //
 
 import Foundation
+import SwiftUI
 
-enum LocalizedStringKeys {
-    enum Preferences: String, Localizable {
-        case enabled = "preferences_enabled"
-        case start_on_logon
-        case slider_header_text
-        case slider_footnote_text
-        case quit
+extension LocalizedStringKey {
+    enum Preferences {
+        static let quit = LocalizedStringKey("quit")
+        static let enabled = LocalizedStringKey("preferences_enabled")
+        static let start_on_logon = LocalizedStringKey("start_on_logon")
+        static let slider_header_text = LocalizedStringKey("slider_header_text")
+        static let slider_footnote_text = LocalizedStringKey("slider_footnote_text")
     }
 }
 

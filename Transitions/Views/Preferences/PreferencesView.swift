@@ -14,24 +14,24 @@ struct PreferencesView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Toggle(isOn: $userData.isAppEnabled) {
-                Text(LocalizedStringKeys.Preferences.enabled.rawValue)
+                Text(LocalizedStringKey.Preferences.enabled)
             }
             Toggle(isOn: $userData.isStartingOnLogon) {
-                Text(LocalizedStringKeys.Preferences.start_on_logon.rawValue)
+                Text(LocalizedStringKey.Preferences.start_on_logon)
             }
             VStack(alignment: .center, spacing: 0) {
-                Text(LocalizedStringKeys.Preferences.slider_header_text.rawValue)
+                Text(LocalizedStringKey.Preferences.slider_header_text)
                 BrightnessSliderView(
                     value: .constant(0.5),
                     innerValue: .constant(0.5),
                     range: 0.0 ... 1.0
                 )
-                Text(LocalizedStringKeys.Preferences.slider_footnote_text.rawValue)
+                Text(LocalizedStringKey.Preferences.slider_footnote_text)
                     .lineLimit(nil)
             }
             HStack {
                 Spacer()
-                Button(LocalizedStringKeys.Preferences.quit.rawValue, action: { exit(0) })
+                Button(LocalizedStringKey.Preferences.quit, action: { exit(0) })
             }
         }
         .padding()
