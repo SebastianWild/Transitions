@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		9E0614902689221D00F34D59 /* Sliders in Frameworks */ = {isa = PBXBuildFile; productRef = 9E06148F2689221D00F34D59 /* Sliders */; };
 		9E061494268940D900F34D59 /* Color+Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E061493268940D900F34D59 /* Color+Library.swift */; };
-		9E061496268941F200F34D59 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9E061495268941F200F34D59 /* Localizable.strings */; };
 		9E0614982689421300F34D59 /* AppStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0614972689421300F34D59 /* AppStrings.swift */; };
+		9E061499268949AB00F34D59 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9E06149B268949AB00F34D59 /* Localizable.strings */; };
 		9E0CF33F25FD8D9200699170 /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0CF33E25FD8D9200699170 /* StatusBarController.swift */; };
 		9E0CF34425FD953600699170 /* NSImage+Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0CF34325FD953600699170 /* NSImage+Library.swift */; };
 		9E0CF34725FD98C000699170 /* NSSize+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0CF34625FD98C000699170 /* NSSize+Extensions.swift */; };
@@ -30,8 +30,8 @@
 
 /* Begin PBXFileReference section */
 		9E061493268940D900F34D59 /* Color+Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Library.swift"; sourceTree = "<group>"; };
-		9E061495268941F200F34D59 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		9E0614972689421300F34D59 /* AppStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStrings.swift; sourceTree = "<group>"; };
+		9E06149A268949AB00F34D59 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9E0CF33E25FD8D9200699170 /* StatusBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
 		9E0CF34325FD953600699170 /* NSImage+Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Library.swift"; sourceTree = "<group>"; };
 		9E0CF34625FD98C000699170 /* NSSize+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSSize+Extensions.swift"; sourceTree = "<group>"; };
@@ -76,7 +76,7 @@
 		9E06149226893E6B00F34D59 /* Localizable */ = {
 			isa = PBXGroup;
 			children = (
-				9E061495268941F200F34D59 /* Localizable.strings */,
+				9E06149B268949AB00F34D59 /* Localizable.strings */,
 			);
 			path = Localizable;
 			sourceTree = "<group>";
@@ -267,7 +267,7 @@
 				9E4511CD2401E61A0000E7E0 /* Main.storyboard in Resources */,
 				9E4511CA2401E61A0000E7E0 /* Preview Assets.xcassets in Resources */,
 				9E4511C72401E61A0000E7E0 /* Assets.xcassets in Resources */,
-				9E061496268941F200F34D59 /* Localizable.strings in Resources */,
+				9E061499268949AB00F34D59 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +324,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		9E06149B268949AB00F34D59 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9E06149A268949AB00F34D59 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		9E4511CB2401E61A0000E7E0 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
