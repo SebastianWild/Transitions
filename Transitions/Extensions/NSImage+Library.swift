@@ -10,13 +10,21 @@ import Cocoa
 
 extension NSImage {
     static var statusBarIcon: NSImage {
-        guard let image = NSImage(named: "sun.min") else {
+        var image: NSImage?
+        if #available(macOS 11.0, *) {
+            let symbolConfig = NSImage.SymbolConfiguration(pointSize: .statusBarIconPointSize, weight: .bold)
+            image = NSImage(systemSymbolName: "sun.min", accessibilityDescription: nil)?.withSymbolConfiguration(symbolConfig)
+        } else {
+            image = NSImage(named: "sun.min")
+        }
+
+        guard let statusBarIcon = image else {
             fatalError("Asset not found!")
         }
 
-        image.isTemplate = true
-        image.size = .statusBarIcon
+        statusBarIcon.isTemplate = true
+        statusBarIcon.size = .statusBarIcon
 
-        return image
+        return statusBarIcon
     }
 }

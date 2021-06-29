@@ -12,3 +12,7 @@ extension NSSize {
     static let statusBarIcon = NSSize(width: 18, height: 18)
     static let popover = NSSize(width: 360, height: 360)
 }
+
+extension CGFloat {
+    static let statusBarIconPointSize: CGFloat = 15.0
+}

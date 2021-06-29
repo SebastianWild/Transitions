@@ -13,7 +13,7 @@
 		9E061499268949AB00F34D59 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9E06149B268949AB00F34D59 /* Localizable.strings */; };
 		9E0CF33F25FD8D9200699170 /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0CF33E25FD8D9200699170 /* StatusBarController.swift */; };
 		9E0CF34425FD953600699170 /* NSImage+Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0CF34325FD953600699170 /* NSImage+Library.swift */; };
-		9E0CF34725FD98C000699170 /* NSSize+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0CF34625FD98C000699170 /* NSSize+Extensions.swift */; };
+		9E0CF34725FD98C000699170 /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0CF34625FD98C000699170 /* Sizes.swift */; };
 		9E0CF34A25FD99D700699170 /* NSEventPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0CF34925FD99D700699170 /* NSEventPublisher.swift */; };
 		9E41946F24037EF2003B5E87 /* PositionIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E41946E24037EF2003B5E87 /* PositionIndicatorView.swift */; };
 		9E4511C32401E6160000E7E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4511C22401E6160000E7E0 /* AppDelegate.swift */; };
@@ -34,7 +34,7 @@
 		9E06149A268949AB00F34D59 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9E0CF33E25FD8D9200699170 /* StatusBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
 		9E0CF34325FD953600699170 /* NSImage+Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Library.swift"; sourceTree = "<group>"; };
-		9E0CF34625FD98C000699170 /* NSSize+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSSize+Extensions.swift"; sourceTree = "<group>"; };
+		9E0CF34625FD98C000699170 /* Sizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
 		9E0CF34925FD99D700699170 /* NSEventPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSEventPublisher.swift; sourceTree = "<group>"; };
 		9E41946E24037EF2003B5E87 /* PositionIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionIndicatorView.swift; sourceTree = "<group>"; };
 		9E4511BF2401E6160000E7E0 /* Transitions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Transitions.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -146,7 +146,7 @@
 			children = (
 				9E061493268940D900F34D59 /* Color+Library.swift */,
 				9E0CF34325FD953600699170 /* NSImage+Library.swift */,
-				9E0CF34625FD98C000699170 /* NSSize+Extensions.swift */,
+				9E0CF34625FD98C000699170 /* Sizes.swift */,
 				9E4511E12402117F0000E7E0 /* UserDefaults+Extensions.swift */,
 			);
 			path = Extensions;
@@ -300,7 +300,7 @@
 			files = (
 				9E0614982689421300F34D59 /* AppStrings.swift in Sources */,
 				9EE3E33B25FC64D70063BAFF /* CodableUserDefaultProperty.swift in Sources */,
-				9E0CF34725FD98C000699170 /* NSSize+Extensions.swift in Sources */,
+				9E0CF34725FD98C000699170 /* Sizes.swift in Sources */,
 				9E4511E22402117F0000E7E0 /* UserDefaults+Extensions.swift in Sources */,
 				9E4511C52401E6160000E7E0 /* PreferencesView.swift in Sources */,
 				9E4511C32401E6160000E7E0 /* AppDelegate.swift in Sources */,
