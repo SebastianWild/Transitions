@@ -12,7 +12,7 @@ import Combine
 final class StatusBarController: NSObject {
     private var statusBar: NSStatusBar
     private var statusItem: NSStatusItem
-    private var popover: NSPopover
+    private weak var popover: NSPopover?
     private var eventSubscriber: AnyCancellable?
 
     init(_ popover: NSPopover) {
@@ -39,16 +39,16 @@ final class StatusBarController: NSObject {
 
     @objc
     func togglePopOver(sender: AnyObject) {
-        popover.isShown ? hidePopOver(sender) : showPopover()
+        popover?.isShown ?? false ? hidePopOver(sender) : showPopover()
     }
 
     private func hidePopOver(_ sender: AnyObject) {
-        popover.performClose(sender)
+        popover?.performClose(sender)
     }
 
     private func showPopover() {
         if let button = statusItem.button {
-            popover.show(relativeTo: button.bounds, of: button, preferredEdge: .maxY)
+            popover?.show(relativeTo: button.bounds, of: button, preferredEdge: .maxY)
         }
     }
 }
