@@ -16,6 +16,8 @@ struct BrightnessSliderView: View {
     @Binding var innerValue: Double
     let range: ClosedRange<Double>
 
+    @State private var isPressed: Bool = false
+
     init(
         value: Binding<Double>,
         innerValue: Binding<Double>,
@@ -33,11 +35,7 @@ struct BrightnessSliderView: View {
                     track: track
                         .frame(height: 6)
                         .cornerRadius(3),
-                    thumb: Rectangle()
-                        .foregroundColor(Color.Controls.slider_thumb)
-                        .cornerRadius(CGSize.defaultThumbSize.width / 2)
-                        .frame(width: CGSize.defaultThumbSize.width / 2, height: CGSize.defaultThumbSize.height)
-                        .shadow(radius: 1.0),
+                    thumb: thumb,
                     thumbSize: CGSize(width: CGSize.defaultThumbSize.width / 2, height: CGSize.defaultThumbSize.height)
                 )
             )
@@ -63,6 +61,14 @@ struct BrightnessSliderView: View {
                     .foregroundColor(.accentColor)
             }
         }
+    }
+
+    var thumb: some View {
+        Rectangle()
+            .foregroundColor(isPressed ? Color.red : Color.Controls.slider_thumb)
+            .cornerRadius(CGSize.defaultThumbSize.width / 2)
+            .frame(width: CGSize.defaultThumbSize.width / 2, height: CGSize.defaultThumbSize.height)
+            .shadow(radius: 1.0)
     }
 
     var ratioFilled: Double {
