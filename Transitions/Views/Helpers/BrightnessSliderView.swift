@@ -33,9 +33,12 @@ struct BrightnessSliderView: View {
                     track: track
                         .frame(height: 6)
                         .cornerRadius(3),
-                    thumb: PositionIndicatorView(cornerRadius: 1.0)
-                        .frame(width: 27, height: 27)
-                        .offset(x: 0.0, y: -12.0)
+                    thumb: Rectangle()
+                        .foregroundColor(Color.Controls.slider_thumb)
+                        .cornerRadius(CGSize.defaultThumbSize.width / 2)
+                        .frame(width: CGSize.defaultThumbSize.width / 2, height: CGSize.defaultThumbSize.height)
+                        .shadow(radius: 1.0),
+                    thumbSize: CGSize(width: CGSize.defaultThumbSize.width / 2, height: CGSize.defaultThumbSize.height)
                 )
             )
             .padding([.top, .bottom])
@@ -71,10 +74,12 @@ struct BrightnessSliderView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             BrightnessSliderView(
-                value: .constant(0.5),
+                value: .constant(0.0),
                 innerValue: .constant(0.25),
                 range: 0.0 ... 1.0
             )
+
+            Slider(value: .constant(0.5))
         }
     }
 }
