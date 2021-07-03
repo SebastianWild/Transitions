@@ -27,7 +27,10 @@ struct PreferencesView: View {
                     range: 0.0 ... 1.0
                 )
                 Text(LocalizedStringKey.Preferences.slider_footnote_text)
-                    .lineLimit(nil)
+                    // Need to set fixed size in order to prevent word wrap issue
+                    // https://stackoverflow.com/a/56604599/30602
+                    .fixedSize(horizontal: false, vertical: true)
+                    .lineLimit(2)
             }
             HStack {
                 Spacer()
