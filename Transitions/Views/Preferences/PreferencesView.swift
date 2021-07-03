@@ -22,7 +22,7 @@ struct PreferencesView: View {
             VStack(alignment: .center, spacing: 0) {
                 Text(LocalizedStringKey.Preferences.slider_header_text)
                 BrightnessSliderView(
-                    value: .constant(0.5),
+                    value: $userData.interfaceStyleSwitchTriggerValue,
                     innerValue: .constant(0.5),
                     range: 0.0 ... 1.0
                 )
