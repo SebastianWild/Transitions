@@ -63,7 +63,7 @@ struct BrightnessSliderView: View {
     }
 
     var ratioFilled: Double {
-        value / (range.upperBound - range.lowerBound)
+        innerValue / (range.upperBound - range.lowerBound)
     }
 }
 
