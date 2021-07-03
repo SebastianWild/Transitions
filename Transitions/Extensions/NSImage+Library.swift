@@ -27,4 +27,20 @@ extension NSImage {
 
         return statusBarIcon
     }
+
+    static var sun_max: NSImage {
+        guard let image = NSImage(named: "sun.max") else {
+            fatalError("Asset not found!")
+        }
+
+        return image
+    }
+
+    static var sun_min: NSImage {
+        guard let image = NSImage(named: "sun.min") else {
+            fatalError("Asset not found!")
+        }
+
+        return image
+    }
 }

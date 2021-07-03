@@ -22,6 +22,9 @@ final class UserData: ObservableObject {
         // Synchronize to UserDefaults when values change
         changeHandler = Publishers.CombineLatest3($isAppEnabled, $isStartingOnLogon, $interfaceStyleSwitchTriggerValue)
             .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: true)
+            .handleEvents(receiveOutput: { data in
+                print("Received new user data: \(data)")
+            })
             .sink { [weak self] _ in
                 guard let self = self else { return }
 

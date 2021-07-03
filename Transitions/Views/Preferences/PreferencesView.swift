@@ -13,19 +13,26 @@ struct PreferencesView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
+            Text(LocalizedStringKey.Preferences.general)
+                .font(.headline)
             Toggle(isOn: $userData.isAppEnabled) {
                 Text(LocalizedStringKey.Preferences.enabled)
             }
             Toggle(isOn: $userData.isStartingOnLogon) {
                 Text(LocalizedStringKey.Preferences.start_on_logon)
             }
+            Text(LocalizedStringKey.Preferences.slider_header_text)
+                .font(.headline)
             VStack(alignment: .center, spacing: 0) {
-                Text(LocalizedStringKey.Preferences.slider_header_text)
-                BrightnessSliderView(
-                    value: $userData.interfaceStyleSwitchTriggerValue,
-                    innerValue: .constant(0.5),
-                    range: 0.0 ... 1.0
-                )
+                HStack {
+                    Image(nsImage: NSImage.sun_min)
+                    BrightnessSliderView(
+                        value: $userData.interfaceStyleSwitchTriggerValue,
+                        innerValue: .constant(0.5),
+                        range: 0.0 ... 1.0
+                    )
+                    Image(nsImage: NSImage.sun_max)
+                }
                 Text(LocalizedStringKey.Preferences.slider_footnote_text)
                     // Need to set fixed size in order to prevent word wrap issue
                     // https://stackoverflow.com/a/56604599/30602

@@ -39,7 +39,6 @@ struct BrightnessSliderView: View {
                     thumbSize: CGSize(width: CGSize.defaultThumbSize.width / 2, height: CGSize.defaultThumbSize.height)
                 )
             )
-            .padding([.top, .bottom])
             .fixedSize(horizontal: false, vertical: true)
     }
 
