@@ -19,7 +19,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_: Notification) {
         let contentView = PreferencesView().environmentObject(userData)
-
+        print("current brightness: \(SystemBrightness.getBrightness())")
         popover.contentSize = .popover
         popover.contentViewController = NSHostingController(rootView: contentView)
 
