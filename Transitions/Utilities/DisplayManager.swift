@@ -20,6 +20,7 @@ class DisplayManager: ObservableObject {
             .sink { [weak self] _ in
                 self?.updateDisplays()
             }
+        updateDisplays()
     }
 
     private func updateDisplays() {
