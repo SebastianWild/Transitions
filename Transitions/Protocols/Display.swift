@@ -6,12 +6,28 @@
 //  Copyright © 2021 Sebastian Wild. All rights reserved.
 //
 
-import Foundation
 import Combine
+import Foundation
+import SwiftUI
 
-protocol Display: Identifiable {
+typealias BrightnessReading = Result<Float, BrightnessReadError>
+
+protocol Display: ObservableObject {
     var name: String { get set }
     /// Brightness for a display is defined from 0.0 to 1.0
     var brightness: Float { get }
-    var brightnessChangePublisher: AnyPublisher<Float, Never> { get }
+    var error: BrightnessReadError? { get }
+    var isInternalDisplay: Bool { get }
+
+    var metadata: DisplayMetadata { get }
+}
+
+extension Display {
+    var metadata: DisplayMetadata {
+        DisplayMetadata(name: name)
+    }
+}
+
+struct DisplayMetadata {
+    let name: String
 }

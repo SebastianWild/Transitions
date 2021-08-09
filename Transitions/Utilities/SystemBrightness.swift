@@ -9,6 +9,7 @@
 import Cocoa
 
 enum SystemBrightness {
+    /// - attention:  Does not work for Apple Silicon systems
     static func getBrightness() -> Float {
         var iterator: io_iterator_t = 0
         var brightness: Float = 0.0

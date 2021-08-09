@@ -13,7 +13,7 @@ import SwiftUI
 final class UserData: ObservableObject {
     @Published var isAppEnabled: Bool = false
     @Published var isStartingOnLogon: Bool = false
-    @Published var interfaceStyleSwitchTriggerValue: Double = 0.0
+    @Published var interfaceStyleSwitchTriggerValue: Float = 0.0
 
     private var changeHandler: AnyCancellable?
     private let userDefaults = UserDefaults.standard
@@ -47,7 +47,7 @@ extension UserData: Codable {
 
         isAppEnabled = try container.decode(Bool.self, forKey: .isAppEnabled)
         isStartingOnLogon = try container.decode(Bool.self, forKey: .isStartingOnLogon)
-        interfaceStyleSwitchTriggerValue = try container.decode(Double.self, forKey: .interfaceStyleSwitchTriggerValue)
+        interfaceStyleSwitchTriggerValue = try container.decode(Float.self, forKey: .interfaceStyleSwitchTriggerValue)
     }
 
     func encode(to encoder: Encoder) throws {

@@ -11,20 +11,20 @@ import Foundation
 import Sliders
 import SwiftUI
 
-struct BrightnessSliderView: View {
-    @Binding var value: Double
-    @Binding var innerValue: Double
-    let range: ClosedRange<Double>
+struct SliderView: View {
+    @Binding var value: Float
+    let innerValue: Float
+    let range: ClosedRange<Float>
 
     @State private var isPressed: Bool = false
 
     init(
-        value: Binding<Double>,
-        innerValue: Binding<Double>,
-        range: ClosedRange<Double>
+        value: Binding<Float>,
+        innerValue: Float,
+        range: ClosedRange<Float>
     ) {
         _value = value
-        _innerValue = innerValue
+        self.innerValue = innerValue
         self.range = range
     }
 
@@ -70,7 +70,7 @@ struct BrightnessSliderView: View {
             .shadow(radius: 1.0)
     }
 
-    var ratioFilled: Double {
+    var ratioFilled: Float {
         innerValue / (range.upperBound - range.lowerBound)
     }
 }
@@ -78,13 +78,11 @@ struct BrightnessSliderView: View {
 struct BrightnessSliderView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            BrightnessSliderView(
+            SliderView(
                 value: .constant(0.0),
-                innerValue: .constant(0.25),
+                innerValue: 0.25,
                 range: 0.0 ... 1.0
             )
-
-            Slider(value: .constant(0.5))
         }
     }
 }
