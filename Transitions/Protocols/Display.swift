@@ -22,6 +22,51 @@ protocol Display: ObservableObject {
     var metadata: DisplayMetadata { get }
 }
 
+class AnyDisplay {
+    private let nameGetter: () -> String
+    private let nameSetter: (String) -> Void
+    private let brightnessGetter: () -> Float
+    private let errorGetter: () -> BrightnessReadError?
+    private let isInternalDisplayGetter: () -> Bool
+
+    init<D: Display>(display: D) {
+        nameGetter = { display.name }
+        brightnessGetter = { display.brightness }
+        errorGetter = { display.error }
+        isInternalDisplayGetter = { display.isInternalDisplay }
+        nameSetter = { display.name = $0 }
+    }
+}
+
+extension AnyDisplay: Display {
+    var name: String {
+        get {
+            nameGetter()
+        }
+        set {
+            nameSetter(newValue)
+        }
+    }
+
+    var brightness: Float {
+        brightnessGetter()
+    }
+
+    var error: BrightnessReadError? {
+        errorGetter()
+    }
+
+    var isInternalDisplay: Bool {
+        isInternalDisplayGetter()
+    }
+}
+
+extension Display {
+    func eraseToAnyDisplay() -> AnyDisplay {
+        AnyDisplay(display: self)
+    }
+}
+
 extension Display {
     var metadata: DisplayMetadata {
         DisplayMetadata(name: name)

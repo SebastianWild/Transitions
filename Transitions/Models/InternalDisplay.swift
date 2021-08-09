@@ -15,7 +15,14 @@ class InternalDisplay: Display {
 
     private var brightnessUpdateCancellable: AnyCancellable?
 
-    init(screen: NSScreen) {
+    convenience init() throws {
+        guard let nsScreen = NSScreen.internalDisplay else {
+            throw InternalDisplayError.notAvailable
+        }
+        self.init(screen: nsScreen)
+    }
+
+    private init(screen: NSScreen) {
         name = screen.localizedName
         error = nil
         brightness = 0.0
@@ -64,5 +71,12 @@ class InternalDisplay: Display {
         } catch {
             return .failure(BrightnessReadError.readError(displayMetadata: metadata, original: error))
         }
+    }
+}
+
+extension InternalDisplay {
+    enum InternalDisplayError: LocalizedError {
+        /// The internal display is not available
+        case notAvailable
     }
 }
