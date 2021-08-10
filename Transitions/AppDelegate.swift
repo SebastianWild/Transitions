@@ -16,12 +16,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @CodableUserDefaultProperty(UserDefaults.Keys.userData, defaultValue: UserData())
     private var userData: UserData
-//    private let displayManager = DisplayManager()
+    private let displayManager = DisplayManager()
 
     func applicationDidFinishLaunching(_: Notification) {
         let contentView = PreferencesView()
             .environmentObject(userData)
-//            .environmentObject(displayManager)
+            .environmentObject(displayManager)
 
         popover.contentSize = .popover
         popover.contentViewController = NSHostingController(rootView: contentView)

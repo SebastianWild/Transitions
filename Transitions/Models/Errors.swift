@@ -11,4 +11,6 @@ enum BrightnessReadError: LocalizedError {
     ///
     /// For internal displays, this can occur when there lid is closed or the internal display is off.
     case readError(displayMetadata: DisplayMetadata, original: Error?)
+    /// There are no displays where brightness can be read from.
+    case noDisplays(original: Error?)
 }

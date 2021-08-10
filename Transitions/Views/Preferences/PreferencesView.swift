@@ -10,7 +10,9 @@ import SwiftUI
 
 struct PreferencesView: View {
     @EnvironmentObject private var userData: UserData
-//    @EnvironmentObject private var displayManager: DisplayManager
+    @EnvironmentObject private var displayManager: DisplayManager
+
+    @State var primaryDisplay: Result<AnyDisplay, BrightnessReadError> = .failure(.noDisplays(original: nil))
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -24,16 +26,36 @@ struct PreferencesView: View {
             }
             Text(LocalizedStringKey.Preferences.slider_header_text)
                 .font(.headline)
-            TriggerSliderView(
-                display: Preview.MockDisplay(),
-                triggerValue: $userData.interfaceStyleSwitchTriggerValue
-            )
+
+            switch primaryDisplay {
+            case let .success(display):
+                TriggerSliderView(
+                    display: display,
+                    triggerValue: $userData.interfaceStyleSwitchTriggerValue
+                )
+            case let .failure(error):
+                error
+            }
+
             HStack {
                 Spacer()
                 Button(LocalizedStringKey.Preferences.quit, action: { exit(0) })
             }
         }
         .padding()
+        .onReceive(displayManager.$displays) { displays in
+            guard let primaryDisplay = displays.first else {
+                self.primaryDisplay = .failure(.noDisplays(original: nil))
+                return
+            }
+
+            if let readError = primaryDisplay.error {
+                self.primaryDisplay = .failure(readError)
+                return
+            }
+
+            self.primaryDisplay = .success(primaryDisplay)
+        }
     }
 }
 
