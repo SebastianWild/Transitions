@@ -10,9 +10,11 @@ import Combine
 import Foundation
 import SwiftUI
 
-struct TriggerSliderView<Model>: View where Model: Display {
-    @ObservedObject var display: Model
+struct TriggerSliderView: View {
+    let display: Display
     @Binding var triggerValue: Float
+
+    @State var reading: Float = 0.0
 
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
@@ -34,6 +36,11 @@ struct TriggerSliderView<Model>: View where Model: Display {
                 // https://stackoverflow.com/a/56604599/30602
                 .fixedSize(horizontal: false, vertical: true)
                 .lineLimit(2)
+        }
+        .onReceive(display.reading) { reading in
+            if case let .success(brightness) = reading {
+                self.reading = brightness
+            }
         }
     }
 }

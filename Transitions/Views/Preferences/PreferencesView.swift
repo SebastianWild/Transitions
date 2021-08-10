@@ -12,7 +12,7 @@ struct PreferencesView: View {
     @EnvironmentObject private var userData: UserData
     @EnvironmentObject private var displayManager: DisplayManager
 
-    @State var primaryDisplay: Result<AnyDisplay, BrightnessReadError> = .failure(.noDisplays(original: nil))
+    @State var primaryDisplay: Result<Display, BrightnessReadError> = .failure(.noDisplays(original: nil))
 
     var body: some View {
         VStack(alignment: .leading) {

@@ -8,10 +8,25 @@ import Combine
 import Foundation
 
 class InternalDisplay: Display {
-    @Published var name: String
+    var name: String
     let isInternalDisplay = true
-    @Published private(set) var brightness: Float = 0.0
-    @Published private(set) var error: BrightnessReadError?
+    private(set) var brightness: Float = 0.0 {
+        didSet {
+            readingSubject.send(.success(brightness))
+        }
+    }
+
+    private(set) var error: BrightnessReadError? {
+        didSet {
+            guard let error = error else { return }
+            readingSubject.send(.failure(error))
+        }
+    }
+
+    private var readingSubject = CurrentValueSubject<BrightnessReading, Never>(.failure(.noDisplays(original: nil)))
+    var reading: AnyPublisher<BrightnessReading, Never> {
+        readingSubject.eraseToAnyPublisher()
+    }
 
     private var brightnessUpdateCancellable: AnyCancellable?
     private lazy var plistdecoder = PropertyListDecoder()

@@ -8,7 +8,7 @@ import Foundation
 import SwiftUI
 
 class DisplayManager: ObservableObject {
-    @Published private(set) var displays: [AnyDisplay] = []
+    @Published private(set) var displays: [Display] = []
 
     private var nsScreenUpdateCancellable: AnyCancellable?
 
@@ -24,10 +24,10 @@ class DisplayManager: ObservableObject {
     }
 
     private func updateDisplays() {
-        var displays = [AnyDisplay]()
+        var displays = [Display]()
         // Pretty sure there is no mac with two internal displays?
         if let internalDisplay = try? InternalDisplay() {
-            displays.append(internalDisplay.eraseToAnyDisplay())
+            displays.append(internalDisplay)
         }
 
         self.displays = displays

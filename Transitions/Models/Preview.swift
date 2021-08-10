@@ -3,14 +3,30 @@
 // Copyright (c) 2021 Sebastian Wild. All rights reserved.
 //
 
+import Combine
 import Foundation
 
 enum Preview {
     class MockDisplay: Display {
-        @Published var name = "MockDisplay"
-        @Published var brightness: Float
-        @Published var error: BrightnessReadError?
+        var name = "MockDisplay"
         let isInternalDisplay: Bool
+        var brightness: Float = 0.0 {
+            didSet {
+                readingSubject.send(.success(brightness))
+            }
+        }
+
+        var error: BrightnessReadError? {
+            didSet {
+                guard let error = error else { return }
+                readingSubject.send(.failure(error))
+            }
+        }
+
+        private var readingSubject = CurrentValueSubject<BrightnessReading, Never>(.failure(.noDisplays(original: nil)))
+        var reading: AnyPublisher<BrightnessReading, Never> {
+            readingSubject.eraseToAnyPublisher()
+        }
 
         init(reading: BrightnessReading = .success(0.5), isInternal: Bool = true) {
             isInternalDisplay = isInternal
