@@ -14,6 +14,7 @@ class InternalDisplay: Display {
     @Published private(set) var error: BrightnessReadError?
 
     private var brightnessUpdateCancellable: AnyCancellable?
+    private lazy var plistdecoder = PropertyListDecoder()
 
     convenience init() throws {
         guard let nsScreen = NSScreen.internalDisplay else {
@@ -45,29 +46,21 @@ class InternalDisplay: Display {
     }
 
     func readBrightness() -> BrightnessReading {
-        let args = [
-            "/usr/libexec/corebrightnessdiag",
-            "status-info",
-            "|",
-            "grep 'DisplayServicesBrightness'"
-        ]
+        let launchPath = "/usr/libexec/corebrightnessdiag"
+        let args = ["status-info"]
 
         do {
-            let stdout: String? = try Shell.run(args: args)
+            let stdout: Data? = try Shell.run(launchPath: launchPath, args: args)
 
             guard
-                let returnString = stdout,
-                !returnString.isEmpty,
-                let range = stdout?.range(of: #".*"#, options: .regularExpression)
+                let plist = stdout,
+                !plist.isEmpty,
+                let displayInfo = try? plistdecoder.decode(CoreBrightnessDiag.StatusInfo.self, from: plist),
+                let brightness = displayInfo.internalDisplay()?.DisplayServicesBrightness
             else {
                 return .failure(BrightnessReadError.readError(displayMetadata: metadata, original: nil))
             }
 
-            let floatString = returnString[range.lowerBound ... range.upperBound]
-
-            guard let brightness = Float(floatString) else {
-                return .failure(BrightnessReadError.readError(displayMetadata: metadata, original: nil))
-            }
             self.brightness = brightness
             return .success(brightness)
         } catch {
