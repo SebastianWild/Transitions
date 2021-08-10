@@ -5,17 +5,20 @@
 
 import Foundation
 
+/// Helper functions to run commands in using /bin/sh in a separate process, and return their standard output
+///
+/// - attention: Does not work when the app this code runs is sandboxed
 enum Shell {
     @discardableResult
-    static func run(args: [String]) throws -> String? {
-        String(data: try run(args: args), encoding: .utf8)
+    static func run(launchPath: String = "/bin/sh", args: [String]) throws -> String? {
+        String(data: try run(launchPath: launchPath, args: args), encoding: .utf8)
     }
 
     @discardableResult
-    static func run(args: [String]) throws -> Data {
+    static func run(launchPath: String = "/bin/sh", args: [String]) throws -> Data {
         let pipe = Pipe()
         let process = Process()
-        process.launchPath = "/bin/sh"
+        process.launchPath = launchPath
         process.arguments = args
         process.standardOutput = pipe
         let handle = pipe.fileHandleForReading
