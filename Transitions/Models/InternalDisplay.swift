@@ -28,6 +28,7 @@ class InternalDisplay: Display {
         brightness = 0.0
 
         brightnessUpdateCancellable = Timer.publish(every: 1, on: .main, in: .default)
+            .autoconnect()
             .compactMap { [weak self] _ in
                 self?.readBrightness()
             }
@@ -56,6 +57,7 @@ class InternalDisplay: Display {
 
             guard
                 let returnString = stdout,
+                !returnString.isEmpty,
                 let range = stdout?.range(of: #".*"#, options: .regularExpression)
             else {
                 return .failure(BrightnessReadError.readError(displayMetadata: metadata, original: nil))
