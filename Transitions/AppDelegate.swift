@@ -15,8 +15,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var statusBar: StatusBarController?
     lazy var popover = NSPopover()
 
-    @CodableUserDefaultProperty(UserDefaults.Keys.userData, defaultValue: UserData())
-    private var userData: UserData
+    private var userData: UserData = UserDefaults.standard.get(
+        from: UserDefaults.Keys.userData.rawValue
+    ) ?? UserData()
     private let displayManager = DisplayManager()
     private var darkModeController: DarkModeController?
 
@@ -32,8 +33,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         statusBar = StatusBarController(popover)
 
-        // Configure re-creating the DarkModeController when user preferences or displays change
-        primaryDisplayUpdateCancellable = displayManager.$displays
+        let primaryDisplayChangedHandler = displayManager.$displays
             .throttle(for: 0.5, scheduler: RunLoop.main, latest: true)
             .map(\.first) // The first display is the primary display
             .handleEvents(receiveOutput: { [weak self] display in
@@ -42,7 +42,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 }
             })
             .compactMap { $0 } // If there is no primary display, we cannot continue
-            .combineLatest(userData.$interfaceStyleSwitchTriggerValue) { display, thresholdValue in
+
+        // Configure re-creating the DarkModeController when user preferences or displays change
+        primaryDisplayUpdateCancellable = Publishers.CombineLatest(primaryDisplayChangedHandler, userData.$interfaceStyleSwitchTriggerValue)
+            .map { display, thresholdValue in
                 DarkModeController(display: display, threshold: thresholdValue)
             }
             .sink { [weak self] controller in
