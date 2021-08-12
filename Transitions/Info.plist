@@ -34,5 +34,7 @@
 	<true/>
 	<key>NSSupportsSuddenTermination</key>
 	<true/>
+	<key>NSAppleEventsUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs to control System Events to toggle dark mode</string>
 </dict>
 </plist>
