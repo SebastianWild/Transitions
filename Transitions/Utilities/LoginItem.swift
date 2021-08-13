@@ -12,25 +12,17 @@ enum LoginItem {
 
      pass `true` to
      */
-    static var enabled: Bool? {
+    static var enabled: Bool {
         get {
-            guard let loginItem = LSSharedFileList
+            LSSharedFileList
                 .sessionLoginItems
                 .copiedSnapshot
-                .transitionsApp
-            else {
-                return nil
-            }
-
-            return LSSharedFileListItemCopyProperty(
-                loginItem,
-                kLSSharedFileListLoginItemHidden.takeRetainedValue()
-            )?.takeRetainedValue() as? Bool
+                .transitionsApp != nil
         }
         set {
             let list = LSSharedFileList.sessionLoginItems
 
-            guard let enabled = newValue, enabled else {
+            guard newValue else {
                 guard let transitionsItem = list.copiedSnapshot.transitionsApp else { return }
                 LSSharedFileListItemRemove(list, transitionsItem)
 

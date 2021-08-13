@@ -12,16 +12,15 @@ import SwiftUI
 
 final class UserData: ObservableObject {
     @Published var isAppEnabled: Bool = false
-    // TODO: Read this state from system settings instead of UserDefaults!
-    @Published var isStartingOnLogon: Bool = false
     @Published var interfaceStyleSwitchTriggerValue: Float = 0.0
+    @Published var isStartingOnLogon: Bool = LoginItem.enabled ?? false
 
     private var changeHandler: AnyCancellable?
     private let userDefaults = UserDefaults.standard
 
     init() {
         // Synchronize to UserDefaults when values change
-        changeHandler = Publishers.CombineLatest3($isAppEnabled, $isStartingOnLogon, $interfaceStyleSwitchTriggerValue)
+        changeHandler = Publishers.CombineLatest($isAppEnabled, $interfaceStyleSwitchTriggerValue)
             .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: true)
             .handleEvents(receiveOutput: { data in
                 print("Received new user data: \(data)")
@@ -37,7 +36,6 @@ final class UserData: ObservableObject {
 extension UserData: Codable {
     enum CodingKeys: String, CodingKey {
         case isAppEnabled
-        case isStartingOnLogon
         case interfaceStyleSwitchTriggerValue
     }
 
@@ -47,7 +45,6 @@ extension UserData: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         isAppEnabled = try container.decode(Bool.self, forKey: .isAppEnabled)
-        isStartingOnLogon = try container.decode(Bool.self, forKey: .isStartingOnLogon)
         interfaceStyleSwitchTriggerValue = try container.decode(Float.self, forKey: .interfaceStyleSwitchTriggerValue)
     }
 
@@ -55,7 +52,6 @@ extension UserData: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
 
         try container.encode(isAppEnabled, forKey: .isAppEnabled)
-        try container.encode(isStartingOnLogon, forKey: .isStartingOnLogon)
         try container.encode(interfaceStyleSwitchTriggerValue, forKey: .interfaceStyleSwitchTriggerValue)
     }
 }
