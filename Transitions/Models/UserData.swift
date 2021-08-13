@@ -12,6 +12,7 @@ import SwiftUI
 
 final class UserData: ObservableObject {
     @Published var isAppEnabled: Bool = false
+    // TODO: Read this state from system settings instead of UserDefaults!
     @Published var isStartingOnLogon: Bool = false
     @Published var interfaceStyleSwitchTriggerValue: Float = 0.0
 

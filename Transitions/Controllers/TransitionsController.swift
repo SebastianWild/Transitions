@@ -13,28 +13,33 @@ import Foundation
 class TransitionsController {
     let displayManager = DisplayManager()
 
-    private let userData: UserData
     private var darkModeController: DarkModeController?
     /// Will hold a subscriber listening on changes of the enabled status of the app
     private var enabledCancellable: AnyCancellable?
+    /// Will hold a subscriber listening on changes of the login item enabled status
+    private var loginItemCancellable: AnyCancellable?
     /// Will hold a subscriber listening for display changes on the machine
     private var primaryDisplayUpdateCancellable: AnyCancellable?
 
     init(userData: UserData) {
-        self.userData = userData
-        setUp()
+        setUp(listeningOn: userData)
     }
 
-    private func setUp() {
+    private func setUp(listeningOn userData: UserData) {
         enabledCancellable = userData.$isAppEnabled
             .sink { [weak self] isEnabled in
                 guard let self = self else { return }
 
                 if isEnabled {
-                    self.primaryDisplayUpdateCancellable = self.makeDisplayUpdatePipeline()
+                    self.primaryDisplayUpdateCancellable = self.makeDisplayUpdatePipeline(listeningOn: userData)
                 } else {
                     self.primaryDisplayUpdateCancellable?.cancel()
                 }
+            }
+
+        loginItemCancellable = userData.$isStartingOnLogon
+            .sink { isEnabled in
+                LoginItem.enabled = isEnabled
             }
     }
 
@@ -42,7 +47,7 @@ class TransitionsController {
     /// and creates `DarkModeController`s that then toggle the system appearance as needed
     ///
     /// - Returns: `AnyCancellable` of the built pipeline
-    private func makeDisplayUpdatePipeline() -> AnyCancellable {
+    private func makeDisplayUpdatePipeline(listeningOn userData: UserData) -> AnyCancellable {
         let primaryDisplayChangedHandler = displayManager.$displays
             .throttle(for: 0.5, scheduler: RunLoop.main, latest: true)
             .map(\.first) // The first display is the primary display
@@ -63,3 +68,5 @@ class TransitionsController {
             }
     }
 }
+
+extension TransitionsController: ObservableObject {}

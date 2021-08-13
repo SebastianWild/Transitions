@@ -6,7 +6,7 @@
 import Foundation
 
 enum LoginItem {
-
+    // TODO: Error handling?
     /**
      Adds or removed the login item for Transitions.app.
 
@@ -17,8 +17,8 @@ enum LoginItem {
             guard let loginItem = transitionsSharedFileListItem else { return nil }
 
             return LSSharedFileListItemCopyProperty(
-                    loginItem,
-                    kLSSharedFileListLoginItemHidden.takeRetainedValue()
+                loginItem,
+                kLSSharedFileListLoginItemHidden.takeRetainedValue()
             )?.takeRetainedValue() as? Bool
         }
         set {

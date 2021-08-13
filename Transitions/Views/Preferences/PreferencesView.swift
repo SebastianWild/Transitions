@@ -10,7 +10,7 @@ import SwiftUI
 
 struct PreferencesView: View {
     @EnvironmentObject private var userData: UserData
-    @EnvironmentObject private var displayManager: DisplayManager
+    @EnvironmentObject private var controller: TransitionsController
 
     @State var primaryDisplay: Result<Display, BrightnessReadError> = .failure(.noDisplays(original: nil))
 
@@ -43,7 +43,7 @@ struct PreferencesView: View {
             }
         }
         .padding()
-        .onReceive(displayManager.$displays) { displays in
+        .onReceive(controller.displayManager.$displays) { displays in
             guard let primaryDisplay = displays.first else {
                 self.primaryDisplay = .failure(.noDisplays(original: nil))
                 return
@@ -63,7 +63,6 @@ struct PreferencesView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             PreferencesView()
-                .environmentObject(UserData())
         }
     }
 }
