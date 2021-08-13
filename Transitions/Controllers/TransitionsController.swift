@@ -12,6 +12,7 @@ import Foundation
  */
 class TransitionsController {
     let displayManager = DisplayManager()
+    @Published var isStartingOnLogon: Bool = LoginItem.enabled
 
     private var darkModeController: DarkModeController?
     /// Will hold a subscriber listening on changes of the enabled status of the app
@@ -37,7 +38,7 @@ class TransitionsController {
                 }
             }
 
-        loginItemCancellable = userData.$isStartingOnLogon
+        loginItemCancellable = $isStartingOnLogon
             .sink { isEnabled in
                 LoginItem.enabled = isEnabled
             }
@@ -70,3 +71,9 @@ class TransitionsController {
 }
 
 extension TransitionsController: ObservableObject {}
+
+extension TransitionsController: Refreshable {
+    func refresh() {
+        isStartingOnLogon = LoginItem.enabled
+    }
+}

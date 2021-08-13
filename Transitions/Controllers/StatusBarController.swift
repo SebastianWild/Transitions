@@ -13,14 +13,16 @@ final class StatusBarController: NSObject {
     private var statusBar: NSStatusBar
     private var statusItem: NSStatusItem
     private weak var popover: NSPopover?
+    private let onShow: (() -> Void)?
     private var eventSubscriber: AnyCancellable?
 
-    init(_ popover: NSPopover) {
+    init(_ popover: NSPopover, onShow: (() -> Void)? = nil) {
         statusBar = NSStatusBar()
         statusItem = statusBar.statusItem(withLength: 28.0)
         statusItem.button?.image = .statusBarIcon
 
         self.popover = popover
+        self.onShow = onShow
 
         super.init()
 
@@ -47,6 +49,8 @@ final class StatusBarController: NSObject {
     }
 
     private func showPopover() {
+        onShow?()
+
         if let button = statusItem.button {
             popover?.show(relativeTo: button.bounds, of: button, preferredEdge: .maxY)
         }

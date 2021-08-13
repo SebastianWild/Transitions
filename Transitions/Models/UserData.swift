@@ -13,7 +13,7 @@ import SwiftUI
 final class UserData: ObservableObject {
     @Published var isAppEnabled: Bool = false
     @Published var interfaceStyleSwitchTriggerValue: Float = 0.0
-    @Published var isStartingOnLogon: Bool = LoginItem.enabled ?? false
+    var isStartingOnLogon: Bool { LoginItem.enabled }
 
     private var changeHandler: AnyCancellable?
     private let userDefaults = UserDefaults.standard

@@ -21,7 +21,7 @@ struct PreferencesView: View {
             Toggle(isOn: $userData.isAppEnabled) {
                 Text(LocalizedStringKey.Preferences.enabled)
             }
-            Toggle(isOn: $userData.isStartingOnLogon) {
+            Toggle(isOn: $controller.isStartingOnLogon) {
                 Text(LocalizedStringKey.Preferences.start_on_logon)
             }
             Text(LocalizedStringKey.Preferences.slider_header_text)

@@ -16,6 +16,7 @@
 		82C83622B3B5FF4820276D31 /* NSScreen+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C833022A42935FF5244B64 /* NSScreen+Extensions.swift */; };
 		82C836FBB8F7220C1C35DF58 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83A0BE3F6422EE7D39BC8 /* Errors.swift */; };
 		82C838BA0C307CDD92FDEE6D /* InternalDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83D21D6C6CD1446C57DF2 /* InternalDisplay.swift */; };
+		82C83A667D45EE3683CAC014 /* Refreshable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83E4DFD708AEE56F0C9D8 /* Refreshable.swift */; };
 		82C83AA37EE62E37936BE63C /* CoreBrightnessDiag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83A61033F2F4F0B31C28C /* CoreBrightnessDiag.swift */; };
 		82C83B841E2430C9E54723E9 /* TransitionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83E4158A55D02EEE50345 /* TransitionsController.swift */; };
 		82C83C076F574DD927C141FB /* LoginItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83AAC71530778D48F950F /* LoginItem.swift */; };
@@ -58,6 +59,7 @@
 		82C83CB093BF0C8821CE6BE0 /* DarkMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DarkMode.swift; sourceTree = "<group>"; };
 		82C83D21D6C6CD1446C57DF2 /* InternalDisplay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternalDisplay.swift; sourceTree = "<group>"; };
 		82C83E4158A55D02EEE50345 /* TransitionsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionsController.swift; sourceTree = "<group>"; };
+		82C83E4DFD708AEE56F0C9D8 /* Refreshable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Refreshable.swift; sourceTree = "<group>"; };
 		82C83F18D8865D3CDE7784D1 /* CoreBrightnessDiag+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreBrightnessDiag+Extensions.swift"; sourceTree = "<group>"; };
 		82C83FBECA4B42A8BD31A088 /* BrightnessReadError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrightnessReadError.swift; sourceTree = "<group>"; };
 		9E061493268940D900F34D59 /* Color+Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Library.swift"; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				9E4E58F72693B9B500915490 /* Display.swift */,
+				82C83E4DFD708AEE56F0C9D8 /* Refreshable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				82C830105D99028E12FECDD3 /* DarkModeController.swift in Sources */,
 				82C83B841E2430C9E54723E9 /* TransitionsController.swift in Sources */,
 				82C83C076F574DD927C141FB /* LoginItem.swift in Sources */,
+				82C83A667D45EE3683CAC014 /* Refreshable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -34,7 +34,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         popover.contentSize = .popover
         popover.contentViewController = NSHostingController(rootView: contentView)
 
-        statusBar = StatusBarController(popover)
+        statusBar = StatusBarController(popover, onShow: { [weak self] in self?.controller.refresh() })
     }
 
     func applicationWillTerminate(_: Notification) {
