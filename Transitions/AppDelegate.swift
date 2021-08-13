@@ -28,13 +28,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // MARK: - UI Creation
 
         let contentView = PreferencesView()
+            .environmentObject(controller)
             .environmentObject(userData)
-            .environmentObject(controller.displayManager)
 
         popover.contentSize = .popover
         popover.contentViewController = NSHostingController(rootView: contentView)
 
-        statusBar = StatusBarController(popover)
+        statusBar = StatusBarController(popover, onShow: { [weak self] in self?.controller.refresh() })
     }
 
     func applicationWillTerminate(_: Notification) {
