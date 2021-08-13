@@ -14,7 +14,13 @@ enum LoginItem {
      */
     static var enabled: Bool? {
         get {
-            guard let loginItem = transitionsSharedFileListItem else { return nil }
+            guard let loginItem = LSSharedFileList
+                .sessionLoginItems
+                .copiedSnapshot
+                .transitionsApp
+            else {
+                return nil
+            }
 
             return LSSharedFileListItemCopyProperty(
                 loginItem,
@@ -22,9 +28,11 @@ enum LoginItem {
             )?.takeRetainedValue() as? Bool
         }
         set {
+            let list = LSSharedFileList.sessionLoginItems
+
             guard let enabled = newValue, enabled else {
-                guard let transitionsItem = transitionsSharedFileListItem else { return }
-                LSSharedFileListItemRemove(sharedFileList, transitionsItem)
+                guard let transitionsItem = list.copiedSnapshot.transitionsApp else { return }
+                LSSharedFileListItemRemove(list, transitionsItem)
 
                 return
             }
@@ -37,25 +45,30 @@ enum LoginItem {
                 key: isHidden
             ] as CFDictionary
 
-            LSSharedFileListInsertItemURL(sharedFileList, nil, nil, nil, bundleCFURL, properties, nil)
+            LSSharedFileListInsertItemURL(list, nil, nil, nil, Bundle.cfURL, properties, nil)
         }
     }
 }
 
-extension LoginItem {
-    private static var bundleCFURL: CFURL { URL(fileURLWithPath: Bundle.main.bundlePath) as CFURL }
+private extension Bundle {
+    static var cfURL: CFURL { URL(fileURLWithPath: Bundle.main.bundlePath) as CFURL }
+}
 
-    private static var transitionsSharedFileListItem: LSSharedFileListItem? {
-        sharedFileListItems
-            .filter { LSSharedFileListItemCopyResolvedURL($0, 0, nil).takeRetainedValue() == bundleCFURL }
-            .first
-    }
-
-    private static var sharedFileList: LSSharedFileList {
+private extension LSSharedFileList {
+    static var sessionLoginItems: LSSharedFileList {
         LSSharedFileListCreate(nil, kLSSharedFileListSessionLoginItems.takeRetainedValue(), nil).takeRetainedValue()
     }
+}
 
-    private static var sharedFileListItems: [LSSharedFileListItem] {
-        LSSharedFileListCopySnapshot(sharedFileList, nil).takeRetainedValue() as? [LSSharedFileListItem] ?? []
+private extension LSSharedFileList {
+    var copiedSnapshot: [LSSharedFileListItem] {
+        LSSharedFileListCopySnapshot(self, nil).takeRetainedValue() as? [LSSharedFileListItem] ?? []
+    }
+}
+
+private extension Array where Element == LSSharedFileListItem {
+    var transitionsApp: LSSharedFileListItem? {
+        filter { LSSharedFileListItemCopyResolvedURL($0, 0, nil).takeRetainedValue() == Bundle.cfURL }
+            .first
     }
 }
