@@ -6,12 +6,23 @@
 import Foundation
 
 enum LoginItem {
-    static var enabled: Bool {
+
+    /**
+     Adds or removed the login item for Transitions.app.
+
+     pass `true` to
+     */
+    static var enabled: Bool? {
         get {
-            false
+            guard let loginItem = transitionsSharedFileListItem else { return nil }
+
+            return LSSharedFileListItemCopyProperty(
+                    loginItem,
+                    kLSSharedFileListLoginItemHidden.takeRetainedValue()
+            )?.takeRetainedValue() as? Bool
         }
         set {
-            guard newValue else {
+            guard let enabled = newValue, enabled else {
                 guard let transitionsItem = transitionsSharedFileListItem else { return }
                 LSSharedFileListItemRemove(sharedFileList, transitionsItem)
 
