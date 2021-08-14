@@ -38,6 +38,15 @@ struct StatusBarPreferences: View {
             }
 
             HStack {
+                Button {
+                    // TODO: Open preferences
+                } label: {
+                    Image("gear")
+                        .resizable()
+                        .renderingMode(.template)
+                        .frame(width: 20, height: 20)
+                }
+                .buttonStyle(ColorMultiplyButtonStyle())
                 Spacer()
                 Button(LocalizedStringKey.Preferences.quit, action: { exit(0) })
             }
