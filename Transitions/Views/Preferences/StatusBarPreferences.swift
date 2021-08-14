@@ -63,6 +63,8 @@ struct PreferencesView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             StatusBarPreferences()
+                .environmentObject(UserData())
+                .environmentObject(TransitionsController(userData: UserData()))
         }
     }
 }

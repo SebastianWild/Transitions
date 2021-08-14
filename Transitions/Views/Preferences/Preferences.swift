@@ -12,7 +12,7 @@ import SwiftUI
 struct Preferences: View {
     @EnvironmentObject private var userData: UserData
     @EnvironmentObject private var controller: TransitionsController
-    
+
     var body: some View {
         EmptyView()
     }
