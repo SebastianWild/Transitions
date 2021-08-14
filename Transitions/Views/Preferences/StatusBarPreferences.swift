@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct PreferencesView: View {
+struct StatusBarPreferences: View {
     @EnvironmentObject private var userData: UserData
     @EnvironmentObject private var controller: TransitionsController
 
@@ -62,7 +62,7 @@ struct PreferencesView: View {
 struct PreferencesView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            PreferencesView()
+            StatusBarPreferences()
         }
     }
 }

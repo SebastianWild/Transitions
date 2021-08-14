@@ -27,7 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         // MARK: - UI Creation
 
-        let contentView = PreferencesView()
+        let contentView = StatusBarPreferences()
             .environmentObject(controller)
             .environmentObject(userData)
 
