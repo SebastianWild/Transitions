@@ -44,6 +44,7 @@
 		9E8A23CC26981F8000E91600 /* TriggerSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8A23CB26981F8000E91600 /* TriggerSliderView.swift */; };
 		9EC555D025FC56F200AFC0BA /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 9EC555CF25FC56F200AFC0BA /* .swiftlint.yml */; };
 		9EE3E33B25FC64D70063BAFF /* CodableUserDefaultProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE3E33A25FC64D70063BAFF /* CodableUserDefaultProperty.swift */; };
+		9EFF264626C7BD58008F24C9 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFF264526C7BD58008F24C9 /* Preferences.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +88,7 @@
 		9EC555CA25FC559E00AFC0BA /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		9EC555CF25FC56F200AFC0BA /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		9EE3E33A25FC64D70063BAFF /* CodableUserDefaultProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableUserDefaultProperty.swift; sourceTree = "<group>"; };
+		9EFF264526C7BD58008F24C9 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				9E4511C42401E6160000E7E0 /* StatusBarPreferences.swift */,
+				9EFF264526C7BD58008F24C9 /* Preferences.swift */,
 			);
 			path = Preferences;
 			sourceTree = "<group>";
@@ -398,6 +401,7 @@
 				82C830105D99028E12FECDD3 /* DarkModeController.swift in Sources */,
 				82C83B841E2430C9E54723E9 /* TransitionsController.swift in Sources */,
 				82C83C076F574DD927C141FB /* LoginItem.swift in Sources */,
+				9EFF264626C7BD58008F24C9 /* Preferences.swift in Sources */,
 				82C83A667D45EE3683CAC014 /* Refreshable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
