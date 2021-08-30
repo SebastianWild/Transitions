@@ -11,7 +11,7 @@ import SwiftUI
 
 struct Preferences: View {
     @EnvironmentObject private var userData: UserData
-    @EnvironmentObject private var controller: TransitionsController
+    @EnvironmentObject private var controller: DisplaysController
 
     @State private var selected: Section = .general
 
@@ -21,9 +21,9 @@ struct Preferences: View {
                 Section.general.header(onSwitch: { onSwitch(to: $0) })
                 Section.about.header(onSwitch: { onSwitch(to: $0) })
             }
-            
+
             Divider()
-            
+
             selected
         }
         .padding()
@@ -55,7 +55,7 @@ struct Preferences_Previews: PreviewProvider {
         Group {
             Preferences()
                 .environmentObject(UserData())
-                .environmentObject(TransitionsController(userData: UserData()))
+                .environmentObject(DisplaysController(userData: UserData()))
                 .previewDisplayName("Preferences Pane")
         }
     }

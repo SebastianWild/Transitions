@@ -10,7 +10,7 @@ import SwiftUI
 
 struct StatusBarPreferences: View {
     @EnvironmentObject private var userData: UserData
-    @EnvironmentObject private var controller: TransitionsController
+    @EnvironmentObject private var controller: DisplaysController
 
     @State var primaryDisplay: Result<Display, BrightnessReadError> = .failure(.noDisplays(original: nil))
 
@@ -47,7 +47,9 @@ struct StatusBarPreferences: View {
                         .frame(width: 20, height: 20)
                 }
                 .buttonStyle(ColorMultiplyButtonStyle())
+
                 Spacer()
+
                 Button(LocalizedStringKey.Preferences.quit, action: { exit(0) })
             }
         }
@@ -73,7 +75,7 @@ struct PreferencesView_Previews: PreviewProvider {
         Group {
             StatusBarPreferences()
                 .environmentObject(UserData())
-                .environmentObject(TransitionsController(userData: UserData()))
+                .environmentObject(DisplaysController(userData: UserData()))
         }
     }
 }

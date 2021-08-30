@@ -18,12 +18,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var userData: UserData = UserDefaults.standard.get(
         from: UserDefaults.Keys.userData.rawValue
     ) ?? UserData()
-    private lazy var controller = TransitionsController(userData: userData)
+    private lazy var controller = DisplaysController(userData: userData)
 
     func applicationDidFinishLaunching(_: Notification) {
         // MARK: - Controller creation
 
-        controller = TransitionsController(userData: userData)
+        controller = DisplaysController(userData: userData)
 
         // MARK: - UI Creation
 
