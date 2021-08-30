@@ -42,7 +42,12 @@
 		9E4511E22402117F0000E7E0 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4511E12402117F0000E7E0 /* UserDefaults+Extensions.swift */; };
 		9E4E58F82693B9B500915490 /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4E58F72693B9B500915490 /* Display.swift */; };
 		9E8A23CC26981F8000E91600 /* TriggerSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8A23CB26981F8000E91600 /* TriggerSliderView.swift */; };
+		9E9C345926C84E41007489FE /* PreferencesHeaderItemButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9C345826C84E41007489FE /* PreferencesHeaderItemButtonStyle.swift */; };
+		9E9C345C26C85883007489FE /* PreferenceItemImageModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9C345B26C85883007489FE /* PreferenceItemImageModifier.swift */; };
 		9EC555D025FC56F200AFC0BA /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 9EC555CF25FC56F200AFC0BA /* .swiftlint.yml */; };
+		9ED1F8F026DC59DA00B3EDC6 /* Preferences+SectionHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED1F8EF26DC59DA00B3EDC6 /* Preferences+SectionHeaders.swift */; };
+		9ED1F8F226DC5A9900B3EDC6 /* PreferenceSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED1F8F126DC5A9900B3EDC6 /* PreferenceSection.swift */; };
+		9ED1F8F426DC5B7A00B3EDC6 /* Preferences+SectionBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED1F8F326DC5B7A00B3EDC6 /* Preferences+SectionBody.swift */; };
 		9EE3E33B25FC64D70063BAFF /* CodableUserDefaultProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE3E33A25FC64D70063BAFF /* CodableUserDefaultProperty.swift */; };
 		9EFF264626C7BD58008F24C9 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFF264526C7BD58008F24C9 /* Preferences.swift */; };
 		9EFF264926C820DD008F24C9 /* ColorMultiplyButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFF264826C820DD008F24C9 /* ColorMultiplyButtonStyle.swift */; };
@@ -86,8 +91,13 @@
 		9E4511E12402117F0000E7E0 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		9E4E58F72693B9B500915490 /* Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
 		9E8A23CB26981F8000E91600 /* TriggerSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerSliderView.swift; sourceTree = "<group>"; };
+		9E9C345826C84E41007489FE /* PreferencesHeaderItemButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesHeaderItemButtonStyle.swift; sourceTree = "<group>"; };
+		9E9C345B26C85883007489FE /* PreferenceItemImageModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceItemImageModifier.swift; sourceTree = "<group>"; };
 		9EC555CA25FC559E00AFC0BA /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		9EC555CF25FC56F200AFC0BA /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		9ED1F8EF26DC59DA00B3EDC6 /* Preferences+SectionHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Preferences+SectionHeaders.swift"; sourceTree = "<group>"; };
+		9ED1F8F126DC5A9900B3EDC6 /* PreferenceSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceSection.swift; sourceTree = "<group>"; };
+		9ED1F8F326DC5B7A00B3EDC6 /* Preferences+SectionBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Preferences+SectionBody.swift"; sourceTree = "<group>"; };
 		9EE3E33A25FC64D70063BAFF /* CodableUserDefaultProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableUserDefaultProperty.swift; sourceTree = "<group>"; };
 		9EFF264526C7BD58008F24C9 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		9EFF264826C820DD008F24C9 /* ColorMultiplyButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorMultiplyButtonStyle.swift; sourceTree = "<group>"; };
@@ -188,6 +198,8 @@
 			children = (
 				9E4511C42401E6160000E7E0 /* StatusBarPreferences.swift */,
 				9EFF264526C7BD58008F24C9 /* Preferences.swift */,
+				9ED1F8EF26DC59DA00B3EDC6 /* Preferences+SectionHeaders.swift */,
+				9ED1F8F326DC5B7A00B3EDC6 /* Preferences+SectionBody.swift */,
 			);
 			path = Preferences;
 			sourceTree = "<group>";
@@ -211,8 +223,17 @@
 			children = (
 				9E4E58F72693B9B500915490 /* Display.swift */,
 				82C83E4DFD708AEE56F0C9D8 /* Refreshable.swift */,
+				9ED1F8F126DC5A9900B3EDC6 /* PreferenceSection.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		9E9C345A26C8586E007489FE /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				9E9C345B26C85883007489FE /* PreferenceItemImageModifier.swift */,
+			);
+			path = Modifiers;
 			sourceTree = "<group>";
 		};
 		9EC555D225FC587F00AFC0BA /* BuildTools */ = {
@@ -240,6 +261,7 @@
 		9EE3E33625FC641D0063BAFF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9E9C345A26C8586E007489FE /* Modifiers */,
 				9EFF264726C820C9008F24C9 /* Style */,
 				9E4511CB2401E61A0000E7E0 /* Main.storyboard */,
 				9EE3E33725FC64370063BAFF /* Common */,
@@ -277,6 +299,7 @@
 			isa = PBXGroup;
 			children = (
 				9EFF264826C820DD008F24C9 /* ColorMultiplyButtonStyle.swift */,
+				9E9C345826C84E41007489FE /* PreferencesHeaderItemButtonStyle.swift */,
 			);
 			path = Style;
 			sourceTree = "<group>";
@@ -384,13 +407,16 @@
 			files = (
 				9E8A23CC26981F8000E91600 /* TriggerSliderView.swift in Sources */,
 				9E0614982689421300F34D59 /* AppStrings.swift in Sources */,
+				9E9C345926C84E41007489FE /* PreferencesHeaderItemButtonStyle.swift in Sources */,
 				9EE3E33B25FC64D70063BAFF /* CodableUserDefaultProperty.swift in Sources */,
+				9ED1F8F426DC5B7A00B3EDC6 /* Preferences+SectionBody.swift in Sources */,
 				9E0CF34725FD98C000699170 /* Sizes.swift in Sources */,
 				9E4511E22402117F0000E7E0 /* UserDefaults+Extensions.swift in Sources */,
 				9E4511C52401E6160000E7E0 /* StatusBarPreferences.swift in Sources */,
 				9E4511C32401E6160000E7E0 /* AppDelegate.swift in Sources */,
 				9E0CF33F25FD8D9200699170 /* StatusBarController.swift in Sources */,
 				9E2E9D7026911E88003987EF /* SystemBrightness.swift in Sources */,
+				9ED1F8F226DC5A9900B3EDC6 /* PreferenceSection.swift in Sources */,
 				9E41946F24037EF2003B5E87 /* PositionIndicatorView.swift in Sources */,
 				9E4511DC2402026A0000E7E0 /* UserData.swift in Sources */,
 				9E4E58F82693B9B500915490 /* Display.swift in Sources */,
@@ -404,6 +430,7 @@
 				82C836FBB8F7220C1C35DF58 /* Errors.swift in Sources */,
 				82C83519D042743B48DA0298 /* Shell.swift in Sources */,
 				82C83622B3B5FF4820276D31 /* NSScreen+Extensions.swift in Sources */,
+				9E9C345C26C85883007489FE /* PreferenceItemImageModifier.swift in Sources */,
 				82C83EDDF9C271DA38C564CC /* Preview.swift in Sources */,
 				82C831C27AE7B57AF89864DE /* DisplayManager.swift in Sources */,
 				82C83E5A98618D862D1463D3 /* BrightnessReadError.swift in Sources */,
@@ -413,6 +440,7 @@
 				82C830105D99028E12FECDD3 /* DarkModeController.swift in Sources */,
 				82C83B841E2430C9E54723E9 /* TransitionsController.swift in Sources */,
 				82C83C076F574DD927C141FB /* LoginItem.swift in Sources */,
+				9ED1F8F026DC59DA00B3EDC6 /* Preferences+SectionHeaders.swift in Sources */,
 				9EFF264626C7BD58008F24C9 /* Preferences.swift in Sources */,
 				82C83A667D45EE3683CAC014 /* Refreshable.swift in Sources */,
 			);
