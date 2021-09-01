@@ -70,6 +70,15 @@ class DisplaysController {
     }
 }
 
+extension DisplaysController {
+    /// Singleton shared instance `DisplaysController`.
+    ///
+    /// - attention: not thread safe
+    static let main: DisplaysController = {
+        DisplaysController(userData: .main)
+    }()
+}
+
 extension DisplaysController: ObservableObject {}
 
 extension DisplaysController: Refreshable {
