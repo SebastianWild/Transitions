@@ -12,29 +12,10 @@ import SwiftUI
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-    var statusBar: StatusBarController?
-    lazy var popover = NSPopover()
-
-    private var userData: UserData = UserDefaults.standard.get(
-        from: UserDefaults.Keys.userData.rawValue
-    ) ?? UserData()
-    private lazy var controller = DisplaysController(userData: userData)
+    lazy var coordinator = AppCoordinator()
 
     func applicationDidFinishLaunching(_: Notification) {
-        // MARK: - Controller creation
-
-        controller = DisplaysController(userData: userData)
-
-        // MARK: - UI Creation
-
-        let contentView = StatusBarPreferences()
-            .environmentObject(controller)
-            .environmentObject(userData)
-
-        popover.contentSize = .popover
-        popover.contentViewController = NSHostingController(rootView: contentView)
-
-        statusBar = StatusBarController(popover, onShow: { [weak self] in self?.controller.refresh() })
+        coordinator.showUI()
     }
 
     func applicationWillTerminate(_: Notification) {
