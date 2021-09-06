@@ -13,8 +13,7 @@ import SwiftUI
 /**
  Class responsible for bootstrapping the app UI and navigating between views
  */
-class AppCoordinator {
-    // ^rename to AppRouter? Create router pattern?
+class AppCoordinator: NSObject {
     private var userData: UserData
     private var displaysController: DisplaysController
 
@@ -22,6 +21,8 @@ class AppCoordinator {
     private var statusBarController: StatusBarController?
     /// Will be nil when the menu bar item is turned off
     private var statusBarPopover: NSPopover?
+
+    private var preferencesWindowController: NSWindowController?
 
     init(
         userData: UserData = .main,
@@ -56,11 +57,42 @@ extension AppCoordinator {
         )
 
         popover.contentViewController = NSHostingController(
-            rootView: StatusBarPreferences()
+            rootView: StatusBarPreferences { [weak self] in self?.showPreferencesUI() }
                 .environmentObject(displaysController)
                 .environmentObject(userData)
         )
 
         statusBarPopover = popover
+    }
+}
+
+// MARK: - Preferences UI handling
+
+extension AppCoordinator: NSWindowDelegate {
+    private func showPreferencesUI() {
+        guard preferencesWindowController == nil else {
+            preferencesWindowController?.showWindow(self)
+            return
+        }
+
+        let window = NSWindow(
+            contentViewController: NSHostingController(
+                rootView: Preferences()
+                    .environmentObject(displaysController)
+                    .environmentObject(userData)
+            )
+        )
+        window.delegate = self
+
+        preferencesWindowController = NSWindowController(window: window)
+        preferencesWindowController?.showWindow(self)
+
+        NSApp.activate(ignoringOtherApps: true)
+    }
+
+    public func windowWillClose(_ notification: Notification) {
+        if let window = notification.object as? NSWindow, window == preferencesWindowController {
+            preferencesWindowController = nil
+        }
     }
 }

@@ -672,7 +672,7 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		9EC148922403391C00EBC6D2 /* XCRemoteSwiftPackageReference "Mint" */ = {
+		9EC148922403391C00EBC6D2 /* XCRemoteSwiftPackageReference "Mint.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/yonaskolb/Mint.git";
 			requirement = {
@@ -690,7 +690,7 @@
 		};
 		9EC148932403392600EBC6D2 /* mint */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9EC148922403391C00EBC6D2 /* XCRemoteSwiftPackageReference "Mint" */;
+			package = 9EC148922403391C00EBC6D2 /* XCRemoteSwiftPackageReference "Mint.git" */;
 			productName = mint;
 		};
 /* End XCSwiftPackageProductDependency section */

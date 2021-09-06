@@ -12,7 +12,9 @@ struct StatusBarPreferences: View {
     @EnvironmentObject private var userData: UserData
     @EnvironmentObject private var controller: DisplaysController
 
-    @State var primaryDisplay: Result<Display, BrightnessReadError> = .failure(.noDisplays(original: nil))
+    @State private var primaryDisplay: Result<Display, BrightnessReadError> = .failure(.noDisplays(original: nil))
+
+    let onPreferenceButtonPress: () -> Void
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -39,7 +41,7 @@ struct StatusBarPreferences: View {
 
             HStack {
                 Button {
-                    // TODO: Open preferences
+                    onPreferenceButtonPress()
                 } label: {
                     Image("gear")
                         .resizable()
@@ -73,7 +75,7 @@ struct StatusBarPreferences: View {
 struct PreferencesView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            StatusBarPreferences()
+            StatusBarPreferences {}
                 .environmentObject(UserData())
                 .environmentObject(DisplaysController(userData: UserData()))
         }
