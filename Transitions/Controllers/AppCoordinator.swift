@@ -10,6 +10,8 @@ import Cocoa
 import Foundation
 import SwiftUI
 
+import Preferences
+
 /**
  Class responsible for bootstrapping the app UI and navigating between views
  */
@@ -22,7 +24,7 @@ class AppCoordinator: NSObject {
     /// Will be nil when the menu bar item is turned off
     private var statusBarPopover: NSPopover?
 
-    private var preferencesWindowController: NSWindowController?
+    private var preferencesWindowController: PreferencesWindowController?
 
     init(
         userData: UserData = .main,
@@ -75,19 +77,9 @@ extension AppCoordinator: NSWindowDelegate {
             return
         }
 
-        let window = NSWindow(
-            contentViewController: NSHostingController(
-                rootView: Preferences()
-                    .environmentObject(displaysController)
-                    .environmentObject(userData)
-            )
-        )
-        window.delegate = self
-
-        preferencesWindowController = NSWindowController(window: window)
-        preferencesWindowController?.showWindow(self)
-
-        NSApp.activate(ignoringOtherApps: true)
+        preferencesWindowController = PreferencePanes.buildController(with: userData, and: displaysController)
+        preferencesWindowController?.window?.delegate = self
+        preferencesWindowController?.show()
     }
 
     public func windowWillClose(_ notification: Notification) {

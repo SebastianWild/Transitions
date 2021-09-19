@@ -8,6 +8,7 @@
 // MARK: - Preferences
 "quit" = "Quit";
 "general" = "General";
+"about" = "About";
 "preferences_enabled" = "Enabled";
 "start_on_logon" = "Start On Logon";
 "slider_header_text" = "Dark Mode Trigger";

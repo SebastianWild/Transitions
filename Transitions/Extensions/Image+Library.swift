@@ -34,4 +34,24 @@ extension NSImage {
 
         return icon
     }
+
+    static var gear: NSImage {
+        guard let icon = NSImage(named: "gear") else {
+            fatalError("Image not found in asset catalog!")
+        }
+
+        icon.isTemplate = true
+
+        return icon
+    }
+
+    static var info_circle: NSImage {
+        guard let icon = NSImage(named: "info.circle") else {
+            fatalError("Image not found in asset catalog!")
+        }
+
+        icon.isTemplate = true
+
+        return icon
+    }
 }
