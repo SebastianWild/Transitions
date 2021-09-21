@@ -41,6 +41,12 @@
 		9E4511DC2402026A0000E7E0 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4511DB2402026A0000E7E0 /* UserData.swift */; };
 		9E4511E22402117F0000E7E0 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4511E12402117F0000E7E0 /* UserDefaults+Extensions.swift */; };
 		9E4E58F82693B9B500915490 /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4E58F72693B9B500915490 /* Display.swift */; };
+		9E70593826F96A410002566C /* ToggleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E70593726F96A410002566C /* ToggleButtonStyle.swift */; };
+		9E70593A26F96A650002566C /* ButtonToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E70593926F96A650002566C /* ButtonToggleStyle.swift */; };
+		9E70593C26F96AA10002566C /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E70593B26F96AA10002566C /* Link.swift */; };
+		9E70593F26F96ADE0002566C /* License.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E70593E26F96ADE0002566C /* License.swift */; };
+		9E70594126F96B030002566C /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E70594026F96B030002566C /* Dependencies.swift */; };
+		9E70594326F96B2C0002566C /* Dependencies+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E70594226F96B2C0002566C /* Dependencies+View.swift */; };
 		9E8A23CC26981F8000E91600 /* TriggerSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8A23CB26981F8000E91600 /* TriggerSliderView.swift */; };
 		9E8B56AB26F421B50081587F /* Preferences in Frameworks */ = {isa = PBXBuildFile; productRef = 9E8B56AA26F421B50081587F /* Preferences */; };
 		9E8B56AD26F4422C0081587F /* ColorMultiplyButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8B56AC26F4422C0081587F /* ColorMultiplyButtonStyle.swift */; };
@@ -89,6 +95,12 @@
 		9E4511DB2402026A0000E7E0 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		9E4511E12402117F0000E7E0 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		9E4E58F72693B9B500915490 /* Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
+		9E70593726F96A410002566C /* ToggleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleButtonStyle.swift; sourceTree = "<group>"; };
+		9E70593926F96A650002566C /* ButtonToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonToggleStyle.swift; sourceTree = "<group>"; };
+		9E70593B26F96AA10002566C /* Link.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
+		9E70593E26F96ADE0002566C /* License.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = License.swift; sourceTree = "<group>"; };
+		9E70594026F96B030002566C /* Dependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependencies.swift; sourceTree = "<group>"; };
+		9E70594226F96B2C0002566C /* Dependencies+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dependencies+View.swift"; sourceTree = "<group>"; };
 		9E8A23CB26981F8000E91600 /* TriggerSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerSliderView.swift; sourceTree = "<group>"; };
 		9E8B56AC26F4422C0081587F /* ColorMultiplyButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorMultiplyButtonStyle.swift; sourceTree = "<group>"; };
 		9E8B56B026F809E10081587F /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
@@ -173,6 +185,7 @@
 				9E4511C22401E6160000E7E0 /* AppDelegate.swift */,
 				9E4511C62401E61A0000E7E0 /* Assets.xcassets */,
 				9E0CF33D25FD8D6500699170 /* Controllers */,
+				9E70593D26F96ACF0002566C /* Enums */,
 				9E4511E02402116C0000E7E0 /* Extensions */,
 				9EE3E33525FC640B0063BAFF /* Models */,
 				9E4511C82401E61A0000E7E0 /* Preview Content */,
@@ -225,6 +238,15 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		9E70593D26F96ACF0002566C /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				9E70593E26F96ADE0002566C /* License.swift */,
+				9E70594026F96B030002566C /* Dependencies.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		9E9C345A26C8586E007489FE /* Modifiers */ = {
 			isa = PBXGroup;
 			children = (
@@ -274,6 +296,8 @@
 				9E41946E24037EF2003B5E87 /* PositionIndicatorView.swift */,
 				9E4511D82401F3960000E7E0 /* SliderView.swift */,
 				9E8A23CB26981F8000E91600 /* TriggerSliderView.swift */,
+				9E70593B26F96AA10002566C /* Link.swift */,
+				9E70594226F96B2C0002566C /* Dependencies+View.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -296,6 +320,8 @@
 			isa = PBXGroup;
 			children = (
 				9E8B56AC26F4422C0081587F /* ColorMultiplyButtonStyle.swift */,
+				9E70593726F96A410002566C /* ToggleButtonStyle.swift */,
+				9E70593926F96A650002566C /* ButtonToggleStyle.swift */,
 			);
 			path = Style;
 			sourceTree = "<group>";
@@ -406,6 +432,7 @@
 				9E8A23CC26981F8000E91600 /* TriggerSliderView.swift in Sources */,
 				9E0614982689421300F34D59 /* AppStrings.swift in Sources */,
 				9EE3E33B25FC64D70063BAFF /* CodableUserDefaultProperty.swift in Sources */,
+				9E70593826F96A410002566C /* ToggleButtonStyle.swift in Sources */,
 				9E8B56B126F809E10081587F /* Bundle+Extensions.swift in Sources */,
 				9E0CF34725FD98C000699170 /* Sizes.swift in Sources */,
 				9E4511E22402117F0000E7E0 /* UserDefaults+Extensions.swift in Sources */,
@@ -420,6 +447,7 @@
 				9E061494268940D900F34D59 /* Color+Library.swift in Sources */,
 				9E0CF34A25FD99D700699170 /* NSEventPublisher.swift in Sources */,
 				9E0CF34425FD953600699170 /* Image+Library.swift in Sources */,
+				9E70593C26F96AA10002566C /* Link.swift in Sources */,
 				82C838BA0C307CDD92FDEE6D /* InternalDisplay.swift in Sources */,
 				82C830E6838F9F17F72491CB /* Combine+Extensions.swift in Sources */,
 				82C836FBB8F7220C1C35DF58 /* Errors.swift in Sources */,
@@ -428,11 +456,15 @@
 				82C83622B3B5FF4820276D31 /* NSScreen+Extensions.swift in Sources */,
 				9E9C345C26C85883007489FE /* PreferenceItemImageModifier.swift in Sources */,
 				82C83EDDF9C271DA38C564CC /* Preview.swift in Sources */,
+				9E70593F26F96ADE0002566C /* License.swift in Sources */,
 				82C831C27AE7B57AF89864DE /* DisplayManager.swift in Sources */,
 				82C83E5A98618D862D1463D3 /* BrightnessReadError.swift in Sources */,
 				82C83AA37EE62E37936BE63C /* CoreBrightnessDiag.swift in Sources */,
 				82C834896FCB03C060556EC8 /* CoreBrightnessDiag+Extensions.swift in Sources */,
 				82C8344D5FC0BE64719D4628 /* DarkMode.swift in Sources */,
+				9E70594126F96B030002566C /* Dependencies.swift in Sources */,
+				9E70593A26F96A650002566C /* ButtonToggleStyle.swift in Sources */,
+				9E70594326F96B2C0002566C /* Dependencies+View.swift in Sources */,
 				9ED1F8F626DC620100B3EDC6 /* AppCoordinator.swift in Sources */,
 				82C830105D99028E12FECDD3 /* DisplayController.swift in Sources */,
 				82C83B841E2430C9E54723E9 /* DisplaysController.swift in Sources */,
