@@ -8,11 +8,13 @@
 
 import SwiftUI
 
-struct PreferencesView: View {
+struct StatusBarPreferences: View {
     @EnvironmentObject private var userData: UserData
-    @EnvironmentObject private var controller: TransitionsController
+    @EnvironmentObject private var controller: DisplaysController
 
-    @State var primaryDisplay: Result<Display, BrightnessReadError> = .failure(.noDisplays(original: nil))
+    @State private var primaryDisplay: Result<Display, BrightnessReadError> = .failure(.noDisplays(original: nil))
+
+    let onPreferenceButtonPress: () -> Void
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -38,7 +40,18 @@ struct PreferencesView: View {
             }
 
             HStack {
+                Button {
+                    onPreferenceButtonPress()
+                } label: {
+                    Image("gear")
+                        .resizable()
+                        .renderingMode(.template)
+                        .frame(width: 20, height: 20)
+                }
+                .buttonStyle(ColorMultiplyButtonStyle())
+
                 Spacer()
+
                 Button(LocalizedStringKey.Preferences.quit, action: { exit(0) })
             }
         }
@@ -62,7 +75,9 @@ struct PreferencesView: View {
 struct PreferencesView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            PreferencesView()
+            StatusBarPreferences {}
+                .environmentObject(UserData())
+                .environmentObject(DisplaysController(userData: UserData()))
         }
     }
 }

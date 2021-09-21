@@ -6,9 +6,9 @@
 import Combine
 import Foundation
 
-/// `DarkModeController` listens to brightness changes on a display and triggers toggling of the system dark mode
+/// `DisplayController` listens to brightness changes on a display and triggers toggling of the system dark mode
 /// when appropriate
-class DarkModeController {
+class DisplayController {
     private let display: Display
     private let threshold: Float
 

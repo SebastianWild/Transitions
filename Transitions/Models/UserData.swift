@@ -10,6 +10,7 @@ import Combine
 import Foundation
 import SwiftUI
 
+/// - attention: Not thread safe.
 final class UserData: ObservableObject {
     @Published var isAppEnabled: Bool = false
     @Published var interfaceStyleSwitchTriggerValue: Float = 27.0
@@ -54,4 +55,15 @@ extension UserData: Codable {
         try container.encode(isAppEnabled, forKey: .isAppEnabled)
         try container.encode(interfaceStyleSwitchTriggerValue, forKey: .interfaceStyleSwitchTriggerValue)
     }
+}
+
+extension UserData {
+    /// Singleton shared instance `UserData`.
+    ///
+    /// - attention: not thread safe
+    static let main: UserData = {
+        UserDefaults.standard.get(
+            from: UserDefaults.Keys.userData.rawValue
+        ) ?? UserData()
+    }()
 }

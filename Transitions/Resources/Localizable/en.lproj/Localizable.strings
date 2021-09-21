@@ -8,7 +8,12 @@
 // MARK: - Preferences
 "quit" = "Quit";
 "general" = "General";
+"about" = "About";
 "preferences_enabled" = "Enabled";
 "start_on_logon" = "Start On Logon";
 "slider_header_text" = "Dark Mode Trigger";
 "slider_footnote_text" = "Move the slider to adjust at what brightness level dark mode is triggered.";
+"author" = "Sebastian Wild";
+"version" = "Version";
+"acknowledgements_title" = "Acknowledgements";
+"about_description" = "Built with ❤️ in the Bay Area.";

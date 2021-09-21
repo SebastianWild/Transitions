@@ -10,11 +10,11 @@ import Foundation
  The main controller that tracks available displays, changes in user settings,
  and uses those in order to toggle functionality of the app
  */
-class TransitionsController {
+class DisplaysController {
     let displayManager = DisplayManager()
     @Published var isStartingOnLogon: Bool = LoginItem.enabled
 
-    private var darkModeController: DarkModeController?
+    private var darkModeController: DisplayController?
     /// Will hold a subscriber listening on changes of the enabled status of the app
     private var enabledCancellable: AnyCancellable?
     /// Will hold a subscriber listening on changes of the login item enabled status
@@ -62,7 +62,7 @@ class TransitionsController {
         // Configure re-creating the DarkModeController when user preferences or displays change
         return Publishers.CombineLatest(primaryDisplayChangedHandler, userData.$interfaceStyleSwitchTriggerValue)
             .map { display, thresholdValue in
-                DarkModeController(display: display, threshold: thresholdValue)
+                DisplayController(display: display, threshold: thresholdValue)
             }
             .sink { [weak self] controller in
                 self?.darkModeController = controller
@@ -70,9 +70,18 @@ class TransitionsController {
     }
 }
 
-extension TransitionsController: ObservableObject {}
+extension DisplaysController {
+    /// Singleton shared instance `DisplaysController`.
+    ///
+    /// - attention: not thread safe
+    static let main: DisplaysController = {
+        DisplaysController(userData: .main)
+    }()
+}
 
-extension TransitionsController: Refreshable {
+extension DisplaysController: ObservableObject {}
+
+extension DisplaysController: Refreshable {
     func refresh() {
         isStartingOnLogon = LoginItem.enabled
     }
