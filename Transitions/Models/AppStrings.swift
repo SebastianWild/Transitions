@@ -18,6 +18,8 @@ extension LocalizedStringKey {
         static let start_on_logon = LocalizedStringKey("start_on_logon")
         static let slider_header_text = LocalizedStringKey("slider_header_text")
         static let slider_footnote_text = LocalizedStringKey("slider_footnote_text")
+        static let acknowledgements_title = LocalizedStringKey("acknowledgements_title")
+        static let about_description = LocalizedStringKey("about_description")
     }
 }
 

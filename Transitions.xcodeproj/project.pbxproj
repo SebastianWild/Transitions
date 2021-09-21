@@ -44,6 +44,7 @@
 		9E8A23CC26981F8000E91600 /* TriggerSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8A23CB26981F8000E91600 /* TriggerSliderView.swift */; };
 		9E8B56AB26F421B50081587F /* Preferences in Frameworks */ = {isa = PBXBuildFile; productRef = 9E8B56AA26F421B50081587F /* Preferences */; };
 		9E8B56AD26F4422C0081587F /* ColorMultiplyButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8B56AC26F4422C0081587F /* ColorMultiplyButtonStyle.swift */; };
+		9E8B56B126F809E10081587F /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8B56B026F809E10081587F /* Bundle+Extensions.swift */; };
 		9E9C345C26C85883007489FE /* PreferenceItemImageModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9C345B26C85883007489FE /* PreferenceItemImageModifier.swift */; };
 		9EC555D025FC56F200AFC0BA /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 9EC555CF25FC56F200AFC0BA /* .swiftlint.yml */; };
 		9ED1F8F626DC620100B3EDC6 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED1F8F526DC620100B3EDC6 /* AppCoordinator.swift */; };
@@ -90,6 +91,7 @@
 		9E4E58F72693B9B500915490 /* Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
 		9E8A23CB26981F8000E91600 /* TriggerSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerSliderView.swift; sourceTree = "<group>"; };
 		9E8B56AC26F4422C0081587F /* ColorMultiplyButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorMultiplyButtonStyle.swift; sourceTree = "<group>"; };
+		9E8B56B026F809E10081587F /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
 		9E9C345B26C85883007489FE /* PreferenceItemImageModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceItemImageModifier.swift; sourceTree = "<group>"; };
 		9EC555CA25FC559E00AFC0BA /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		9EC555CF25FC56F200AFC0BA /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 				82C83AA9F276431F70C0D5E8 /* Combine+Extensions.swift */,
 				82C833022A42935FF5244B64 /* NSScreen+Extensions.swift */,
 				82C83F18D8865D3CDE7784D1 /* CoreBrightnessDiag+Extensions.swift */,
+				9E8B56B026F809E10081587F /* Bundle+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -403,6 +406,7 @@
 				9E8A23CC26981F8000E91600 /* TriggerSliderView.swift in Sources */,
 				9E0614982689421300F34D59 /* AppStrings.swift in Sources */,
 				9EE3E33B25FC64D70063BAFF /* CodableUserDefaultProperty.swift in Sources */,
+				9E8B56B126F809E10081587F /* Bundle+Extensions.swift in Sources */,
 				9E0CF34725FD98C000699170 /* Sizes.swift in Sources */,
 				9E4511E22402117F0000E7E0 /* UserDefaults+Extensions.swift in Sources */,
 				9E4511C52401E6160000E7E0 /* StatusBarPreferences.swift in Sources */,
