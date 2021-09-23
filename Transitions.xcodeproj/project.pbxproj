@@ -53,9 +53,13 @@
 		9E8B56B126F809E10081587F /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8B56B026F809E10081587F /* Bundle+Extensions.swift */; };
 		9E9C345C26C85883007489FE /* PreferenceItemImageModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9C345B26C85883007489FE /* PreferenceItemImageModifier.swift */; };
 		9EC555D025FC56F200AFC0BA /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 9EC555CF25FC56F200AFC0BA /* .swiftlint.yml */; };
+		9ECB9ED126FC667F001E94C4 /* Preferences+Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECB9ED026FC667F001E94C4 /* Preferences+Container.swift */; };
+		9ECB9ED326FC671B001E94C4 /* Preferences+Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECB9ED226FC671B001E94C4 /* Preferences+Section.swift */; };
+		9ECB9ED626FC6782001E94C4 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECB9ED526FC6782001E94C4 /* General.swift */; };
+		9ECB9ED826FC67AE001E94C4 /* About.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECB9ED726FC67AE001E94C4 /* About.swift */; };
 		9ED1F8F626DC620100B3EDC6 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED1F8F526DC620100B3EDC6 /* AppCoordinator.swift */; };
 		9EE3E33B25FC64D70063BAFF /* CodableUserDefaultProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE3E33A25FC64D70063BAFF /* CodableUserDefaultProperty.swift */; };
-		9EFF264626C7BD58008F24C9 /* PreferencesPanes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFF264526C7BD58008F24C9 /* PreferencesPanes.swift */; };
+		9EFF264626C7BD58008F24C9 /* Preferences+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFF264526C7BD58008F24C9 /* Preferences+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -107,9 +111,13 @@
 		9E9C345B26C85883007489FE /* PreferenceItemImageModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceItemImageModifier.swift; sourceTree = "<group>"; };
 		9EC555CA25FC559E00AFC0BA /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		9EC555CF25FC56F200AFC0BA /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		9ECB9ED026FC667F001E94C4 /* Preferences+Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Preferences+Container.swift"; sourceTree = "<group>"; };
+		9ECB9ED226FC671B001E94C4 /* Preferences+Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Preferences+Section.swift"; sourceTree = "<group>"; };
+		9ECB9ED526FC6782001E94C4 /* General.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
+		9ECB9ED726FC67AE001E94C4 /* About.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = About.swift; sourceTree = "<group>"; };
 		9ED1F8F526DC620100B3EDC6 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		9EE3E33A25FC64D70063BAFF /* CodableUserDefaultProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableUserDefaultProperty.swift; sourceTree = "<group>"; };
-		9EFF264526C7BD58008F24C9 /* PreferencesPanes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesPanes.swift; sourceTree = "<group>"; };
+		9EFF264526C7BD58008F24C9 /* Preferences+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Preferences+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,8 +216,8 @@
 		9E4511D52401E9600000E7E0 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
-				9E4511C42401E6160000E7E0 /* StatusBarPreferences.swift */,
-				9EFF264526C7BD58008F24C9 /* PreferencesPanes.swift */,
+				9ECB9ECE26FC661C001E94C4 /* Menulet */,
+				9ECB9ECF26FC6624001E94C4 /* Pane */,
 			);
 			path = Preferences;
 			sourceTree = "<group>";
@@ -262,6 +270,34 @@
 				9EC555CA25FC559E00AFC0BA /* Package.swift */,
 			);
 			path = BuildTools;
+			sourceTree = "<group>";
+		};
+		9ECB9ECE26FC661C001E94C4 /* Menulet */ = {
+			isa = PBXGroup;
+			children = (
+				9E4511C42401E6160000E7E0 /* StatusBarPreferences.swift */,
+			);
+			path = Menulet;
+			sourceTree = "<group>";
+		};
+		9ECB9ECF26FC6624001E94C4 /* Pane */ = {
+			isa = PBXGroup;
+			children = (
+				9ECB9ED026FC667F001E94C4 /* Preferences+Container.swift */,
+				9EFF264526C7BD58008F24C9 /* Preferences+Extensions.swift */,
+				9ECB9ED226FC671B001E94C4 /* Preferences+Section.swift */,
+				9ECB9ED426FC676A001E94C4 /* Sections */,
+			);
+			path = Pane;
+			sourceTree = "<group>";
+		};
+		9ECB9ED426FC676A001E94C4 /* Sections */ = {
+			isa = PBXGroup;
+			children = (
+				9ECB9ED726FC67AE001E94C4 /* About.swift */,
+				9ECB9ED526FC6782001E94C4 /* General.swift */,
+			);
+			path = Sections;
 			sourceTree = "<group>";
 		};
 		9EE3E33525FC640B0063BAFF /* Models */ = {
@@ -429,7 +465,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9ECB9ED126FC667F001E94C4 /* Preferences+Container.swift in Sources */,
 				9E8A23CC26981F8000E91600 /* TriggerSliderView.swift in Sources */,
+				9ECB9ED326FC671B001E94C4 /* Preferences+Section.swift in Sources */,
 				9E0614982689421300F34D59 /* AppStrings.swift in Sources */,
 				9EE3E33B25FC64D70063BAFF /* CodableUserDefaultProperty.swift in Sources */,
 				9E70593826F96A410002566C /* ToggleButtonStyle.swift in Sources */,
@@ -444,6 +482,7 @@
 				9E4511DC2402026A0000E7E0 /* UserData.swift in Sources */,
 				9E4E58F82693B9B500915490 /* Display.swift in Sources */,
 				9E4511D92401F3960000E7E0 /* SliderView.swift in Sources */,
+				9ECB9ED826FC67AE001E94C4 /* About.swift in Sources */,
 				9E061494268940D900F34D59 /* Color+Library.swift in Sources */,
 				9E0CF34A25FD99D700699170 /* NSEventPublisher.swift in Sources */,
 				9E0CF34425FD953600699170 /* Image+Library.swift in Sources */,
@@ -466,10 +505,11 @@
 				9E70593A26F96A650002566C /* ButtonToggleStyle.swift in Sources */,
 				9E70594326F96B2C0002566C /* Dependencies+View.swift in Sources */,
 				9ED1F8F626DC620100B3EDC6 /* AppCoordinator.swift in Sources */,
+				9ECB9ED626FC6782001E94C4 /* General.swift in Sources */,
 				82C830105D99028E12FECDD3 /* DisplayController.swift in Sources */,
 				82C83B841E2430C9E54723E9 /* DisplaysController.swift in Sources */,
 				82C83C076F574DD927C141FB /* LoginItem.swift in Sources */,
-				9EFF264626C7BD58008F24C9 /* PreferencesPanes.swift in Sources */,
+				9EFF264626C7BD58008F24C9 /* Preferences+Extensions.swift in Sources */,
 				82C83A667D45EE3683CAC014 /* Refreshable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

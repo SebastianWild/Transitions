@@ -77,7 +77,7 @@ extension AppCoordinator: NSWindowDelegate {
             return
         }
 
-        preferencesWindowController = PreferencePanes.buildController(with: userData, and: displaysController)
+        preferencesWindowController = Preferences.buildController(with: userData, and: displaysController)
         preferencesWindowController?.window?.delegate = self
         preferencesWindowController?.show()
     }

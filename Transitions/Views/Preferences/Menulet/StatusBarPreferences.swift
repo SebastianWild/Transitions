@@ -6,6 +6,7 @@
 //  Copyright © 2020 Sebastian Wild. All rights reserved.
 //
 
+import Preferences
 import SwiftUI
 
 struct StatusBarPreferences: View {
@@ -20,24 +21,7 @@ struct StatusBarPreferences: View {
         VStack(alignment: .leading) {
             Text(LocalizedStringKey.Preferences.general)
                 .font(.headline)
-            Toggle(isOn: $userData.isAppEnabled) {
-                Text(LocalizedStringKey.Preferences.enabled)
-            }
-            Toggle(isOn: $controller.isStartingOnLogon) {
-                Text(LocalizedStringKey.Preferences.start_on_logon)
-            }
-            Text(LocalizedStringKey.Preferences.slider_header_text)
-                .font(.headline)
-
-            switch primaryDisplay {
-            case let .success(display):
-                TriggerSliderView(
-                    display: display,
-                    triggerValue: $userData.interfaceStyleSwitchTriggerValue
-                )
-            case let .failure(error):
-                error
-            }
+            Preferences.Section.General.Container()
 
             HStack {
                 Button {
