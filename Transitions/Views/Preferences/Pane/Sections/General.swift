@@ -11,7 +11,7 @@ import SwiftUI
 
 extension Preferences.Section.General {
     static var section: Preferences.Section {
-        Preferences.Section(title: "general".localized) {
+        Preferences.Section(title: "") {
             Preferences.Section.General.Container()
         }
     }
