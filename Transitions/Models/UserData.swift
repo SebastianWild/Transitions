@@ -13,7 +13,7 @@ import SwiftUI
 /// - attention: Not thread safe.
 final class UserData: ObservableObject {
     @Published var isAppEnabled: Bool = false
-    @Published var interfaceStyleSwitchTriggerValue: Float = 27.0
+    @Published var interfaceStyleSwitchTriggerValue: Float = 0.27
     var isStartingOnLogon: Bool { LoginItem.enabled }
 
     private var changeHandler: AnyCancellable?
