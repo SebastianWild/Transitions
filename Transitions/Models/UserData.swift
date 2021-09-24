@@ -12,12 +12,22 @@ import SwiftUI
 
 /// - attention: Not thread safe.
 final class UserData: ObservableObject {
+    
+    // MARK: - User Preferences
+    
     @Published var isAppEnabled: Bool = false
     @Published var interfaceStyleSwitchTriggerValue: Float = 0.27
+    @Published var isMenuletEnabled: Bool = true
+    
+    // MARK: - Public Properties
+    
     var isStartingOnLogon: Bool { LoginItem.enabled }
+    
+    // MARK: - Private Properties
 
     private var changeHandler: AnyCancellable?
     private let userDefaults = UserDefaults.standard
+    
 
     init() {
         // Synchronize to UserDefaults when values change
@@ -33,6 +43,8 @@ final class UserData: ObservableObject {
             }
     }
 }
+
+// MARK: - Codable
 
 extension UserData: Codable {
     enum CodingKeys: String, CodingKey {
@@ -56,6 +68,8 @@ extension UserData: Codable {
         try container.encode(interfaceStyleSwitchTriggerValue, forKey: .interfaceStyleSwitchTriggerValue)
     }
 }
+
+// MARK: - Singleton
 
 extension UserData {
     /// Singleton shared instance `UserData`.
