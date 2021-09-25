@@ -10,6 +10,7 @@
 		82C830105D99028E12FECDD3 /* DisplayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C832864A9F72A369DE0007 /* DisplayController.swift */; };
 		82C830E6838F9F17F72491CB /* Combine+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83AA9F276431F70C0D5E8 /* Combine+Extensions.swift */; };
 		82C831C27AE7B57AF89864DE /* DisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83457B308720F62A47F1D /* DisplayManager.swift */; };
+		82C832681C0542B991ADBAC3 /* MenuBarItemControlling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83606560D88E954530552 /* MenuBarItemControlling.swift */; };
 		82C8344D5FC0BE64719D4628 /* DarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83CB093BF0C8821CE6BE0 /* DarkMode.swift */; };
 		82C834896FCB03C060556EC8 /* CoreBrightnessDiag+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83F18D8865D3CDE7784D1 /* CoreBrightnessDiag+Extensions.swift */; };
 		82C83519D042743B48DA0298 /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C8372B9E19910C6D6C7621 /* Shell.swift */; };
@@ -26,7 +27,7 @@
 		9E061494268940D900F34D59 /* Color+Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E061493268940D900F34D59 /* Color+Library.swift */; };
 		9E0614982689421300F34D59 /* AppStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0614972689421300F34D59 /* AppStrings.swift */; };
 		9E061499268949AB00F34D59 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9E06149B268949AB00F34D59 /* Localizable.strings */; };
-		9E0CF33F25FD8D9200699170 /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0CF33E25FD8D9200699170 /* StatusBarController.swift */; };
+		9E0CF33F25FD8D9200699170 /* MenuBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0CF33E25FD8D9200699170 /* MenuBarController.swift */; };
 		9E0CF34425FD953600699170 /* Image+Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0CF34325FD953600699170 /* Image+Library.swift */; };
 		9E0CF34725FD98C000699170 /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0CF34625FD98C000699170 /* Sizes.swift */; };
 		9E0CF34A25FD99D700699170 /* NSEventPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0CF34925FD99D700699170 /* NSEventPublisher.swift */; };
@@ -66,6 +67,7 @@
 		82C832864A9F72A369DE0007 /* DisplayController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayController.swift; sourceTree = "<group>"; };
 		82C833022A42935FF5244B64 /* NSScreen+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSScreen+Extensions.swift"; sourceTree = "<group>"; };
 		82C83457B308720F62A47F1D /* DisplayManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayManager.swift; sourceTree = "<group>"; };
+		82C83606560D88E954530552 /* MenuBarItemControlling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBarItemControlling.swift; sourceTree = "<group>"; };
 		82C8372B9E19910C6D6C7621 /* Shell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shell.swift; sourceTree = "<group>"; };
 		82C83820B622BD4556F7A2DA /* Preview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		82C83A0BE3F6422EE7D39BC8 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
@@ -81,7 +83,7 @@
 		9E061493268940D900F34D59 /* Color+Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Library.swift"; sourceTree = "<group>"; };
 		9E0614972689421300F34D59 /* AppStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStrings.swift; sourceTree = "<group>"; };
 		9E06149A268949AB00F34D59 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		9E0CF33E25FD8D9200699170 /* StatusBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
+		9E0CF33E25FD8D9200699170 /* MenuBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarController.swift; sourceTree = "<group>"; };
 		9E0CF34325FD953600699170 /* Image+Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Library.swift"; sourceTree = "<group>"; };
 		9E0CF34625FD98C000699170 /* Sizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
 		9E0CF34925FD99D700699170 /* NSEventPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSEventPublisher.swift; sourceTree = "<group>"; };
@@ -160,7 +162,7 @@
 		9E0CF33D25FD8D6500699170 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				9E0CF33E25FD8D9200699170 /* StatusBarController.swift */,
+				9E0CF33E25FD8D9200699170 /* MenuBarController.swift */,
 				82C832864A9F72A369DE0007 /* DisplayController.swift */,
 				82C83E4158A55D02EEE50345 /* DisplaysController.swift */,
 				9ED1F8F526DC620100B3EDC6 /* AppCoordinator.swift */,
@@ -242,6 +244,7 @@
 			children = (
 				9E4E58F72693B9B500915490 /* Display.swift */,
 				82C83E4DFD708AEE56F0C9D8 /* Refreshable.swift */,
+				82C83606560D88E954530552 /* MenuBarItemControlling.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -414,7 +417,7 @@
 			mainGroup = 9E4511B62401E6160000E7E0;
 			packageReferences = (
 				9E06148E2689221D00F34D59 /* XCRemoteSwiftPackageReference "swiftui-sliders" */,
-				9E8B56A926F421B50081587F /* XCRemoteSwiftPackageReference "Preferences" */,
+				9E8B56A926F421B50081587F /* XCRemoteSwiftPackageReference "Preferences.git" */,
 			);
 			productRefGroup = 9E4511C02401E6160000E7E0 /* Products */;
 			projectDirPath = "";
@@ -476,7 +479,7 @@
 				9E4511E22402117F0000E7E0 /* UserDefaults+Extensions.swift in Sources */,
 				9E4511C52401E6160000E7E0 /* StatusBarPreferences.swift in Sources */,
 				9E4511C32401E6160000E7E0 /* AppDelegate.swift in Sources */,
-				9E0CF33F25FD8D9200699170 /* StatusBarController.swift in Sources */,
+				9E0CF33F25FD8D9200699170 /* MenuBarController.swift in Sources */,
 				9E2E9D7026911E88003987EF /* SystemBrightness.swift in Sources */,
 				9E41946F24037EF2003B5E87 /* PositionIndicatorView.swift in Sources */,
 				9E4511DC2402026A0000E7E0 /* UserData.swift in Sources */,
@@ -511,6 +514,7 @@
 				82C83C076F574DD927C141FB /* LoginItem.swift in Sources */,
 				9EFF264626C7BD58008F24C9 /* Preferences+Extensions.swift in Sources */,
 				82C83A667D45EE3683CAC014 /* Refreshable.swift in Sources */,
+				82C832681C0542B991ADBAC3 /* MenuBarItemControlling.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -736,7 +740,7 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		9E8B56A926F421B50081587F /* XCRemoteSwiftPackageReference "Preferences" */ = {
+		9E8B56A926F421B50081587F /* XCRemoteSwiftPackageReference "Preferences.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sindresorhus/Preferences.git";
 			requirement = {
@@ -744,7 +748,7 @@
 				minimumVersion = 2.5.0;
 			};
 		};
-		9EC148922403391C00EBC6D2 /* XCRemoteSwiftPackageReference "Mint" */ = {
+		9EC148922403391C00EBC6D2 /* XCRemoteSwiftPackageReference "Mint.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/yonaskolb/Mint.git";
 			requirement = {
@@ -762,12 +766,12 @@
 		};
 		9E8B56AA26F421B50081587F /* Preferences */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9E8B56A926F421B50081587F /* XCRemoteSwiftPackageReference "Preferences" */;
+			package = 9E8B56A926F421B50081587F /* XCRemoteSwiftPackageReference "Preferences.git" */;
 			productName = Preferences;
 		};
 		9EC148932403392600EBC6D2 /* mint */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9EC148922403391C00EBC6D2 /* XCRemoteSwiftPackageReference "Mint" */;
+			package = 9EC148922403391C00EBC6D2 /* XCRemoteSwiftPackageReference "Mint.git" */;
 			productName = mint;
 		};
 /* End XCSwiftPackageProductDependency section */

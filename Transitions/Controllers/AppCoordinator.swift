@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Combine
 import Foundation
 import SwiftUI
 
@@ -19,52 +20,37 @@ class AppCoordinator: NSObject {
     private var userData: UserData
     private var displaysController: DisplaysController
 
-    /// Will be nil when the menu bar item is turned off
-    private var statusBarController: StatusBarController?
-    /// Will be nil when the menu bar item is turned off
-    private var statusBarPopover: NSPopover?
+    private var statusBarController: MenuBarItemControlling
 
     private var preferencesWindowController: PreferencesWindowController?
 
     init(
         userData: UserData = .main,
-        displaysController: DisplaysController = .main
+        displaysController: DisplaysController = .main,
+        statusBarController: MenuBarItemControlling = MenuBarBarController()
     ) {
         self.userData = userData
         self.displaysController = displaysController
+
+        self.statusBarController = statusBarController
+
+        super.init()
+
+        self.statusBarController.onPreferencesTap = { [weak self] in
+            self?.showPreferencesUI()
+        }
+        self.statusBarController.onPopOverShow = { [weak self] in
+            self?.displaysController.refresh()
+        }
     }
 
     /**
      To be called at app start to show the UI
      */
     func showUI() {
-        // For now, we always show the menu item
-        // In the future, user preferences will control what is shown
-        createMenuItem()
-    }
-}
-
-// MARK: - Menu Item handling
-
-extension AppCoordinator {
-    private func createMenuItem() {
-        let popover = NSPopover()
-        popover.contentSize = .popover
-
-        statusBarController = StatusBarController(
-            popover,
-            onShow: { [weak self] in
-                self?.displaysController.refresh()
-            }
-        )
-
-        popover.contentViewController = NSHostingController(
-            rootView: StatusBarPreferences { [weak self] in self?.showPreferencesUI() }
-                .environmentObject(displaysController)
-                .environmentObject(userData)
-        )
-
-        statusBarPopover = popover
+        if userData.isMenuletEnabled {
+            statusBarController.showMenuItem()
+        }
     }
 }
 
