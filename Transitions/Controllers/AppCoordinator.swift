@@ -20,26 +20,26 @@ class AppCoordinator: NSObject {
     private var userData: UserData
     private var displaysController: DisplaysController
 
-    private var statusBarController: MenuBarItemControlling
-
-    private var preferencesWindowController: PreferencesWindowController?
+    private var menuBarController: MenuBarItemControlling
+    private let appPreferenceWindowController: AppPreferenceWindowControlling
 
     init(
         userData: UserData = .main,
         displaysController: DisplaysController = .main,
-        statusBarController: MenuBarItemControlling = MenuBarBarController()
+        menuBarController: MenuBarItemControlling = MenuBarBarController(),
+        appPreferenceWindowController: AppPreferenceWindowControlling = AppPreferenceWindowController()
     ) {
         self.userData = userData
         self.displaysController = displaysController
-
-        self.statusBarController = statusBarController
+        self.menuBarController = menuBarController
+        self.appPreferenceWindowController = appPreferenceWindowController
 
         super.init()
 
-        self.statusBarController.onPreferencesTap = { [weak self] in
-            self?.showPreferencesUI()
+        self.menuBarController.onPreferencesTap = { [weak self] in
+            self?.appPreferenceWindowController.showPreferencesWindow()
         }
-        self.statusBarController.onPopOverShow = { [weak self] in
+        self.menuBarController.onPopOverShow = { [weak self] in
             self?.displaysController.refresh()
         }
     }
@@ -49,28 +49,7 @@ class AppCoordinator: NSObject {
      */
     func showUI() {
         if userData.isMenuletEnabled {
-            statusBarController.showMenuItem()
-        }
-    }
-}
-
-// MARK: - Preferences UI handling
-
-extension AppCoordinator: NSWindowDelegate {
-    private func showPreferencesUI() {
-        guard preferencesWindowController == nil else {
-            preferencesWindowController?.showWindow(self)
-            return
-        }
-
-        preferencesWindowController = Preferences.buildController(with: userData, and: displaysController)
-        preferencesWindowController?.window?.delegate = self
-        preferencesWindowController?.show()
-    }
-
-    public func windowWillClose(_ notification: Notification) {
-        if let window = notification.object as? NSWindow, window == preferencesWindowController {
-            preferencesWindowController = nil
+            menuBarController.showMenuItem()
         }
     }
 }
