@@ -18,6 +18,7 @@
 		82C83622B3B5FF4820276D31 /* NSScreen+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C833022A42935FF5244B64 /* NSScreen+Extensions.swift */; };
 		82C836FBB8F7220C1C35DF58 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83A0BE3F6422EE7D39BC8 /* Errors.swift */; };
 		82C838BA0C307CDD92FDEE6D /* InternalDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83D21D6C6CD1446C57DF2 /* InternalDisplay.swift */; };
+		82C839D218E18A7B37C385D8 /* AppCoordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C8306B2647294EA202DE07 /* AppCoordinating.swift */; };
 		82C83A667D45EE3683CAC014 /* Refreshable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83E4DFD708AEE56F0C9D8 /* Refreshable.swift */; };
 		82C83AA37EE62E37936BE63C /* CoreBrightnessDiag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83A61033F2F4F0B31C28C /* CoreBrightnessDiag.swift */; };
 		82C83AB18A598F510781A84F /* AppPreferenceWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83ADBB821820060ACF0E2 /* AppPreferenceWindowController.swift */; };
@@ -66,6 +67,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		82C8306B2647294EA202DE07 /* AppCoordinating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinating.swift; sourceTree = "<group>"; };
 		82C832864A9F72A369DE0007 /* DisplayController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayController.swift; sourceTree = "<group>"; };
 		82C833022A42935FF5244B64 /* NSScreen+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSScreen+Extensions.swift"; sourceTree = "<group>"; };
 		82C83457B308720F62A47F1D /* DisplayManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayManager.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 				82C83E4DFD708AEE56F0C9D8 /* Refreshable.swift */,
 				82C83606560D88E954530552 /* MenuBarItemControlling.swift */,
 				82C83E8BD977B1E11EED39B6 /* AppPreferenceWindowControlling.swift */,
+				82C8306B2647294EA202DE07 /* AppCoordinating.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -523,6 +526,7 @@
 				82C832681C0542B991ADBAC3 /* MenuBarItemControlling.swift in Sources */,
 				82C833EDB4587C4844F0BEA1 /* AppPreferenceWindowControlling.swift in Sources */,
 				82C83AB18A598F510781A84F /* AppPreferenceWindowController.swift in Sources */,
+				82C839D218E18A7B37C385D8 /* AppCoordinating.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

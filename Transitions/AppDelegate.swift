@@ -12,10 +12,14 @@ import SwiftUI
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-    lazy var coordinator = AppCoordinator()
+    lazy var coordinator: AppCoordinating = AppCoordinator()
 
     func applicationDidFinishLaunching(_: Notification) {
-        coordinator.showUI()
+        coordinator.applicationDidFinishLaunching()
+    }
+
+    func applicationShouldHandleReopen(_: NSApplication, hasVisibleWindows _: Bool) -> Bool {
+        coordinator.applicationShouldHandleReopen()
     }
 
     func applicationWillTerminate(_: Notification) {

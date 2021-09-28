@@ -16,7 +16,7 @@ import Preferences
 /**
  Class responsible for bootstrapping the app UI and navigating between views
  */
-class AppCoordinator: NSObject {
+class AppCoordinator: NSObject, AppCoordinating {
     private var userData: UserData
     private var displaysController: DisplaysController
 
@@ -25,7 +25,7 @@ class AppCoordinator: NSObject {
 
     private var bag = Set<AnyCancellable>()
 
-    init(
+    required init(
         userData: UserData = .main,
         displaysController: DisplaysController = .main,
         menuBarController: MenuBarItemControlling = MenuBarBarController(),
@@ -59,9 +59,15 @@ class AppCoordinator: NSObject {
     /**
      To be called at app start to show the UI
      */
-    func showUI() {
+    func applicationDidFinishLaunching() {
         if userData.isMenuletEnabled {
             menuBarController.showMenuItem()
         }
+    }
+
+    func applicationShouldHandleReopen() -> Bool {
+        // The app has been reopened while already running - let's show preferences
+        appPreferenceWindowController.showPreferencesWindow()
+        return true
     }
 }
