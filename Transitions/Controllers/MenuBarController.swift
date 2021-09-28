@@ -47,7 +47,7 @@ final class MenuBarBarController: NSObject, MenuBarItemControlling {
     func showMenuItem() {
         // Create the menu bar item.
         // This automatically adds it to the menu bar.
-        statusItem = statusBar.statusItem(withLength: 28.0)
+        statusItem = statusBar.statusItem(withLength: 18.0)
         statusItem?.button?.image = .statusBarIcon
         statusItem?.button?.action = #selector(togglePopOver(sender:))
         statusItem?.button?.target = self
