@@ -29,7 +29,7 @@ final class UserData: ObservableObject {
 
     init() {
         // Synchronize to UserDefaults when values change
-        changeHandler = Publishers.CombineLatest($isAppEnabled, $interfaceStyleSwitchTriggerValue)
+        changeHandler = Publishers.CombineLatest3($isAppEnabled, $interfaceStyleSwitchTriggerValue, $isMenuletEnabled)
             .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: true)
             .handleEvents(receiveOutput: { data in
                 print("Received new user data: \(data)")

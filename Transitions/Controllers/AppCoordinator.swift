@@ -23,6 +23,8 @@ class AppCoordinator: NSObject {
     private var menuBarController: MenuBarItemControlling
     private let appPreferenceWindowController: AppPreferenceWindowControlling
 
+    private var bag = Set<AnyCancellable>()
+
     init(
         userData: UserData = .main,
         displaysController: DisplaysController = .main,
@@ -42,7 +44,17 @@ class AppCoordinator: NSObject {
         self.menuBarController.onPopOverShow = { [weak self] in
             self?.displaysController.refresh()
         }
+
+        userData.$isMenuletEnabled
+            // Upon subscribing, the current value will publish
+            // we don't need to react on this as `showUI` will handle the first showing
+            .dropFirst()
+            .sink { [weak self] enabled in
+                enabled ? self?.menuBarController.showMenuItem() : self?.menuBarController.removeMenuItem()
+            }.store(in: &bag)
     }
+
+    // MARK: - Public API
 
     /**
      To be called at app start to show the UI

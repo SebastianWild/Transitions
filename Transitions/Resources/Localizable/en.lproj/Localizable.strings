@@ -11,6 +11,7 @@
 "about" = "About";
 "preferences_enabled" = "Enabled";
 "start_on_logon" = "Start On Logon";
+"menulet_enabled" = "Menu bar item enabled";
 "slider_header_text" = "Dark Mode Trigger";
 "slider_footnote_text" = "Move the slider to adjust at what brightness level dark mode is triggered.";
 "author" = "Sebastian Wild";

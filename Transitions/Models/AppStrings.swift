@@ -16,6 +16,7 @@ extension LocalizedStringKey {
         static let about = LocalizedStringKey("about")
         static let enabled = LocalizedStringKey("preferences_enabled")
         static let start_on_logon = LocalizedStringKey("start_on_logon")
+        static let menulet_enabled = LocalizedStringKey("menulet_enabled")
         static let slider_header_text = LocalizedStringKey("slider_header_text")
         static let slider_footnote_text = LocalizedStringKey("slider_footnote_text")
         static let acknowledgements_title = LocalizedStringKey("acknowledgements_title")

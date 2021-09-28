@@ -20,7 +20,7 @@ final class MenuBarBarController: NSObject, MenuBarItemControlling {
         let popover = NSPopover()
         popover.contentSize = .popover
         popover.contentViewController = NSHostingController(
-            rootView: StatusBarPreferences { [weak self] in
+            rootView: MenuBarPreferences { [weak self] in
                 guard let self = self else { return }
                 self.onPreferencesTap?()
                 self.hidePopOver(self)

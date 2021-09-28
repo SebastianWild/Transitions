@@ -9,7 +9,7 @@
 import Preferences
 import SwiftUI
 
-struct StatusBarPreferences: View {
+struct MenuBarPreferences: View {
     @EnvironmentObject private var userData: UserData
     @EnvironmentObject private var controller: DisplaysController
 
@@ -21,7 +21,8 @@ struct StatusBarPreferences: View {
         VStack(alignment: .leading) {
             Text(LocalizedStringKey.Preferences.general)
                 .font(.headline)
-            Preferences.Section.General.Container()
+            Preferences.Section.General.IsAppEnabledPreference()
+            Preferences.Section.General.IsStartingOnLogonPreference()
 
             HStack {
                 Button {
@@ -59,7 +60,7 @@ struct StatusBarPreferences: View {
 struct PreferencesView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            StatusBarPreferences {}
+            MenuBarPreferences {}
                 .environmentObject(UserData())
                 .environmentObject(DisplaysController(userData: UserData()))
         }

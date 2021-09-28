@@ -27,7 +27,9 @@ extension Preferences.Section.General {
 
         var body: some View {
             VStack(alignment: .leading) {
-                Preferences.Section.General.Toggles()
+                Preferences.Section.General.IsAppEnabledPreference()
+                Preferences.Section.General.IsStartingOnLogonPreference()
+                Preferences.Section.General.IsMenuLetEnabledPreference()
 
                 Text(LocalizedStringKey.Preferences.slider_header_text)
                     .font(.headline)
@@ -58,9 +60,7 @@ extension Preferences.Section.General {
         }
     }
 
-    /// View for app settings that can be toggled,
-    /// such as enabled, start on logon, menulet
-    struct Toggles: View {
+    struct IsAppEnabledPreference: View {
         @EnvironmentObject private var userData: UserData
         @EnvironmentObject private var controller: DisplaysController
 
@@ -68,8 +68,27 @@ extension Preferences.Section.General {
             Toggle(isOn: $userData.isAppEnabled) {
                 Text(LocalizedStringKey.Preferences.enabled)
             }
+        }
+    }
+
+    struct IsStartingOnLogonPreference: View {
+        @EnvironmentObject private var userData: UserData
+        @EnvironmentObject private var controller: DisplaysController
+
+        var body: some View {
             Toggle(isOn: $controller.isStartingOnLogon) {
                 Text(LocalizedStringKey.Preferences.start_on_logon)
+            }
+        }
+    }
+
+    struct IsMenuLetEnabledPreference: View {
+        @EnvironmentObject private var userData: UserData
+        @EnvironmentObject private var controller: DisplaysController
+
+        var body: some View {
+            Toggle(isOn: $userData.isMenuletEnabled) {
+                Text(LocalizedStringKey.Preferences.menulet_enabled)
             }
         }
     }
