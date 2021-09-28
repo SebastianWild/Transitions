@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Combine
 import Foundation
 import SwiftUI
 
@@ -15,76 +16,58 @@ import Preferences
 /**
  Class responsible for bootstrapping the app UI and navigating between views
  */
-class AppCoordinator: NSObject {
+class AppCoordinator: NSObject, AppCoordinating {
     private var userData: UserData
     private var displaysController: DisplaysController
 
-    /// Will be nil when the menu bar item is turned off
-    private var statusBarController: StatusBarController?
-    /// Will be nil when the menu bar item is turned off
-    private var statusBarPopover: NSPopover?
+    private var menuBarController: MenuBarItemControlling
+    private let appPreferenceWindowController: AppPreferenceWindowControlling
 
-    private var preferencesWindowController: PreferencesWindowController?
+    private var bag = Set<AnyCancellable>()
 
-    init(
+    required init(
         userData: UserData = .main,
-        displaysController: DisplaysController = .main
+        displaysController: DisplaysController = .main,
+        menuBarController: MenuBarItemControlling = MenuBarBarController(),
+        appPreferenceWindowController: AppPreferenceWindowControlling = AppPreferenceWindowController()
     ) {
         self.userData = userData
         self.displaysController = displaysController
+        self.menuBarController = menuBarController
+        self.appPreferenceWindowController = appPreferenceWindowController
+
+        super.init()
+
+        self.menuBarController.onPreferencesTap = { [weak self] in
+            self?.appPreferenceWindowController.showPreferencesWindow()
+        }
+        self.menuBarController.onPopOverShow = { [weak self] in
+            self?.displaysController.refresh()
+        }
+
+        userData.$isMenuletEnabled
+            // Upon subscribing, the current value will publish
+            // we don't need to react on this as `showUI` will handle the first showing
+            .dropFirst()
+            .sink { [weak self] enabled in
+                enabled ? self?.menuBarController.showMenuItem() : self?.menuBarController.removeMenuItem()
+            }.store(in: &bag)
     }
+
+    // MARK: - Public API
 
     /**
      To be called at app start to show the UI
      */
-    func showUI() {
-        // For now, we always show the menu item
-        // In the future, user preferences will control what is shown
-        createMenuItem()
-    }
-}
-
-// MARK: - Menu Item handling
-
-extension AppCoordinator {
-    private func createMenuItem() {
-        let popover = NSPopover()
-        popover.contentSize = .popover
-
-        statusBarController = StatusBarController(
-            popover,
-            onShow: { [weak self] in
-                self?.displaysController.refresh()
-            }
-        )
-
-        popover.contentViewController = NSHostingController(
-            rootView: StatusBarPreferences { [weak self] in self?.showPreferencesUI() }
-                .environmentObject(displaysController)
-                .environmentObject(userData)
-        )
-
-        statusBarPopover = popover
-    }
-}
-
-// MARK: - Preferences UI handling
-
-extension AppCoordinator: NSWindowDelegate {
-    private func showPreferencesUI() {
-        guard preferencesWindowController == nil else {
-            preferencesWindowController?.showWindow(self)
-            return
+    func applicationDidFinishLaunching() {
+        if userData.isMenuletEnabled {
+            menuBarController.showMenuItem()
         }
-
-        preferencesWindowController = PreferencePanes.buildController(with: userData, and: displaysController)
-        preferencesWindowController?.window?.delegate = self
-        preferencesWindowController?.show()
     }
 
-    public func windowWillClose(_ notification: Notification) {
-        if let window = notification.object as? NSWindow, window == preferencesWindowController {
-            preferencesWindowController = nil
-        }
+    func applicationShouldHandleReopen() -> Bool {
+        // The app has been reopened while already running - let's show preferences
+        appPreferenceWindowController.showPreferencesWindow()
+        return true
     }
 }
