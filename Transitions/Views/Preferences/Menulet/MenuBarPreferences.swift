@@ -13,8 +13,6 @@ struct MenuBarPreferences: View {
     @EnvironmentObject private var userData: UserData
     @EnvironmentObject private var controller: DisplaysController
 
-    @State private var primaryDisplay: Result<Display, BrightnessReadError> = .failure(.noDisplays(original: nil))
-
     let onPreferenceButtonPress: () -> Void
 
     var body: some View {
@@ -23,6 +21,7 @@ struct MenuBarPreferences: View {
                 .font(.headline)
             Preferences.Section.General.IsAppEnabledPreference()
             Preferences.Section.General.IsStartingOnLogonPreference()
+            Preferences.Section.General.PrimaryDisplayTriggerPreference()
 
             HStack {
                 Button {
@@ -41,19 +40,6 @@ struct MenuBarPreferences: View {
             }
         }
         .padding()
-        .onReceive(controller.displayManager.$displays) { displays in
-            guard let primaryDisplay = displays.first else {
-                self.primaryDisplay = .failure(.noDisplays(original: nil))
-                return
-            }
-
-            if let readError = primaryDisplay.error {
-                self.primaryDisplay = .failure(readError)
-                return
-            }
-
-            self.primaryDisplay = .success(primaryDisplay)
-        }
     }
 }
 

@@ -11,6 +11,9 @@ import SwiftUI
 
 extension Preferences.Container {
     struct General: View {
+        /// The "General" preference section body.
+        ///
+        /// - Important: all views require `UserData`, and `DisplaysController` in the environment!
         var body: some View {
             Preferences.Container(contentWidth: Preferences.contentWidth) {
                 Preferences.Section.General.section
