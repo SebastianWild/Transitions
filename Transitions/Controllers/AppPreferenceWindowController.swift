@@ -22,6 +22,9 @@ class AppPreferenceWindowController: NSObject, AppPreferenceWindowControlling, N
     func showPreferencesWindow() {
         guard preferencesWindowController == nil else {
             preferencesWindowController?.showWindow(self)
+            // If the user already has the preference window open, another application could be covering it -
+            // we should make the preference window come to the front regardless of what window is currently in front.
+            preferencesWindowController?.window?.orderFrontRegardless()
             return
         }
 
