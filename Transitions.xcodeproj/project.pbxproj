@@ -426,7 +426,7 @@
 			mainGroup = 9E4511B62401E6160000E7E0;
 			packageReferences = (
 				9E06148E2689221D00F34D59 /* XCRemoteSwiftPackageReference "swiftui-sliders" */,
-				9E8B56A926F421B50081587F /* XCRemoteSwiftPackageReference "Preferences.git" */,
+				9E8B56A926F421B50081587F /* XCRemoteSwiftPackageReference "Preferences" */,
 			);
 			productRefGroup = 9E4511C02401E6160000E7E0 /* Products */;
 			projectDirPath = "";
@@ -678,6 +678,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Transitions/Transitions.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -701,6 +702,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Transitions/Transitions.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -752,7 +754,7 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		9E8B56A926F421B50081587F /* XCRemoteSwiftPackageReference "Preferences.git" */ = {
+		9E8B56A926F421B50081587F /* XCRemoteSwiftPackageReference "Preferences" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sindresorhus/Preferences.git";
 			requirement = {
@@ -760,7 +762,7 @@
 				minimumVersion = 2.5.0;
 			};
 		};
-		9EC148922403391C00EBC6D2 /* XCRemoteSwiftPackageReference "Mint.git" */ = {
+		9EC148922403391C00EBC6D2 /* XCRemoteSwiftPackageReference "Mint" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/yonaskolb/Mint.git";
 			requirement = {
@@ -778,12 +780,12 @@
 		};
 		9E8B56AA26F421B50081587F /* Preferences */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9E8B56A926F421B50081587F /* XCRemoteSwiftPackageReference "Preferences.git" */;
+			package = 9E8B56A926F421B50081587F /* XCRemoteSwiftPackageReference "Preferences" */;
 			productName = Preferences;
 		};
 		9EC148932403392600EBC6D2 /* mint */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9EC148922403391C00EBC6D2 /* XCRemoteSwiftPackageReference "Mint.git" */;
+			package = 9EC148922403391C00EBC6D2 /* XCRemoteSwiftPackageReference "Mint" */;
 			productName = mint;
 		};
 /* End XCSwiftPackageProductDependency section */

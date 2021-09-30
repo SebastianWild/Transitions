@@ -21,6 +21,14 @@ extension Image {
             .resizable()
             .scaledToFit()
     }
+
+    static var appIcon: some View {
+        // Simply doing `Image("AppIcon)` does not work, see
+        // https://stackoverflow.com/questions/62063972/how-do-i-include-ios-app-icon-image-within-the-app-itself/62064533#62064533
+        Image(nsImage: NSImage.appIcon)
+            .resizable()
+            .scaledToFit()
+    }
 }
 
 extension NSImage {
@@ -51,6 +59,14 @@ extension NSImage {
         }
 
         icon.isTemplate = true
+
+        return icon
+    }
+
+    static var appIcon: NSImage {
+        guard let icon = NSImage(named: "AppIcon") else {
+            fatalError("Image not found in asset catalog!")
+        }
 
         return icon
     }
