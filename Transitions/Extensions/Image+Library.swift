@@ -33,7 +33,7 @@ extension Image {
 
 extension NSImage {
     static var statusBarIcon: NSImage {
-        guard let icon = NSImage(named: "sun.min") else {
+        guard let icon = NSImage(named: "menubar") else {
             fatalError("Image not found in asset catalog!")
         }
 
