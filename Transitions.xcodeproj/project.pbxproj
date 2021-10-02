@@ -468,7 +468,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd BuildTools\n\n# Run SwiftLint\n# Need to set SDKROOT b/c otherwise it would be set to iphoneos, SwiftLint is a macOS CLI tool\nSDKROOT=macosx\n\nswift run -c release swiftlint --path $SRCROOT --config \"${SRCROOT}/BuildTools/.swiftlint.yml\"\n\n# Run SwiftFormat in linting mode\nswift run -c release swiftformat --config \"${SRCROOT}/BuildTools/.swiftformat\" \"$SRCROOT\"\n";
+			shellScript = "cd BuildTools\n\nswift run -c release swiftlint --path $SRCROOT --config \"${SRCROOT}/BuildTools/.swiftlint.yml\"\n\n# Run SwiftFormat in linting mode\nswift run -c release swiftformat --config \"${SRCROOT}/BuildTools/.swiftformat\" \"$SRCROOT\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
