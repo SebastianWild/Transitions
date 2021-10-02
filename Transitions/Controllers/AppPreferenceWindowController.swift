@@ -8,18 +8,28 @@ import Foundation
 import Preferences
 
 class AppPreferenceWindowController: NSObject, AppPreferenceWindowControlling, NSWindowDelegate {
+    typealias SetActivationPolicy = (NSApplication.ActivationPolicy) -> Bool
+
     private var preferencesWindowController: PreferencesWindowController?
 
     private let userData: UserData
     private let displaysController: DisplaysController
+    private let setActivationPolicy: SetActivationPolicy
 
-    init(userData: UserData = .main, displaysController: DisplaysController = .main) {
+    init(
+        userData: UserData = .main,
+        displaysController: DisplaysController = .main,
+        activationPolicySetting: @escaping SetActivationPolicy = NSApp.setActivationPolicy(_:)
+    ) {
         self.userData = userData
         self.displaysController = displaysController
+        setActivationPolicy = activationPolicySetting
         super.init()
     }
 
     func showPreferencesWindow() {
+        _ = setActivationPolicy(.regular)
+
         guard preferencesWindowController == nil else {
             preferencesWindowController?.showWindow(self)
             // If the user already has the preference window open, another application could be covering it -
@@ -34,6 +44,8 @@ class AppPreferenceWindowController: NSObject, AppPreferenceWindowControlling, N
     }
 
     public func windowWillClose(_ notification: Notification) {
+        _ = setActivationPolicy(.prohibited)
+
         if let window = notification.object as? NSWindow, window == preferencesWindowController {
             preferencesWindowController = nil
         }

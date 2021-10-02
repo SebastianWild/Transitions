@@ -26,42 +26,58 @@ extension Preferences.Section.About {
         @State private var mitTextExpanded: Bool = false
 
         var body: some View {
-            VStack(alignment: .leading, spacing: 5.0) {
-                Text(Bundle.main.displayName)
-                    .bold()
-                    .font(.largeTitle)
-                Text("\("version".localized): \(Bundle.main.shortVersionString)")
-                    .bold()
-                Text("© \("author".localized)")
-                Text(LocalizedStringKey.Preferences.about_description)
-            }
+            VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 5.0) {
+                    Text(Bundle.main.displayName)
+                        .bold()
+                        .font(.largeTitle)
+                    Text("\("version".localized): \(Bundle.main.shortVersionString)")
+                        .bold()
+                    Text("© \("author".localized)")
+                    Text(LocalizedStringKey.Preferences.about_description)
+                }
 
-            Divider()
+                Divider()
 
-            HStack {
-                Text("Libraries under MIT license")
-                    .bold()
-                Toggle("􀐸", isOn: $mitTextExpanded)
-                    .toggleStyle(ToggleButtonStyle())
-            }
+                HStack {
+                    Text("Libraries under MIT license")
+                        .bold()
+                    Toggle("􀐸", isOn: $mitTextExpanded)
+                        .toggleStyle(ToggleButtonStyle())
+                }
 
-            if mitTextExpanded {
-                Text(License.MIT.text)
-                    .font(.subheadline)
-                    .lineLimit(nil)
-                    // Needed to fix weird expansion issues with text.
-                    // Without this the text upon expansion does not go beyond one line
-                    // https://stackoverflow.com/a/58335789
-                    .fixedSize(horizontal: false, vertical: true)
-                    .padding([.bottom], 5.0)
-                // TODO: Smooth animation when expanding!
-            }
+                if mitTextExpanded {
+                    Text(License.MIT.text)
+                        .font(.subheadline)
+                        .lineLimit(nil)
+                        // Needed to fix weird expansion issues with text.
+                        // Without this the text upon expansion does not go beyond one line
+                        // https://stackoverflow.com/a/58335789
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding([.bottom], 5.0)
+                    // TODO: Smooth animation when expanding!
+                }
 
-            HStack {
-                ForEach(Dependencies.allCases.indices) {
-                    Dependencies.allCases[$0].description
+                HStack {
+                    ForEach(Dependencies.allCases.indices) {
+                        Dependencies.allCases[$0].description
+                    }
                 }
             }
+            .addTopTrailingView(
+                Image.appIcon
+                    .frame(width: 64, height: 64)
+            )
+        }
+    }
+}
+
+private extension View {
+    func addTopTrailingView<V: View>(_ view: V) -> some View {
+        ZStack(alignment: .topTrailing) {
+            view
+
+            self
         }
     }
 }
