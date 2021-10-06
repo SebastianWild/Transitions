@@ -41,6 +41,7 @@
 		9E2E3EFE270A8AB300592EF3 /* ARMDDC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2E3EFD270A8AB300592EF3 /* ARMDDC.swift */; };
 		9E2E3F03270D34B500592EF3 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E2E3F02270D34B500592EF3 /* IOKit.framework */; platformFilter = maccatalyst; };
 		9E2E3F06270D413600592EF3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E2E3F05270D413600592EF3 /* CoreGraphics.framework */; platformFilter = maccatalyst; };
+		9E2E3F08270D4AFF00592EF3 /* CoreDisplay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E2E3F07270D4AFE00592EF3 /* CoreDisplay.framework */; };
 		9E2E9D7026911E88003987EF /* SystemBrightness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2E9D6F26911E88003987EF /* SystemBrightness.swift */; };
 		9E41946F24037EF2003B5E87 /* PositionIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E41946E24037EF2003B5E87 /* PositionIndicatorView.swift */; };
 		9E4511C32401E6160000E7E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4511C22401E6160000E7E0 /* AppDelegate.swift */; };
@@ -108,6 +109,7 @@
 		9E2E3F02270D34B500592EF3 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		9E2E3F04270D350700592EF3 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		9E2E3F05270D413600592EF3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		9E2E3F07270D4AFE00592EF3 /* CoreDisplay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreDisplay.framework; path = ../../../../../System/Library/Frameworks/CoreDisplay.framework; sourceTree = "<group>"; };
 		9E2E9D6F26911E88003987EF /* SystemBrightness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemBrightness.swift; sourceTree = "<group>"; };
 		9E41946E24037EF2003B5E87 /* PositionIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionIndicatorView.swift; sourceTree = "<group>"; };
 		9E4511BF2401E6160000E7E0 /* Transitions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Transitions.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,6 +150,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E2E3F08270D4AFF00592EF3 /* CoreDisplay.framework in Frameworks */,
 				9E2E3EF6270A720B00592EF3 /* DDC in Frameworks */,
 				9EEAF276273DBA4A003944CB /* LaunchAtLogin in Frameworks */,
 				9E0614902689221D00F34D59 /* Sliders in Frameworks */,
@@ -199,6 +202,7 @@
 		9E2E3F01270D34B500592EF3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9E2E3F07270D4AFE00592EF3 /* CoreDisplay.framework */,
 				9E2E3F05270D413600592EF3 /* CoreGraphics.framework */,
 				9E2E3F02270D34B500592EF3 /* IOKit.framework */,
 			);
