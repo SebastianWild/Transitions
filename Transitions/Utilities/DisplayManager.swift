@@ -27,7 +27,7 @@ class DisplayManager: ObservableObject {
     private func updateDisplays() {
         displays = NSScreen.screens
             .compactMap { screen -> Display? in
-                screen.isInternalDisplay ? InternalDisplay(screen: screen) : DDCDisplay(screen)
+                screen.isInternalDisplay ? try? InternalDisplay(screen: screen) : DDCDisplay(screen)
             }
     }
 }

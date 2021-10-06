@@ -12,15 +12,20 @@ import DDC
 import Foundation
 
 class DDCDisplay {
+    let id: CGDirectDisplayID
     private let ddc: DDCControlling
     @Published private var _reading: BrightnessReading = .failure(.notPerformed)
     private var updateCancellable: AnyCancellable?
 
     init?(_ screen: NSScreen) {
-        guard let ddc = screen.ddc() else {
+        guard
+            let ddc = screen.ddc(),
+            let id = screen.displayID
+        else {
             return nil
         }
 
+        self.id = id
         self.ddc = ddc
         updateCancellable = Timer.publish(every: 1, on: .main, in: .default)
             .autoconnect()

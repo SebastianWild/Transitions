@@ -8,6 +8,7 @@ import Combine
 import Foundation
 
 class InternalDisplay: Display {
+    let id: CGDirectDisplayID
     var name: String
     let isInternalDisplay = true
     private(set) var brightness: Float = 0.0 {
@@ -35,10 +36,13 @@ class InternalDisplay: Display {
         guard let nsScreen = NSScreen.internalDisplay else {
             throw InternalDisplayError.notAvailable
         }
-        self.init(screen: nsScreen)
+        try self.init(screen: nsScreen)
     }
 
-    init(screen: NSScreen) {
+    init(screen: NSScreen) throws {
+        guard let id = screen.displayID else { throw InternalDisplayError.noId }
+
+        self.id = id
         name = screen.localizedName
         error = nil
         brightness = 0.0
@@ -88,5 +92,7 @@ extension InternalDisplay {
     enum InternalDisplayError: LocalizedError {
         /// The internal display is not available
         case notAvailable
+        /// The internal display has no CGDirectDisplayID
+        case noId
     }
 }

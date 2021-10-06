@@ -13,6 +13,7 @@ import SwiftUI
 typealias BrightnessReading = Result<Float, BrightnessReadError>
 
 protocol Display {
+    var id: CGDirectDisplayID { get }
     var name: String { get set }
     /// Brightness for a display is defined from 0.0 to 1.0
     var brightness: Float { get }
@@ -27,9 +28,21 @@ protocol Display {
 extension Display {
     var metadata: DisplayMetadata {
         DisplayMetadata(name: name)
+        return DisplayMetadata(name: name, info: nil)
     }
 }
 
 struct DisplayMetadata {
     let name: String
+    /// Additional info applicable to external (DDC) displays
+    let info: Info?
+}
+
+struct Info {
+    let yearOfManufacture: Int
+    let weekOfManufacture: Int
+    let vendorId: Int
+    let productId: Int
+    let horizontalImageSize: Int
+    let verticalImageSize: Int
 }

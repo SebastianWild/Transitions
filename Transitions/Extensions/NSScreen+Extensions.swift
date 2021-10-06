@@ -27,7 +27,7 @@ extension NSScreen {
 
 extension NSScreen {
     func ddc() -> DDCControlling? {
-        guard let id = displayID else {
+        guard !isInternalDisplay, let id = displayID else {
             return nil
         }
 

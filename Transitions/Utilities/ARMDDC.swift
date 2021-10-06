@@ -8,6 +8,13 @@
 
 import Foundation
 
+/*
+ DDC reading steps (ARM)
+    1. Get a reference to the IOAVService
+    2. Send I2C command:
+        a.
+ */
+
 class ARMDDC {
     let displayID: CGDirectDisplayID
 
