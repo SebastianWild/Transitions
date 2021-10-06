@@ -27,7 +27,8 @@ protocol Display {
 
 extension Display {
     var metadata: DisplayMetadata {
-        DisplayMetadata(name: name)
+        let infoDictionary = CoreDisplay_DisplayCreateInfoDictionary(id)?.takeRetainedValue() as? NSDictionary
+
         return DisplayMetadata(name: name, info: nil)
     }
 }
