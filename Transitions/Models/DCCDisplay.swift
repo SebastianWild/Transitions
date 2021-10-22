@@ -42,7 +42,7 @@ class DDCDisplay {
 extension DDCDisplay: Display {
     var name: String {
         get {
-            ddc.readDisplayName()
+            metadata.info?.displayProductName ?? "External Display \(id)"
         }
         set {
             // For now, it is not possible to set the name

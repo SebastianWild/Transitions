@@ -27,9 +27,12 @@ protocol Display {
 
 extension Display {
     var metadata: DisplayMetadata {
-        let infoDictionary = CoreDisplay_DisplayCreateInfoDictionary(id)?.takeRetainedValue() as? NSDictionary
+        let info = DisplayMetadata.Info(from: CoreDisplay_DisplayCreateInfoDictionary(id)?.takeRetainedValue() ?? NSDictionary())
 
-        return DisplayMetadata(name: name, info: nil)
+        return DisplayMetadata(
+            name: info?.displayProductName ?? name,
+            info: info
+        )
     }
 }
 
@@ -37,13 +40,51 @@ struct DisplayMetadata {
     let name: String
     /// Additional info applicable to external (DDC) displays
     let info: Info?
-}
 
-struct Info {
-    let yearOfManufacture: Int
-    let weekOfManufacture: Int
-    let vendorId: Int
-    let productId: Int
-    let horizontalImageSize: Int
-    let verticalImageSize: Int
+    // You can use IORegistryExplorer (Xcode additional tools)
+    // to preview where these values come from
+    struct Info {
+        let displayProductName: String
+        let yearOfManufacture: Int
+        let weekOfManufacture: Int
+        let vendorId: Int
+        let productId: Int
+        let horizontalImageSize: Int
+        let verticalImageSize: Int
+
+        init(displayProductName: String, yearOfManufacture: Int, weekOfManufacture: Int, vendorId: Int, productId: Int, horizontalImageSize: Int, verticalImageSize: Int) {
+            self.displayProductName = displayProductName
+            self.yearOfManufacture = yearOfManufacture
+            self.weekOfManufacture = weekOfManufacture
+            self.vendorId = vendorId
+            self.productId = productId
+            self.horizontalImageSize = horizontalImageSize
+            self.verticalImageSize = verticalImageSize
+        }
+
+        init?(from dictionary: NSDictionary) {
+            guard
+                let displayProductNameDict = dictionary[kDisplayProductName] as? NSDictionary,
+                let displayName = displayProductNameDict[Locale.current.identifier] as? NSString,
+                let yearOfManufacture = dictionary[kDisplayYearOfManufacture] as? Int,
+                let weekOfManufacture = dictionary[kDisplayWeekOfManufacture] as? Int,
+                let vendorId = dictionary[kDisplayVendorID] as? Int,
+                let productId = dictionary[kDisplayProductID] as? Int,
+                let horizontalImageSize = dictionary[kDisplayHorizontalImageSize] as? Int,
+                let verticalImageSize = dictionary[kDisplayVerticalImageSize] as? Int
+            else {
+                return nil
+            }
+
+            self.init(
+                displayProductName: displayName as String,
+                yearOfManufacture: yearOfManufacture,
+                weekOfManufacture: weekOfManufacture,
+                vendorId: vendorId,
+                productId: productId,
+                horizontalImageSize: horizontalImageSize,
+                verticalImageSize: verticalImageSize
+            )
+        }
+    }
 }

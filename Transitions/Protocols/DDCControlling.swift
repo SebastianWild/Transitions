@@ -11,5 +11,4 @@ import Foundation
 
 protocol DDCControlling {
     func readBrightness() -> BrightnessReading
-    func readDisplayName() -> String
 }
