@@ -81,7 +81,7 @@ extension EDIDUUID {
     }
 
     private var vendorIDRange: Range<String.Index> {
-        startIndex ..< index(startIndex, offsetBy: 3)
+        startIndex ..< index(startIndex, offsetBy: 4)
     }
 
     private var productIDRange: Range<String.Index> {
