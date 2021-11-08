@@ -35,6 +35,7 @@
 		9E0CF34425FD953600699170 /* Image+Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0CF34325FD953600699170 /* Image+Library.swift */; };
 		9E0CF34725FD98C000699170 /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0CF34625FD98C000699170 /* Sizes.swift */; };
 		9E0CF34A25FD99D700699170 /* NSEventPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0CF34925FD99D700699170 /* NSEventPublisher.swift */; };
+		9E26B27C2738B6E400869E02 /* EDIDUUIDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E26B27B2738B6E400869E02 /* EDIDUUIDTests.swift */; };
 		9E2E3EF6270A720B00592EF3 /* DDC in Frameworks */ = {isa = PBXBuildFile; productRef = 9E2E3EF5270A720B00592EF3 /* DDC */; };
 		9E2E3EF8270A731000592EF3 /* DCCDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2E3EF7270A731000592EF3 /* DCCDisplay.swift */; };
 		9E2E3EFA270A843D00592EF3 /* DDCControlling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2E3EF9270A843D00592EF3 /* DDCControlling.swift */; };
@@ -77,6 +78,16 @@
 		9EFF264626C7BD58008F24C9 /* Preferences+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFF264526C7BD58008F24C9 /* Preferences+Extensions.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		9E26B27D2738B6E400869E02 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9E4511B72401E6160000E7E0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9E4511BE2401E6160000E7E0;
+			remoteInfo = Transitions;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		82C8306B2647294EA202DE07 /* AppCoordinating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinating.swift; sourceTree = "<group>"; };
 		82C832864A9F72A369DE0007 /* DisplayController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayController.swift; sourceTree = "<group>"; };
@@ -106,6 +117,8 @@
 		9E0CF34625FD98C000699170 /* Sizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
 		9E0CF34925FD99D700699170 /* NSEventPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSEventPublisher.swift; sourceTree = "<group>"; };
 		9E2254382722788700100B76 /* Playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Playground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		9E26B2792738B6E400869E02 /* TransitionsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TransitionsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E26B27B2738B6E400869E02 /* EDIDUUIDTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EDIDUUIDTests.swift; sourceTree = "<group>"; };
 		9E2E3EF7270A731000592EF3 /* DCCDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DCCDisplay.swift; sourceTree = "<group>"; };
 		9E2E3EF9270A843D00592EF3 /* DDCControlling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDCControlling.swift; sourceTree = "<group>"; };
 		9E2E3EFB270A860900592EF3 /* DDCControlling+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DDCControlling+Extensions.swift"; sourceTree = "<group>"; };
@@ -151,6 +164,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		9E26B2762738B6E400869E02 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9E4511BC2401E6160000E7E0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -204,6 +224,14 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		9E26B27A2738B6E400869E02 /* TransitionsTests */ = {
+			isa = PBXGroup;
+			children = (
+				9E26B27B2738B6E400869E02 /* EDIDUUIDTests.swift */,
+			);
+			path = TransitionsTests;
+			sourceTree = "<group>";
+		};
 		9E2E3F01270D34B500592EF3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -222,6 +250,7 @@
 				9E2E3F01270D34B500592EF3 /* Frameworks */,
 				9E4511C02401E6160000E7E0 /* Products */,
 				9E4511C12401E6160000E7E0 /* Transitions */,
+				9E26B27A2738B6E400869E02 /* TransitionsTests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -229,6 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				9E4511BF2401E6160000E7E0 /* Transitions.app */,
+				9E26B2792738B6E400869E02 /* TransitionsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -423,6 +453,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		9E26B2782738B6E400869E02 /* TransitionsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9E26B2812738B6E400869E02 /* Build configuration list for PBXNativeTarget "TransitionsTests" */;
+			buildPhases = (
+				9E26B2752738B6E400869E02 /* Sources */,
+				9E26B2762738B6E400869E02 /* Frameworks */,
+				9E26B2772738B6E400869E02 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9E26B27E2738B6E400869E02 /* PBXTargetDependency */,
+			);
+			name = TransitionsTests;
+			productName = TransitionsTests;
+			productReference = 9E26B2792738B6E400869E02 /* TransitionsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		9E4511BE2401E6160000E7E0 /* Transitions */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9E4511D22401E61A0000E7E0 /* Build configuration list for PBXNativeTarget "Transitions" */;
@@ -455,10 +503,14 @@
 		9E4511B72401E6160000E7E0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1130;
+				LastSwiftUpdateCheck = 1300;
 				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = "Sebastian Wild";
 				TargetAttributes = {
+					9E26B2782738B6E400869E02 = {
+						CreatedOnToolsVersion = 13.0;
+						TestTargetID = 9E4511BE2401E6160000E7E0;
+					};
 					9E4511BE2401E6160000E7E0 = {
 						CreatedOnToolsVersion = 11.3.1;
 					};
@@ -484,11 +536,19 @@
 			projectRoot = "";
 			targets = (
 				9E4511BE2401E6160000E7E0 /* Transitions */,
+				9E26B2782738B6E400869E02 /* TransitionsTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		9E26B2772738B6E400869E02 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9E4511BD2401E6160000E7E0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -543,6 +603,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		9E26B2752738B6E400869E02 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E26B27C2738B6E400869E02 /* EDIDUUIDTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9E4511BB2401E6160000E7E0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -609,6 +677,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		9E26B27E2738B6E400869E02 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9E4511BE2401E6160000E7E0 /* Transitions */;
+			targetProxy = 9E26B27D2738B6E400869E02 /* PBXContainerItemProxy */;
+		};
 		9EC148942403392600EBC6D2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			productRef = 9EC148932403392600EBC6D2 /* mint */;
@@ -635,6 +708,56 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		9E26B27F2738B6E400869E02 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MJGRJBXP25;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.sebaswild.transitions.TransitionsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Transitions.app/Contents/MacOS/Transitions";
+			};
+			name = Debug;
+		};
+		9E26B2802738B6E400869E02 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MJGRJBXP25;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.sebaswild.transitions.TransitionsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Transitions.app/Contents/MacOS/Transitions";
+			};
+			name = Release;
+		};
 		9E4511D02401E61A0000E7E0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -803,6 +926,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9E26B2812738B6E400869E02 /* Build configuration list for PBXNativeTarget "TransitionsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9E26B27F2738B6E400869E02 /* Debug */,
+				9E26B2802738B6E400869E02 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		9E4511BA2401E6160000E7E0 /* Build configuration list for PBXProject "Transitions" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
