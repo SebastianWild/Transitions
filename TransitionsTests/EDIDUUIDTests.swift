@@ -15,4 +15,8 @@ class EDIDUUIDTests: XCTestCase {
     func testGetVendorID() {
         XCTAssertEqual(19501, ediduuid.vendorID)
     }
+
+    func testGetProductID() {
+        XCTAssertEqual(3996, ediduuid.productID)
+    }
 }
