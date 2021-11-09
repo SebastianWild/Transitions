@@ -19,4 +19,10 @@ class EDIDUUIDTests: XCTestCase {
     func testGetProductID() {
         XCTAssertEqual(3996, ediduuid.productID)
     }
+
+    func testGetManufactureDate() {
+        let (week, year) = ediduuid.manufactureDate
+        XCTAssertEqual(week, 43)
+        XCTAssertEqual(year, 2018)
+    }
 }
