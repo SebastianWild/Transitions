@@ -25,4 +25,12 @@ class EDIDUUIDTests: XCTestCase {
         XCTAssertEqual(week, 43)
         XCTAssertEqual(year, 2018)
     }
+
+    func testGetHorizontalImageSize() {
+        XCTAssertEqual(119, ediduuid.horizontalImageSize)
+    }
+
+    func testGetVerticalImageSize() {
+        XCTAssertEqual(34, ediduuid.verticalImageSize)
+    }
 }

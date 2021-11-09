@@ -7,11 +7,10 @@
 //
 
 import Foundation
+
 typealias EDIDUUID = String
 
 extension EDIDUUID {
-    // TODO: Might need to remove the hyphens?
-    // Example UUID = 4C2D9C0F-0000-0000-2B1C-0104B5772278
     enum Component {
         case vendorID
         case productID
@@ -84,7 +83,6 @@ extension EDIDUUID {
         return decRepresentation
     }
 
-    // Example UUID = 4C2D9C0F-0000-0000-2B1C-0104B5772278
     var manufactureDate: (week: Int?, year: Int?) {
         let week = Int(String(self[.manufactureWeek].uppercased()), radix: 16)
         var year = Int(String(self[.manufactureYear].uppercased()), radix: 16)
@@ -96,10 +94,12 @@ extension EDIDUUID {
         return (week, year)
     }
 
+    /// Display horizontal size in centimeters?
     var horizontalImageSize: Int? {
         Int(String(self[.horizontalImageSize].uppercased()), radix: 16)
     }
 
+    /// Display vertical size in centimeters?
     var verticalImageSize: Int? {
         Int(String(self[.verticalImageSize].uppercased().reversed()), radix: 16)
     }
