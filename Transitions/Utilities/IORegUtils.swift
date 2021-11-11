@@ -71,6 +71,8 @@ extension IORegService {
         if metadata.displayProductName == productName {
             score += 1
         }
+
+        return score
     }
 
     /// All the `Service`s to be used for matching with DisplayCreateInfoDictionary for a specific CGDirectDisplayID
