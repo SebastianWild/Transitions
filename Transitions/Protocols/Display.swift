@@ -45,6 +45,7 @@ struct DisplayMetadata {
     // to preview where these values come from
     struct Info {
         let displayProductName: String
+        let serialNumber: Int
         let yearOfManufacture: Int
         let weekOfManufacture: Int
         let vendorId: Int
@@ -52,8 +53,9 @@ struct DisplayMetadata {
         let horizontalImageSize: Int
         let verticalImageSize: Int
 
-        init(displayProductName: String, yearOfManufacture: Int, weekOfManufacture: Int, vendorId: Int, productId: Int, horizontalImageSize: Int, verticalImageSize: Int) {
+        init(displayProductName: String, serialNumber: Int, yearOfManufacture: Int, weekOfManufacture: Int, vendorId: Int, productId: Int, horizontalImageSize: Int, verticalImageSize: Int) {
             self.displayProductName = displayProductName
+            self.serialNumber = serialNumber
             self.yearOfManufacture = yearOfManufacture
             self.weekOfManufacture = weekOfManufacture
             self.vendorId = vendorId
@@ -66,6 +68,7 @@ struct DisplayMetadata {
             guard
                 let displayProductNameDict = dictionary[kDisplayProductName] as? NSDictionary,
                 let displayName = displayProductNameDict[Locale.current.identifier] as? NSString,
+                let serialNumber = dictionary[kDisplaySerialNumber] as? Int,
                 let yearOfManufacture = dictionary[kDisplayYearOfManufacture] as? Int,
                 let weekOfManufacture = dictionary[kDisplayWeekOfManufacture] as? Int,
                 let vendorId = dictionary[kDisplayVendorID] as? Int,
@@ -78,6 +81,7 @@ struct DisplayMetadata {
 
             self.init(
                 displayProductName: displayName as String,
+                serialNumber: serialNumber,
                 yearOfManufacture: yearOfManufacture,
                 weekOfManufacture: weekOfManufacture,
                 vendorId: vendorId,
