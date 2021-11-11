@@ -38,7 +38,7 @@ class InternalDisplay: Display {
         self.init(screen: nsScreen)
     }
 
-    private init(screen: NSScreen) {
+    init(screen: NSScreen) {
         name = screen.localizedName
         error = nil
         brightness = 0.0

@@ -12,6 +12,8 @@ extension BrightnessReadError: View {
             Text("Could not read brightness from \(metadata.name)")
         case .noDisplays:
             Text("No displays that support brightness reading found.")
+        case .notPerformed:
+            Text("Awaiting initial reading...")
         }
     }
 }

@@ -13,4 +13,6 @@ enum BrightnessReadError: LocalizedError {
     case readError(displayMetadata: DisplayMetadata, original: Error?)
     /// There are no displays where brightness can be read from.
     case noDisplays(original: Error?)
+    /// The initial reading has not been performed
+    case notPerformed
 }
