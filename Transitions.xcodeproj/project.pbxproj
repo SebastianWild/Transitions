@@ -63,6 +63,7 @@
 		9ECB9ED826FC67AE001E94C4 /* About.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECB9ED726FC67AE001E94C4 /* About.swift */; };
 		9ED1F8F626DC620100B3EDC6 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED1F8F526DC620100B3EDC6 /* AppCoordinator.swift */; };
 		9EE3E33B25FC64D70063BAFF /* CodableUserDefaultProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE3E33A25FC64D70063BAFF /* CodableUserDefaultProperty.swift */; };
+		9EEAF276273DBA4A003944CB /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 9EEAF275273DBA4A003944CB /* LaunchAtLogin */; };
 		9EFF264626C7BD58008F24C9 /* Preferences+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFF264526C7BD58008F24C9 /* Preferences+Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -133,6 +134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EEAF276273DBA4A003944CB /* LaunchAtLogin in Frameworks */,
 				9E0614902689221D00F34D59 /* Sliders in Frameworks */,
 				9E8B56AB26F421B50081587F /* Preferences in Frameworks */,
 			);
@@ -381,10 +383,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9E4511D22401E61A0000E7E0 /* Build configuration list for PBXNativeTarget "Transitions" */;
 			buildPhases = (
-				9EC148952403392900EBC6D2 /* ShellScript */,
+				9EC148952403392900EBC6D2 /* Run SwiftLint & SwiftFormat */,
 				9E4511BB2401E6160000E7E0 /* Sources */,
 				9E4511BC2401E6160000E7E0 /* Frameworks */,
 				9E4511BD2401E6160000E7E0 /* Resources */,
+				9EEAF277273DBA5A003944CB /* Copy Launch at Login Helper */,
 			);
 			buildRules = (
 			);
@@ -395,6 +398,7 @@
 			packageProductDependencies = (
 				9E06148F2689221D00F34D59 /* Sliders */,
 				9E8B56AA26F421B50081587F /* Preferences */,
+				9EEAF275273DBA4A003944CB /* LaunchAtLogin */,
 			);
 			productName = DarkModeBuddy;
 			productReference = 9E4511BF2401E6160000E7E0 /* Transitions.app */;
@@ -427,6 +431,7 @@
 			packageReferences = (
 				9E06148E2689221D00F34D59 /* XCRemoteSwiftPackageReference "swiftui-sliders" */,
 				9E8B56A926F421B50081587F /* XCRemoteSwiftPackageReference "Preferences" */,
+				9EEAF274273DBA4A003944CB /* XCRemoteSwiftPackageReference "LaunchAtLogin" */,
 			);
 			productRefGroup = 9E4511C02401E6160000E7E0 /* Products */;
 			projectDirPath = "";
@@ -453,7 +458,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		9EC148952403392900EBC6D2 /* ShellScript */ = {
+		9EC148952403392900EBC6D2 /* Run SwiftLint & SwiftFormat */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -462,6 +467,7 @@
 			);
 			inputPaths = (
 			);
+			name = "Run SwiftLint & SwiftFormat";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -469,6 +475,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "cd BuildTools\n\nswift run -c release swiftlint --path $SRCROOT --config \"${SRCROOT}/BuildTools/.swiftlint.yml\"\n\n# Run SwiftFormat in linting mode\nswift run -c release swiftformat --config \"${SRCROOT}/BuildTools/.swiftformat\" \"$SRCROOT\"\n";
+		};
+		9EEAF277273DBA5A003944CB /* Copy Launch at Login Helper */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Launch at Login Helper";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -770,6 +794,14 @@
 				minimumVersion = 0.14.1;
 			};
 		};
+		9EEAF274273DBA4A003944CB /* XCRemoteSwiftPackageReference "LaunchAtLogin" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -787,6 +819,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9EC148922403391C00EBC6D2 /* XCRemoteSwiftPackageReference "Mint" */;
 			productName = mint;
+		};
+		9EEAF275273DBA4A003944CB /* LaunchAtLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9EEAF274273DBA4A003944CB /* XCRemoteSwiftPackageReference "LaunchAtLogin" */;
+			productName = LaunchAtLogin;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
