@@ -13,7 +13,6 @@ import Foundation
 
 class DDCDisplay {
     let id: CGDirectDisplayID
-
     private let ddc: DDCControlling
     @Published private var _reading: BrightnessReading = .failure(.notPerformed)
     private var updateCancellable: AnyCancellable?
@@ -28,15 +27,15 @@ class DDCDisplay {
 
         self.id = id
         self.ddc = ddc
-//        updateCancellable = Timer.publish(every: 1, on: .main, in: .default)
-//            .autoconnect()
-//            .map { [ddc] _ in
-//                ddc.readBrightness()
-//            }
-//            .handleEvents(receiveOutput: { reading in
-//                print("Received new external display reading: \(reading)")
-//            })
-//            .assignWeakly(to: \._reading, on: self)
+        updateCancellable = Timer.publish(every: 1, on: .main, in: .default)
+            .autoconnect()
+            .map { [ddc] _ in
+                ddc.readBrightness()
+            }
+            .handleEvents(receiveOutput: { reading in
+                print("Received new external display reading: \(reading)")
+            })
+            .assignWeakly(to: \._reading, on: self)
     }
 }
 

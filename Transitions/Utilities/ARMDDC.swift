@@ -16,7 +16,12 @@ import Foundation
  */
 
 class ARMDDC {
+    let displayID: CGDirectDisplayID
+//    private let service: Service
 
+    init?(for displayID: CGDirectDisplayID) {
+        self.displayID = displayID
+    }
 }
 
 extension ARMDDC: DDCControlling {
