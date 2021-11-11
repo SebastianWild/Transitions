@@ -12,4 +12,4 @@
 typedef CFTypeRef IOAVService;
 extern IOAVService IOAVServiceCreateWithService(CFAllocatorRef allocator, io_service_t service);
 
-extern CFDictionaryRef CoreDisplay_DisplayCreateInfoDictionary(CGDirectDisplayID);
+extern CFDictionaryRef CoreDisplay_DisplayCreateInfoDictionary(uint32_t CGDirectDisplayID);
