@@ -6,23 +6,23 @@
 import Foundation
 
 enum IORegUtils {
-    static func service(for displayID: CGDirectDisplayID) -> Service? {
+    static func service(for displayID: CGDirectDisplayID) -> IORegService? {
         guard let info = displayID.metadata.info else { return nil }
         // Not really right, we need to also take into account service locations
-         return Service.forMatching()
+         return IORegService.forMatching()
             .sorted(by: { $0.matchScore(comparedTo: info) > $1.matchScore(comparedTo: info) })
             .first
     }
 }
 
-struct Service {
+struct IORegService {
     var edidUUID: EDIDUUID = ""
     var productName: String = ""
     var serialNumber: Int = 0
     var service: IOAVService?
 }
 
-extension Service {
+extension IORegService {
     typealias MatchScore = Int
     /// To be called when an `io_service_t` is found with class `DCPAVServiceProxy`
     /// previously the service should have been initialized with a call to `makeFromAppleCLCD2(service:)`
@@ -74,13 +74,13 @@ extension Service {
     }
 
     /// All the `Service`s to be used for matching with DisplayCreateInfoDictionary for a specific CGDirectDisplayID
-    static func forMatching() -> [Service] {
-        var servicesForMatching = [Service]()
-        var service = Service()
+    static func forMatching() -> [IORegService] {
+        var servicesForMatching = [IORegService]()
+        var service = IORegService()
         for entry in IORegDisplayEntries() where entry.service != IO_OBJECT_NULL {
             // A `Service` needs both AppleCLCD2 and DCPAVServiceProxy
             if entry.class == .appleCLCD2 {
-                service = Service.makeFromAppleCLCD2(service: entry.service)
+                service = IORegService.makeFromAppleCLCD2(service: entry.service)
             }
             if entry.class == .dcpAVServiceProxy {
                 // Classes matched up, finish building the service
@@ -96,7 +96,7 @@ extension Service {
     ///
     /// - Parameter service: will be used to get edid uuid, display attributes and more using system APIs
     /// - Returns: New `Service` instance to be filled in later using a `DCPAVServiceProxy`
-    static func makeFromAppleCLCD2(service: io_service_t) -> Service {
+    static func makeFromAppleCLCD2(service: io_service_t) -> IORegService {
         let edidUUID = IORegistryEntryCreateCFProperty(
             service,
             CFStringCreateWithCString(kCFAllocatorDefault, "EDID UUID", kCFStringEncodingASCII),
@@ -114,11 +114,11 @@ extension Service {
         let productName = productAttributes?.value(forKey: "ProductName") as? String
         let serialNumber = productAttributes?.value(forKey: "SerialNumber") as? Int
 
-        return Service(edidUUID: edidUUID ?? "", productName: productName ?? "", serialNumber: serialNumber ?? 0, service: nil)
+        return IORegService(edidUUID: edidUUID ?? "", productName: productName ?? "", serialNumber: serialNumber ?? 0, service: nil)
     }
 }
 
-extension Service.MatchScore {
+extension IORegService.MatchScore {
     static var max: Int { 8 }
 }
 
