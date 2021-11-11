@@ -11,6 +11,7 @@ import Foundation
 enum Dependencies: CaseIterable {
     case preferences
     case sliders
+    case launchAtLogin
 
     var description: Dependecy {
         switch self {
@@ -28,6 +29,14 @@ enum Dependencies: CaseIterable {
                 author: "Sindre Sorhus",
                 // swiftlint:disable:next force_unwrapping
                 link: URL(string: "https://github.com/sindresorhus/Preferences")!,
+                license: .MIT
+            )
+        case .launchAtLogin:
+            return Dependecy(
+                name: "LaunchAtLogin",
+                author: "Sindre Sorhus",
+                // swiftlint:disable:next force_unwrapping
+                link: URL(string: "https://github.com/sindresorhus/LaunchAtLogin")!,
                 license: .MIT
             )
         }

@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "LaunchAtLogin",
+        "repositoryURL": "https://github.com/sindresorhus/LaunchAtLogin.git",
+        "state": {
+          "branch": null,
+          "revision": "e8171b3e38a2816f579f58f3dac1522aa39efe41",
+          "version": "4.2.0"
+        }
+      },
+      {
         "package": "Preferences",
         "repositoryURL": "https://github.com/sindresorhus/Preferences.git",
         "state": {
@@ -15,8 +24,8 @@
         "repositoryURL": "https://github.com/spacenation/swiftui-sliders",
         "state": {
           "branch": null,
-          "revision": "5109792d45a53c3c41680b8bdb0602b5dde39c9a",
-          "version": "1.0.0"
+          "revision": "518bed3bfc7bd522f3c49404a0d1efb98fa1bf2c",
+          "version": null
         }
       }
     ]
