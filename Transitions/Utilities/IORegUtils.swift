@@ -67,6 +67,7 @@ struct IORegDisplayEntries: Sequence, IteratorProtocol {
     }()
 
     mutating func next() -> Entry? {
+        // swiftlint:disable:next identifier_name
         guard let it = iterator else { return nil }
 
         var service: io_service_t = IO_OBJECT_NULL
