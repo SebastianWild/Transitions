@@ -31,6 +31,7 @@ extension Display {
 
         return DisplayMetadata(
             name: info?.displayProductName ?? name,
+            id: id,
             info: info
         )
     }
@@ -38,6 +39,7 @@ extension Display {
 
 struct DisplayMetadata {
     let name: String
+    let id: CGDirectDisplayID
     /// Additional info applicable to external (DDC) displays
     let info: Info?
 

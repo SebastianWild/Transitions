@@ -7,10 +7,9 @@ import Foundation
 
 enum IORegUtils {
     static func service(for displayID: CGDirectDisplayID) -> IORegService? {
-        guard let info = displayID.metadata.info else { return nil }
-        // Not really right, we need to also take into account service locations
-         return IORegService.forMatching()
-            .sorted(by: { $0.matchScore(comparedTo: info) > $1.matchScore(comparedTo: info) })
+        guard displayID.metadata.info != nil else { return nil }
+        return IORegService.forMatching()
+            .sorted(by: { $0.matchScore(comparedTo: displayID.metadata) > $1.matchScore(comparedTo: displayID.metadata) })
             .first
     }
 }
@@ -19,6 +18,7 @@ struct IORegService {
     var edidUUID: EDIDUUID = ""
     var productName: String = ""
     var serialNumber: Int = 0
+    var serviceLocation: Int = 0
     var service: IOAVService?
 }
 
@@ -43,32 +43,38 @@ extension IORegService {
     /// Higher numbers mean a greater likelihood
     /// - Parameter metadata:
     /// - Returns:
-    func matchScore(comparedTo metadata: DisplayMetadata.Info) -> MatchScore {
+    func matchScore(comparedTo metadata: DisplayMetadata) -> MatchScore {
+        guard let info = metadata.info else { return -1 }
+
         var score = 0
         // EDID UUID comparing
-        if metadata.vendorId == edidUUID.vendorID {
+        if info.vendorId == edidUUID.vendorID {
             score += 1
         }
-        if metadata.productId == edidUUID.productID {
+        if info.productId == edidUUID.productID {
             score += 1
         }
-        if metadata.horizontalImageSize == edidUUID.horizontalImageSize {
+        if info.horizontalImageSize == edidUUID.horizontalImageSize {
             score += 1
         }
-        if metadata.verticalImageSize == edidUUID.verticalImageSize {
+        if info.verticalImageSize == edidUUID.verticalImageSize {
             score += 1
         }
-        if metadata.weekOfManufacture == edidUUID.manufactureDate.week {
+        if info.weekOfManufacture == edidUUID.manufactureDate.week {
             score += 1
         }
-        if metadata.yearOfManufacture == edidUUID.manufactureDate.year {
+        if info.yearOfManufacture == edidUUID.manufactureDate.year {
             score += 1
         }
 
-        if metadata.serialNumber == serialNumber {
+        if info.serialNumber == serialNumber {
             score += 1
         }
-        if metadata.displayProductName == productName {
+        if info.displayProductName == productName {
+            score += 1
+        }
+
+        if serviceLocation == metadata.id {
             score += 1
         }
 
@@ -79,10 +85,12 @@ extension IORegService {
     static func forMatching() -> [IORegService] {
         var servicesForMatching = [IORegService]()
         var service = IORegService()
+        var serviceLocation = 0
         for entry in IORegDisplayEntries() where entry.service != IO_OBJECT_NULL {
             // A `Service` needs both AppleCLCD2 and DCPAVServiceProxy
             if entry.class == .appleCLCD2 {
-                service = IORegService.makeFromAppleCLCD2(service: entry.service)
+                serviceLocation += 1
+                service = IORegService.makeFromAppleCLCD2(service: entry.service, location: serviceLocation)
             }
             if entry.class == .dcpAVServiceProxy {
                 // Classes matched up, finish building the service
@@ -98,7 +106,7 @@ extension IORegService {
     ///
     /// - Parameter service: will be used to get edid uuid, display attributes and more using system APIs
     /// - Returns: New `Service` instance to be filled in later using a `DCPAVServiceProxy`
-    static func makeFromAppleCLCD2(service: io_service_t) -> IORegService {
+    static func makeFromAppleCLCD2(service: io_service_t, location: Int) -> IORegService {
         let edidUUID = IORegistryEntryCreateCFProperty(
             service,
             CFStringCreateWithCString(kCFAllocatorDefault, "EDID UUID", kCFStringEncodingASCII),
@@ -116,12 +124,18 @@ extension IORegService {
         let productName = productAttributes?.value(forKey: "ProductName") as? String
         let serialNumber = productAttributes?.value(forKey: "SerialNumber") as? Int
 
-        return IORegService(edidUUID: edidUUID ?? "", productName: productName ?? "", serialNumber: serialNumber ?? 0, service: nil)
+        return IORegService(
+            edidUUID: edidUUID ?? "",
+            productName: productName ?? "",
+            serialNumber: serialNumber ?? 0,
+            serviceLocation: location,
+            service: nil
+        )
     }
 }
 
 extension IORegService.MatchScore {
-    static var max: Int { 8 }
+    static var max: Int { 9 }
 }
 
 struct IORegDisplayEntries: Sequence, IteratorProtocol {

@@ -51,6 +51,7 @@ extension CGDirectDisplayID {
 
         return DisplayMetadata(
             name: info?.displayProductName ?? "",
+            id: self,
             info: info
         )
     }
