@@ -5,6 +5,11 @@
 
 import Foundation
 
+/*
+ Other TODOs:
+ - MacMini9,1's HDMI port does not work with DDC
+ */
+
 enum IORegUtils {
     static func service(for displayID: CGDirectDisplayID) -> IORegService? {
         guard displayID.metadata.info != nil else { return nil }
