@@ -29,12 +29,14 @@ class DDCDisplay {
         self.ddc = ddc
         updateCancellable = Timer.publish(every: 1, on: .main, in: .default)
             .autoconnect()
+            .receive(on: DispatchQueue.global(qos: .background))
             .map { [ddc] _ in
                 ddc.readBrightness()
             }
             .handleEvents(receiveOutput: { reading in
                 print("Received new external display reading: \(reading)")
             })
+            .receive(on: DispatchQueue.main)
             .assignWeakly(to: \._reading, on: self)
     }
 }
