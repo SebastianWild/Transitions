@@ -110,6 +110,7 @@ extension IORegService {
     /// Make a `Service` instance using the provided `io_service_t`
     ///
     /// - Parameter service: will be used to get edid uuid, display attributes and more using system APIs
+    /// - Parameter location: The location integer to set in the IORegService structure
     /// - Returns: New `Service` instance to be filled in later using a `DCPAVServiceProxy`
     static func makeFromAppleCLCD2(service: io_service_t, location: Int) -> IORegService {
         let edidUUID = IORegistryEntryCreateCFProperty(
@@ -117,14 +118,14 @@ extension IORegService {
             CFStringCreateWithCString(kCFAllocatorDefault, "EDID UUID", kCFStringEncodingASCII),
             kCFAllocatorDefault,
             IOOptionBits(kIORegistryIterateRecursively)
-        ).takeRetainedValue() as? String
+        )?.takeRetainedValue() as? String
 
         let productAttributes = (IORegistryEntryCreateCFProperty(
             service,
             CFStringCreateWithCString(kCFAllocatorDefault, "DisplayAttributes", kCFStringEncodingASCII),
             kCFAllocatorDefault,
             IOOptionBits(kIORegistryIterateRecursively)
-        ).takeRetainedValue() as? NSDictionary)?.value(forKey: "ProductAttributes") as? NSDictionary
+        )?.takeRetainedValue() as? NSDictionary)?.value(forKey: "ProductAttributes") as? NSDictionary
 
         let productName = productAttributes?.value(forKey: "ProductName") as? String
         let serialNumber = productAttributes?.value(forKey: "SerialNumber") as? Int
