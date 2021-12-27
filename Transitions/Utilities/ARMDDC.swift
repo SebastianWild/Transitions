@@ -13,6 +13,7 @@ import Foundation
 class ARMDDC {
     let displayID: CGDirectDisplayID
     private let service: IORegService
+    private var readingCancellable: AnyCancellable?
 
     init?(for displayID: CGDirectDisplayID) {
         self.displayID = displayID
@@ -125,7 +126,7 @@ extension ARMDDC: DDCControlling {
         waitGroup.enter()
         // TODO: Refactor this to use async/await...or refactor DDCControlling protocol to use Publishers
         var reading = BrightnessReading.success(0.0)
-        _ = read(command: .brightness)
+        readingCancellable = read(command: .brightness)
             .sink(receiveCompletion: { [unowned self] completion in
                 if case let .failure(error) = completion {
                     reading = .failure(.readError(
