@@ -6,13 +6,9 @@
 //  Copyright © 2021 Sebastian Wild. All rights reserved.
 //
 
-import Foundation
-import DDC
 import Combine
-
-/*
-
- */
+import DDC
+import Foundation
 
 class ARMDDC {
     let displayID: CGDirectDisplayID
@@ -25,7 +21,7 @@ class ARMDDC {
         self.service = service
     }
 
-    private func read(command: DDC.Command, tries: UInt8 = 3, minReplyDelay: UInt32 = 10000) -> AnyPublisher<(current: UInt16, max: UInt16), DDCError> {
+    private func read(command: DDC.Command, tries _: UInt8 = 3, minReplyDelay _: UInt32 = 10000) -> AnyPublisher<(current: UInt16, max: UInt16), DDCError> {
         guard let ioAVService = service.service else {
             return Fail(error: DDCError.serviceUnavailable).eraseToAnyPublisher()
         }
@@ -40,7 +36,7 @@ class ARMDDC {
         )
 
         return writeI2COnQueue(with: ioAVService, inputBuffer: &paddedSend, inputBufferSize: UInt32(paddedSend.count))
-            .receive(on: ARMDDC.queue)      // Might be redundant
+            .receive(on: ARMDDC.queue) // Might be redundant
             .delay(for: .seconds(readSleepTime), scheduler: ARMDDC.queue)
             .flatMap { [unowned self] _ in readI2COnQueue(with: ioAVService) }
             .map { reply -> (current: UInt16, max: UInt16) in
@@ -68,7 +64,7 @@ class ARMDDC {
         )
 
         return writeI2COnQueue(with: ioAVService, inputBuffer: &paddedSend, inputBufferSize: UInt32(paddedSend.count))
-            .receive(on: ARMDDC.queue)      // Might be redundant
+            .receive(on: ARMDDC.queue) // Might be redundant
             // TODO: Delay is added even when write is successful! Should not be the case.
             .delay(for: .seconds(writeSleepTime), scheduler: ARMDDC.queue)
             .retry(attempts)
@@ -125,13 +121,34 @@ class ARMDDC {
 
 extension ARMDDC: DDCControlling {
     func readBrightness() -> BrightnessReading {
-        // TODO:
-        .success(-1.0)
+        let waitGroup = DispatchGroup()
+        waitGroup.enter()
+        // TODO: Refactor this to use async/await...or refactor DDCControlling protocol to use Publishers
+        var reading = BrightnessReading.success(0.0)
+        _ = read(command: .brightness)
+            .sink(receiveCompletion: { [unowned self] completion in
+                if case let .failure(error) = completion {
+                    reading = .failure(.readError(
+                        displayMetadata: DisplayMetadata(
+                            name: readDisplayName(),
+                            id: displayID,
+                            info: DisplayMetadata.Info(from: CoreDisplay_DisplayCreateInfoDictionary(displayID)?.takeRetainedValue() ?? NSDictionary())
+                        ),
+                        original: error
+                    )
+                    )
+                }
+            }, receiveValue: { current, _ in
+                reading = .success(Float(current))
+                waitGroup.leave()
+            })
+
+        waitGroup.wait()
+        return reading
     }
 
     func readDisplayName() -> String {
-        // TODO:
-        "ARM DDC Display"
+        service.productName
     }
 }
 
@@ -148,11 +165,11 @@ extension ARMDDC {
 
 private extension Array where Element == UInt8 {
     func checksum(initial: UInt8, range: ClosedRange<Int>) -> UInt8 {
-        var c = initial
-        for i in range {
-            c ^= self[i]
+        var check = initial
+        for index in range {
+            check ^= self[index]
         }
 
-        return c
+        return check
     }
 }
