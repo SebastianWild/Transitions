@@ -130,17 +130,19 @@ extension ARMDDC: DDCControlling {
             .sink(receiveCompletion: { [unowned self] completion in
                 if case let .failure(error) = completion {
                     reading = .failure(.readError(
-                        displayMetadata: DisplayMetadata(
-                            name: readDisplayName(),
-                            id: displayID,
-                            info: DisplayMetadata.Info(from: CoreDisplay_DisplayCreateInfoDictionary(displayID)?.takeRetainedValue() ?? NSDictionary())
-                        ),
+                        displayMetadata: displayID.metadata,
                         original: error
                     )
                     )
                 }
-            }, receiveValue: { current, _ in
-                reading = .success(Float(current))
+            }, receiveValue: { [unowned self] current, max in
+                guard max != 0 else {
+                    reading = .failure(BrightnessReadError.readError(displayMetadata: displayID.metadata, original: nil))
+                    waitGroup.leave()
+                    return
+                }
+
+                reading = .success(Float(current) / Float(max))
                 waitGroup.leave()
             })
 
