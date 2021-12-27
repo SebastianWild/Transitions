@@ -181,6 +181,8 @@ struct IORegDisplayEntries: Sequence, IteratorProtocol {
 
             if let ioRegClass = IORegDisplayEntryClass(rawValue: String(cString: className)) {
                 return (ioRegClass, service)
+            } else {
+                service = IOIteratorNext(it)
             }
         } while service != IO_OBJECT_NULL
 
