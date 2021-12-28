@@ -21,8 +21,8 @@ extension EDIDUUID {
     }
 
     //// Hex-encoded strings
-    subscript(_ component: Component) -> String {
-        let range: Range<String.Index>
+    subscript(_ component: Component) -> String? {
+        let range: Range<String.Index>?
         switch component {
         case .vendorID:
             range = vendorIDRange
@@ -38,6 +38,7 @@ extension EDIDUUID {
             range = verticalImageSizeRange
         }
 
+        guard let range = range else { return nil }
         return String(
             self[range]
         )
@@ -47,7 +48,8 @@ extension EDIDUUID {
     ///
     /// Ex: Samsung is 19501
     var vendorID: Int? {
-        Int(self[.vendorID].uppercased(), radix: 16)
+        guard let vendorIDHexString = self[.vendorID]?.uppercased() else { return nil }
+        return Int(vendorIDHexString, radix: 16)
     }
 
     /// Product ID
@@ -56,7 +58,9 @@ extension EDIDUUID {
     /// We can get there by byte flipping then converting to decimal
     /// Ex. Samsung CRG9 is 3996
     var productID: Int? {
-        let hex = String(self[.productID])
+        guard let hexSubstring = self[.productID] else { return nil }
+
+        let hex = String(hexSubstring)
         var from = hex.startIndex
         let end = hex.endIndex
 
@@ -83,9 +87,14 @@ extension EDIDUUID {
         return decRepresentation
     }
 
-    var manufactureDate: (week: Int?, year: Int?) {
-        let week = Int(String(self[.manufactureWeek].uppercased()), radix: 16)
-        var year = Int(String(self[.manufactureYear].uppercased()), radix: 16)
+    var manufactureDate: (week: Int?, year: Int?)? {
+        guard
+            let manufactureWeekHex = self[.manufactureWeek],
+            let manufactureYearHex = self[.manufactureYear]
+        else { return nil }
+
+        let week = Int(String(manufactureWeekHex.uppercased()), radix: 16)
+        var year = Int(String(manufactureYearHex.uppercased()), radix: 16)
 
         if let _year = year {
             year = _year + 1990
@@ -96,49 +105,82 @@ extension EDIDUUID {
 
     /// Display horizontal size in centimeters?
     var horizontalImageSize: Int? {
-        Int(String(self[.horizontalImageSize].uppercased()), radix: 16)
+        guard let hexSubstring = self[.horizontalImageSize] else { return nil }
+        return Int(String(hexSubstring.uppercased()), radix: 16)
     }
 
     /// Display vertical size in centimeters?
     var verticalImageSize: Int? {
-        Int(String(self[.verticalImageSize].uppercased().reversed()), radix: 16)
+        guard let hexSubstring = self[.verticalImageSize] else { return nil }
+        return Int(String(hexSubstring.uppercased().reversed()), radix: 16)
     }
 
-    private var vendorIDRange: Range<String.Index> {
-        startIndex ..< index(startIndex, offsetBy: 4)
+    private var vendorIDRange: Range<String.Index>? {
+        guard let endIndex = index(startIndex, offsetBy: 4, limitedBy: endIndex) else { return nil }
+
+        return startIndex ..< endIndex
     }
 
-    private var productIDRange: Range<String.Index> {
-        let start = vendorIDRange.upperBound
-        return start ..< index(start, offsetBy: 4)
+    private var productIDRange: Range<String.Index>? {
+        guard
+            let startIndex = vendorIDRange?.upperBound,
+            let endIndex = index(startIndex, offsetBy: 4, limitedBy: endIndex)
+        else { return nil }
+
+        return startIndex ..< endIndex
     }
 
-    private var manufactureWeekRange: Range<String.Index> {
-        let start = index(startIndex, offsetBy: 19)
-        return start ..< index(start, offsetBy: 2)
+    private var manufactureWeekRange: Range<String.Index>? {
+        guard
+            let startIndex = index(startIndex, offsetBy: 19, limitedBy: endIndex),
+            let endIndex = index(startIndex, offsetBy: 2, limitedBy: endIndex)
+        else { return nil }
+
+        return startIndex ..< endIndex
     }
 
-    private var manufactureYearRange: Range<String.Index> {
-        let start = manufactureWeekRange.upperBound
-        return start ..< index(start, offsetBy: 2)
+    private var manufactureYearRange: Range<String.Index>? {
+        guard
+            let startIndex = manufactureWeekRange?.upperBound,
+            let endIndex = index(startIndex, offsetBy: 2, limitedBy: endIndex)
+        else { return nil }
+
+        return startIndex ..< endIndex
     }
 
-    private var manufactureDateRange: Range<String.Index> {
-        Range(uncheckedBounds: (manufactureWeekRange.lowerBound, manufactureYearRange.upperBound))
+    private var manufactureDateRange: Range<String.Index>? {
+        guard
+            let lowerBound = manufactureWeekRange?.upperBound,
+            let upperBound = manufactureYearRange?.upperBound
+        else { return nil }
+
+        return Range(uncheckedBounds: (lowerBound, upperBound))
     }
 
-    private var horizontalImageSizeRange: Range<String.Index> {
-        let start = index(startIndex, offsetBy: 30)
-        return start ..< index(start, offsetBy: 2)
+    private var horizontalImageSizeRange: Range<String.Index>? {
+        guard
+            let startIndex = index(startIndex, offsetBy: 30, limitedBy: endIndex),
+            let endIndex = index(startIndex, offsetBy: 2, limitedBy: endIndex)
+        else { return nil }
+
+        return startIndex ..< endIndex
     }
 
-    private var verticalImageSizeRange: Range<String.Index> {
-        let start = horizontalImageSizeRange.upperBound
-        return start ..< index(start, offsetBy: 2)
+    private var verticalImageSizeRange: Range<String.Index>? {
+        guard
+            let startIndex = horizontalImageSizeRange?.upperBound,
+            let endIndex = index(startIndex, offsetBy: 2, limitedBy: endIndex)
+        else { return nil }
+
+        return startIndex ..< endIndex
     }
 
-    private var imageSizeRange: Range<String.Index> {
-        let start = index(startIndex, offsetBy: 30)
-        return start ..< index(start, offsetBy: 4)
+    private var imageSizeRange: Range<String.Index>? {
+        guard
+            let startIndex = index(startIndex, offsetBy: 30, limitedBy: endIndex),
+            let endIndex = index(startIndex, offsetBy: 4, limitedBy: endIndex)
+        else { return nil }
+
+        return startIndex ..< endIndex
     }
 }

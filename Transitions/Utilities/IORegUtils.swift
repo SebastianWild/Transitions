@@ -65,10 +65,10 @@ extension IORegService {
         if info.verticalImageSize == edidUUID.verticalImageSize {
             score += 1
         }
-        if info.weekOfManufacture == edidUUID.manufactureDate.week {
+        if info.weekOfManufacture == edidUUID.manufactureDate?.week {
             score += 1
         }
-        if info.yearOfManufacture == edidUUID.manufactureDate.year {
+        if info.yearOfManufacture == edidUUID.manufactureDate?.year {
             score += 1
         }
 
