@@ -8,6 +8,7 @@ import Foundation
 
 enum Preview {
     class MockDisplay: Display {
+        let id: CGDirectDisplayID = 0
         var name = "MockDisplay"
         let isInternalDisplay: Bool
         var brightness: Float = 0.0 {

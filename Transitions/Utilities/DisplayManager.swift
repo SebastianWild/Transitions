@@ -25,12 +25,9 @@ class DisplayManager: ObservableObject {
     }
 
     private func updateDisplays() {
-        var displays = [Display]()
-        // Pretty sure there is no mac with two internal displays?
-        if let internalDisplay = try? InternalDisplay() {
-            displays.append(internalDisplay)
-        }
-
-        self.displays = displays
+        displays = NSScreen.screens
+            .compactMap { screen -> Display? in
+                screen.isInternalDisplay ? try? InternalDisplay(screen: screen) : DDCDisplay(screen)
+            }
     }
 }

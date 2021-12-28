@@ -4,6 +4,7 @@
 //
 
 import Cocoa
+import DDC
 
 extension NSScreen {
     static var internalDisplay: NSScreen? {
@@ -17,5 +18,41 @@ extension NSScreen {
         guard let deviceID = deviceDescription[description] as? NSNumber else { return false }
 
         return CGDisplayIsBuiltin(deviceID.uint32Value) != 0
+    }
+
+    var displayID: CGDirectDisplayID? {
+        deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? CGDirectDisplayID
+    }
+
+    var metadata: DisplayMetadata? {
+        guard let id = displayID else { return nil }
+
+        return id.metadata
+    }
+}
+
+extension NSScreen {
+    func ddc() -> DDCControlling? {
+        guard !isInternalDisplay, let id = displayID else {
+            return nil
+        }
+
+        #if arch(arm64)
+            return ARMDDC(for: id)
+        #else
+            return DDC(for: id)
+        #endif
+    }
+}
+
+extension CGDirectDisplayID {
+    var metadata: DisplayMetadata {
+        let info = DisplayMetadata.Info(from: CoreDisplay_DisplayCreateInfoDictionary(self)?.takeRetainedValue() ?? NSDictionary())
+
+        return DisplayMetadata(
+            name: info?.displayProductName ?? "",
+            id: self,
+            info: info
+        )
     }
 }

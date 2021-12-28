@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "DDC.swift",
+        "repositoryURL": "https://github.com/reitermarkus/DDC.swift",
+        "state": {
+          "branch": "master",
+          "revision": "15b3ef8235a831e0d7812dbdf12d6a4bb16d3bd6",
+          "version": null
+        }
+      },
+      {
         "package": "LaunchAtLogin",
         "repositoryURL": "https://github.com/sindresorhus/LaunchAtLogin.git",
         "state": {
