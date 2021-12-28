@@ -9,11 +9,14 @@ extension BrightnessReadError: View {
     var body: some View {
         switch self {
         case let .readError(metadata, _):
-            Text("Could not read brightness from \(metadata.name)")
+            guard let name = metadata?.name else {
+                return Text("Could not read brightness from the external display.")
+            }
+            return Text("Could not read brightness from \(name)")
         case .noDisplays:
-            Text("No displays that support brightness reading found.")
+            return Text("No displays that support brightness reading found.")
         case .notPerformed:
-            Text("Awaiting initial reading...")
+            return Text("Awaiting initial reading...")
         }
     }
 }
