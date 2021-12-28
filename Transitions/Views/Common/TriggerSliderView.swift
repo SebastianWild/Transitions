@@ -27,6 +27,7 @@ struct TriggerSliderView: View {
                     innerValue: display.brightness,
                     range: 0.0 ... 1.0
                 )
+                .animation(.easeInOut)
                 Image.sun_max
                     .frame(width: 24, height: 24)
                     .foregroundColor(Color.primary)
