@@ -10,5 +10,5 @@ import AppKit
 import Foundation
 
 protocol DDCControlling {
-    func readBrightness() -> BrightnessReading
+    func readBrightness() async -> BrightnessReading
 }

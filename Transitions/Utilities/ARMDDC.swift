@@ -10,7 +10,7 @@ import Combine
 import DDC
 import Foundation
 
-class ARMDDC {
+actor ARMDDC {
     let displayID: CGDirectDisplayID
     private let service: IORegService
     private var readingCancellable: AnyCancellable?
@@ -22,11 +22,11 @@ class ARMDDC {
         self.service = service
     }
 
-    private func read(command: DDC.Command, tries _: UInt8 = 3, minReplyDelay _: UInt32 = 10000) -> AnyPublisher<(current: UInt16, max: UInt16), DDCError> {
+    private func read(command: DDC.Command, tries _: UInt8 = 3, minReplyDelay _: UInt32 = 10000) async throws -> (current: UInt16, max: UInt16) {
         guard let ioAVService = service.service else {
-            return Fail(error: DDCError.serviceUnavailable).eraseToAnyPublisher()
+            throw DDCError.serviceUnavailable
         }
-        let readSleepTime: TimeInterval = 0.01
+        let readSleepTime = UInt64(0.01 * 1000 * 1000 * 1000) // 0.01 seconds in nanoseconds
         let attempts = 3
 
         let send: [UInt8] = [command.rawValue]
@@ -36,24 +36,35 @@ class ARMDDC {
             range: ClosedRange<Int>(uncheckedBounds: (0, paddedSend.count - 2))
         )
 
-        return writeI2COnQueue(with: ioAVService, inputBuffer: &paddedSend, inputBufferSize: UInt32(paddedSend.count))
-            .receive(on: ARMDDC.queue) // Might be redundant
-            .delay(for: .seconds(readSleepTime), scheduler: ARMDDC.queue)
-            .flatMap { [unowned self] _ in readI2COnQueue(with: ioAVService) }
-            .map { reply -> (current: UInt16, max: UInt16) in
+        var readError: DDCError?
+        var attemptCount = 0
+        repeat {
+            do {
+                attemptCount += 1
+
+                try writeI2COnQueue(with: ioAVService, inputBuffer: &paddedSend, inputBufferSize: UInt32(paddedSend.count))
+                try await Task.sleep(nanoseconds: readSleepTime)
+                let reply = try readI2COnQueue(with: ioAVService)
+
                 let max = UInt16(reply[6]) * 256 + UInt16(reply[7])
                 let current = UInt16(reply[8]) * 256 + UInt16(reply[9])
                 return (current, max)
+            } catch let error as DDCError {
+                readError = error
+                try await Task.sleep(nanoseconds: readSleepTime)
             }
-            .retry(attempts)
-            .eraseToAnyPublisher()
+        } while readError != nil && attemptCount <= attempts
+
+        if let error = readError {
+            throw error
+        }
     }
 
-    private func write(command: DDC.Command, value: UInt16) -> AnyPublisher<Void, DDCError> {
+    private func write(command: DDC.Command, value: UInt16) async throws {
         guard let ioAVService = service.service else {
-            return Fail(error: DDCError.serviceUnavailable).eraseToAnyPublisher()
+            throw DDCError.serviceUnavailable
         }
-        let writeSleepTime: TimeInterval = 0.01
+        let writeSleepTime = UInt64(0.01 * 1000 * 1000 * 1000) // 0.01 seconds in nanoseconds
         let attempts = 3
 
         let send: [UInt8] = [command.rawValue, UInt8(value >> 8), UInt8(value & 255)]
@@ -64,39 +75,39 @@ class ARMDDC {
             range: ClosedRange<Int>(uncheckedBounds: (0, paddedSend.count - 2))
         )
 
-        return writeI2COnQueue(with: ioAVService, inputBuffer: &paddedSend, inputBufferSize: UInt32(paddedSend.count))
-            .receive(on: ARMDDC.queue) // Might be redundant
-            // TODO: Delay is added even when write is successful! Should not be the case.
-            .delay(for: .seconds(writeSleepTime), scheduler: ARMDDC.queue)
-            .retry(attempts)
-            .eraseToAnyPublisher()
+        var writeError: DDCError?
+        var attemptCount = 0
+        repeat {
+            do {
+                attemptCount += 1
+                try writeI2COnQueue(with: ioAVService, inputBuffer: &paddedSend, inputBufferSize: UInt32(paddedSend.count))
+            } catch let error as DDCError {
+                writeError = error
+                try await Task.sleep(nanoseconds: writeSleepTime)
+            }
+        } while writeError != nil && attemptCount <= attempts
+
+        if let error = writeError {
+            throw error
+        }
     }
 
     private func readI2COnQueue(
         with service: IOAVService,
         chipAddress: UInt32 = 0x37,
         dataAddress: UInt32 = 0x51
-    ) -> AnyPublisher<[UInt8], DDCError> {
-        Deferred { () -> PassthroughSubject<[UInt8], DDCError> in
-            // TODO: How to do this better?
-            let subject = PassthroughSubject<[UInt8], DDCError>()
-            var reply = [UInt8](repeating: 0, count: 11)
+    ) throws -> [UInt8] {
+        var reply = [UInt8](repeating: 0, count: 11)
+        let success = IOAVServiceReadI2C(service, chipAddress, dataAddress, &reply, UInt32(reply.count)) == 0
+        if !success {
+            throw DDCError.readFailure
+        }
 
-            ARMDDC.queue.async {
-                let success = IOAVServiceReadI2C(service, chipAddress, dataAddress, &reply, UInt32(reply.count)) == 0
-                if !success {
-                    subject.send(completion: .failure(.readFailure))
-                }
+        if reply.checksum(initial: 0x50, range: ClosedRange(uncheckedBounds: (0, reply.count - 2))) != reply[reply.count - 1] {
+            throw DDCError.checksumValidationFailed
+        }
 
-                if reply.checksum(initial: 0x50, range: ClosedRange(uncheckedBounds: (0, reply.count - 2))) != reply[reply.count - 1] {
-                    subject.send(completion: .failure(.checksumValidationFailed))
-                }
-
-                subject.send(reply)
-            }
-
-            return subject
-        }.eraseToAnyPublisher()
+        return reply
     }
 
     private func writeI2COnQueue(
@@ -105,49 +116,26 @@ class ARMDDC {
         dataAddress: UInt32 = 0x51,
         inputBuffer: UnsafeMutableRawPointer,
         inputBufferSize: UInt32
-    ) -> AnyPublisher<Void, DDCError> {
-        Deferred { () -> PassthroughSubject<Void, DDCError> in
-            // TODO: How to do this better?
-            let subject = PassthroughSubject<Void, DDCError>()
-
-            ARMDDC.queue.async {
-                let success = IOAVServiceWriteI2C(service, chipAddress, dataAddress, inputBuffer, inputBufferSize) == 0
-                success ? subject.send() : subject.send(completion: .failure(.writeFailure))
-            }
-
-            return subject
-        }.eraseToAnyPublisher()
+    ) throws {
+        if IOAVServiceWriteI2C(service, chipAddress, dataAddress, inputBuffer, inputBufferSize) == 0 {
+            return
+        } else {
+            throw DDCError.writeFailure
+        }
     }
 }
 
 extension ARMDDC: DDCControlling {
-    func readBrightness() -> BrightnessReading {
-        let waitGroup = DispatchGroup()
-        waitGroup.enter()
-        // TODO: Refactor this to use async/await...or refactor DDCControlling protocol to use Publishers
-        var reading = BrightnessReading.success(0.0)
-        readingCancellable = read(command: .brightness)
-            .sink(receiveCompletion: { [unowned self] completion in
-                if case let .failure(error) = completion {
-                    reading = .failure(.readError(
-                        displayMetadata: displayID.metadata,
-                        original: error
-                    )
-                    )
-                }
-            }, receiveValue: { [unowned self] current, max in
-                guard max != 0 else {
-                    reading = .failure(BrightnessReadError.readError(displayMetadata: displayID.metadata, original: nil))
-                    waitGroup.leave()
-                    return
-                }
-
-                reading = .success(Float(current) / Float(max))
-                waitGroup.leave()
-            })
-
-        waitGroup.wait()
-        return reading
+    func readBrightness() async -> BrightnessReading {
+        do {
+            let (current, max) = try await read(command: .brightness)
+            guard max != 0 else {
+                return .failure(BrightnessReadError.readError(displayMetadata: displayID.metadata, original: nil))
+            }
+            return .success(Float(current) / Float(max))
+        } catch {
+            return .failure(BrightnessReadError.readError(displayMetadata: displayID.metadata, original: error))
+        }
     }
 
     func readDisplayName() -> String {
@@ -156,6 +144,7 @@ extension ARMDDC: DDCControlling {
 }
 
 extension ARMDDC {
+    @available(*, deprecated, message: "Do not use. Use async/await instead")
     static let queue = DispatchQueue(label: "Transtitions DDC Queue", qos: .background)
 
     enum DDCError: Error {
