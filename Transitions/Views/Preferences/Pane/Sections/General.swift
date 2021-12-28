@@ -82,11 +82,6 @@ extension Preferences.Section.General {
                     return
                 }
 
-                if let readError = primaryDisplay.error {
-                    self.primaryDisplay = .failure(readError)
-                    return
-                }
-
                 self.primaryDisplay = .success(primaryDisplay)
             }
         }
