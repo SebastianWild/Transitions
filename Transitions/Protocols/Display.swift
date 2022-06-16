@@ -43,6 +43,13 @@ struct DisplayMetadata {
     /// Additional info applicable to external (DDC) displays
     let info: Info?
 
+    /// An identifier that should not change between app runs and system restarts
+    var persistentIdentifier: String? {
+        guard let details = info else { return nil }
+
+        return "\(details.vendorId)-\(details.productId)-\(details.serialNumber)"
+    }
+
     // You can use IORegistryExplorer (Xcode additional tools)
     // to preview where these values come from
     struct Info {

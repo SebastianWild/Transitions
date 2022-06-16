@@ -18,6 +18,8 @@ final class UserData: ObservableObject {
     @Published var interfaceStyleSwitchTriggerValue: Float = 0.27
     @Published var isMenuletEnabled: Bool = true
 
+    @Published var perDisplaySettings: [String: DisplaySettings] = [:]
+
     // MARK: - Public Properties
 
     var isStartingOnLogon: Bool { LoginItem.enabled }
@@ -39,6 +41,15 @@ final class UserData: ObservableObject {
 
                 try? self.userDefaults.save(item: self, for: UserDefaults.Keys.userData)
             }
+    }
+}
+
+// MARK: - UserData Helper Types
+
+extension UserData {
+    struct DisplaySettings: Codable, Identifiable {
+        let id: String
+        let interfaceStyleSwitchTriggerValue: Float
     }
 }
 
