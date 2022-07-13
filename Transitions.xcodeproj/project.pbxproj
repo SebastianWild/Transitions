@@ -10,7 +10,7 @@
 		82C830105D99028E12FECDD3 /* DisplayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C832864A9F72A369DE0007 /* DisplayController.swift */; };
 		82C830DB7F541CA094850B1C /* IORegUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83E05A4847C50CCD8615A /* IORegUtils.swift */; };
 		82C830E6838F9F17F72491CB /* Combine+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83AA9F276431F70C0D5E8 /* Combine+Extensions.swift */; };
-		82C831C27AE7B57AF89864DE /* DisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83457B308720F62A47F1D /* DisplayManager.swift */; };
+		82C831C27AE7B57AF89864DE /* DisplayDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83457B308720F62A47F1D /* DisplayDetector.swift */; };
 		82C832681C0542B991ADBAC3 /* MenuBarItemControlling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83606560D88E954530552 /* MenuBarItemControlling.swift */; };
 		82C833EDB4587C4844F0BEA1 /* AppPreferenceWindowControlling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83E8BD977B1E11EED39B6 /* AppPreferenceWindowControlling.swift */; };
 		82C8344D5FC0BE64719D4628 /* DarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83CB093BF0C8821CE6BE0 /* DarkMode.swift */; };
@@ -92,7 +92,7 @@
 		82C8306B2647294EA202DE07 /* AppCoordinating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinating.swift; sourceTree = "<group>"; };
 		82C832864A9F72A369DE0007 /* DisplayController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayController.swift; sourceTree = "<group>"; };
 		82C833022A42935FF5244B64 /* NSScreen+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSScreen+Extensions.swift"; sourceTree = "<group>"; };
-		82C83457B308720F62A47F1D /* DisplayManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayManager.swift; sourceTree = "<group>"; };
+		82C83457B308720F62A47F1D /* DisplayDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayDetector.swift; sourceTree = "<group>"; };
 		82C83606560D88E954530552 /* MenuBarItemControlling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBarItemControlling.swift; sourceTree = "<group>"; };
 		82C8372B9E19910C6D6C7621 /* Shell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shell.swift; sourceTree = "<group>"; };
 		82C83820B622BD4556F7A2DA /* Preview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
@@ -429,7 +429,7 @@
 			children = (
 				9EE3E33A25FC64D70063BAFF /* CodableUserDefaultProperty.swift */,
 				82C83CB093BF0C8821CE6BE0 /* DarkMode.swift */,
-				82C83457B308720F62A47F1D /* DisplayManager.swift */,
+				82C83457B308720F62A47F1D /* DisplayDetector.swift */,
 				82C83AAC71530778D48F950F /* LoginItem.swift */,
 				9E0CF34925FD99D700699170 /* NSEventPublisher.swift */,
 				82C8372B9E19910C6D6C7621 /* Shell.swift */,
@@ -649,7 +649,7 @@
 				9E2E3EFA270A843D00592EF3 /* DDCControlling.swift in Sources */,
 				82C83EDDF9C271DA38C564CC /* Preview.swift in Sources */,
 				9E70593F26F96ADE0002566C /* License.swift in Sources */,
-				82C831C27AE7B57AF89864DE /* DisplayManager.swift in Sources */,
+				82C831C27AE7B57AF89864DE /* DisplayDetector.swift in Sources */,
 				82C83E5A98618D862D1463D3 /* BrightnessReadError.swift in Sources */,
 				82C83AA37EE62E37936BE63C /* CoreBrightnessDiag.swift in Sources */,
 				82C834896FCB03C060556EC8 /* CoreBrightnessDiag+Extensions.swift in Sources */,

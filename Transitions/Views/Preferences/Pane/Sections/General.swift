@@ -70,7 +70,7 @@ extension Preferences.Section.General {
                 case let .success(display):
                     TriggerSliderView(
                         display: display,
-                        triggerValue: $userData.interfaceStyleSwitchTriggerValue
+                        triggerValue: $userData.defaultTriggerValue
                     )
                 case let .failure(error):
                     error

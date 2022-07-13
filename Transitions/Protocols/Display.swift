@@ -14,6 +14,7 @@ typealias BrightnessReading = Result<Float, BrightnessReadError>
 
 protocol Display {
     var id: CGDirectDisplayID { get }
+    var persistentIdentifier: PersistentIdentifier? { get }
     var name: String { get set }
     /// Brightness for a display is defined from 0.0 to 1.0
     var brightness: Float { get }
@@ -35,6 +36,19 @@ extension Display {
             info: info
         )
     }
+
+    /// Returns an identifier that should persist across restarts
+    var persistentIdentifier: PersistentIdentifier? {
+        isInternalDisplay ? .internalDisplay : metadata.persistentIdentifier
+    }
+}
+
+extension Display {
+    typealias PersistentIdentifier = String
+}
+
+extension Display.PersistentIdentifier {
+    static let internalDisplay: String = "internal-display"
 }
 
 struct DisplayMetadata {
