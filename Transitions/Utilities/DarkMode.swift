@@ -5,7 +5,12 @@
 
 import Foundation
 
-enum DarkMode {
+protocol DarkModeControlling {
+    static func set(on: Bool) throws
+    static func get() throws -> Bool
+}
+
+enum DarkMode: DarkModeControlling {
     static func set(on: Bool) throws {
         try (on ? NSAppleScript.setDarkModeOn : NSAppleScript.setDarkModeOff).execute()
     }

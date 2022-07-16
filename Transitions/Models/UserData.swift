@@ -13,7 +13,7 @@ import SwiftUI
 /// User data/preferences storage model and helpers.
 ///
 /// - attention: Not thread safe.
-final class UserData: ObservableObject {
+final class UserData: ObservableObject, Loggable {
     // MARK: - User Preferences
 
     @Published var isAppEnabled: Bool = false
@@ -37,13 +37,21 @@ final class UserData: ObservableObject {
         changeHandler = objectWillChange
             .receive(on: DispatchQueue.main)
             .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: true)
-            .handleEvents(receiveOutput: { data in
-                print("Received new user data: \(data)")
-            })
             .sink { [weak self] _ in
                 guard let self = self else { return }
 
-                try? self.userDefaults.save(item: self, for: UserDefaults.Keys.userData)
+                do {
+                    try self.userDefaults.save(item: self, for: UserDefaults.Keys.userData)
+                    self.log.info("""
+                    Saved new UserData:
+                    \(self)
+                    """)
+                } catch {
+                    self.log.error("""
+                    Error when saving UserData!
+                    \(error.localizedDescription)
+                    """)
+                }
             }
     }
 }
@@ -53,7 +61,7 @@ final class UserData: ObservableObject {
 extension UserData {
     struct DisplaySettings: Codable, Identifiable {
         let id: String
-        let switchValue: Float
+        var switchValue: Float
 
         init(id: String, interfaceStyleSwitchTriggerValue: Float = 0.27) {
             self.id = id
@@ -78,6 +86,41 @@ extension UserData {
         return $displaySettings
             .compactMap { $0[persistentIdentifier] }
             .eraseToAnyPublisher()
+    }
+
+    /// Get a `Binding` to the `DisplaySettings.switchValue` for a `Display`.
+    ///
+    /// - Parameter persistentIdentifier: The identifier for the display. If `UserData` does not contain this display already, default settings will be created.
+    /// - Returns: `Binding` where the `switchValue` can be changed for the display
+    func switchBinding(for persistentIdentifier: Display.PersistentIdentifier) -> Binding<Float> {
+        if displaySettings[persistentIdentifier] == nil {
+            displaySettings[persistentIdentifier] = DisplaySettings(id: persistentIdentifier)
+        }
+
+        return Binding(
+            get: { [weak self] in
+                self?.displaySettings[persistentIdentifier]?.switchValue ?? 0.0
+            },
+            set: { [weak self] newValue in
+                guard let self = self else {
+                    return
+                }
+
+                self.displaySettings[persistentIdentifier]?.switchValue = newValue
+            }
+        )
+    }
+}
+
+extension UserData: CustomStringConvertible {
+    public var description: String {
+        """
+        UserData(
+            isAppEnabled: \(isAppEnabled),
+            isMenuletEnabled: \(isMenuletEnabled),
+            displaySettings: \(displaySettings),
+        )
+        """
     }
 }
 

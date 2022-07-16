@@ -14,7 +14,7 @@ class DisplaysController {
     let displayManager = DisplayDetector()
     @Published var isStartingOnLogon: Bool = LoginItem.enabled
 
-    private var darkModeController: DisplayController?
+    private var darkModeController: DisplayController<DarkMode>?
     /// Will hold a subscriber listening on changes of the enabled status of the app
     private var enabledCancellable: AnyCancellable?
     /// Will hold a subscriber listening on changes of the login item enabled status
@@ -79,7 +79,7 @@ class DisplaysController {
             }
             .switchToLatest()
             .map { display, thresholdValue in
-                DisplayController(display: display, threshold: thresholdValue)
+                DisplayController(display: display, threshold: thresholdValue, controller: DarkMode.self)
             }
             .sink { [weak self] controller in
                 self?.darkModeController = controller
