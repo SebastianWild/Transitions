@@ -7,8 +7,8 @@ import Combine
 import Foundation
 import SwiftUI
 
-/// `DisplayManager` is responsible for detecting available displays
-class DisplayManager: ObservableObject {
+/// `DisplayDetector` is responsible for detecting available displays
+class DisplayDetector: ObservableObject {
     @Published private(set) var displays: [Display] = []
 
     private var nsScreenUpdateCancellable: AnyCancellable?

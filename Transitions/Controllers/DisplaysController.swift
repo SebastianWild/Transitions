@@ -11,10 +11,10 @@ import Foundation
  and uses those in order to toggle functionality of the app
  */
 class DisplaysController {
-    let displayManager = DisplayManager()
+    let displayManager = DisplayDetector()
     @Published var isStartingOnLogon: Bool = LoginItem.enabled
 
-    private var darkModeController: DisplayController?
+    private var darkModeController: DisplayController<DarkMode>?
     /// Will hold a subscriber listening on changes of the enabled status of the app
     private var enabledCancellable: AnyCancellable?
     /// Will hold a subscriber listening on changes of the login item enabled status
@@ -57,12 +57,29 @@ class DisplaysController {
                     self?.darkModeController = nil
                 }
             })
-            .compactMap { $0 } // If there is no primary display, we cannot continue
+            .compactMap { $0 } // If there is no primary display, or it does not have a persistent identifier, we cannot continue
 
         // Configure re-creating the DarkModeController when user preferences or displays change
-        return Publishers.CombineLatest(primaryDisplayChangedHandler, userData.$interfaceStyleSwitchTriggerValue)
+        return primaryDisplayChangedHandler
+            .map { display -> AnyPublisher<(Display, Float), Never> in
+                var triggerPublisher: AnyPublisher<Float, Never>
+                if let persistentId = display.persistentIdentifier {
+                    triggerPublisher = userData
+                        .settingsPublisher(for: persistentId)
+                        .map(\.switchValue)
+                        .eraseToAnyPublisher()
+                } else {
+                    triggerPublisher = userData
+                        .$defaultTriggerValue
+                        .eraseToAnyPublisher()
+                }
+
+                return Publishers.CombineLatest(Just(display), triggerPublisher)
+                    .eraseToAnyPublisher()
+            }
+            .switchToLatest()
             .map { display, thresholdValue in
-                DisplayController(display: display, threshold: thresholdValue)
+                DisplayController(display: display, threshold: thresholdValue, controller: DarkMode.self)
             }
             .sink { [weak self] controller in
                 self?.darkModeController = controller

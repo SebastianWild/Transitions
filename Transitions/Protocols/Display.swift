@@ -12,8 +12,20 @@ import SwiftUI
 
 typealias BrightnessReading = Result<Float, BrightnessReadError>
 
+extension BrightnessReading: CustomDebugStringConvertible {
+    public var debugDescription: String {
+        switch self {
+        case let .success(reading):
+            return ".success(\(reading))"
+        case let .failure(error):
+            return ".failure(\(error))"
+        }
+    }
+}
+
 protocol Display {
     var id: CGDirectDisplayID { get }
+    var persistentIdentifier: PersistentIdentifier? { get }
     var name: String { get set }
     /// Brightness for a display is defined from 0.0 to 1.0
     var brightness: Float { get }
@@ -35,6 +47,30 @@ extension Display {
             info: info
         )
     }
+
+    /// Returns an identifier that should persist across restarts
+    var persistentIdentifier: PersistentIdentifier? {
+        isInternalDisplay ? .internalDisplay : metadata.persistentIdentifier
+    }
+}
+
+enum PersistentIdentifier: CustomStringConvertible, Hashable, Identifiable, Codable {
+    case uuid(String)
+    case internalDisplay
+    case dynamic(vendorID: Int, productID: Int, serialNumber: Int)
+
+    var id: String { description }
+
+    var description: String {
+        switch self {
+        case let .uuid(identifier):
+            return "\(identifier)"
+        case .internalDisplay:
+            return "internal-display"
+        case let .dynamic(vendorID: vendorID, productID: productID, serialNumber: serialNumber):
+            return "\(vendorID)-\(productID)-\(serialNumber)"
+        }
+    }
 }
 
 struct DisplayMetadata {
@@ -43,10 +79,26 @@ struct DisplayMetadata {
     /// Additional info applicable to external (DDC) displays
     let info: Info?
 
+    /// An identifier that should not change between app runs and system restarts
+    ///
+    /// - attention: This identifier has various formats
+    var persistentIdentifier: PersistentIdentifier? {
+        guard let details = info else { return nil }
+
+        if let identifier = info?.uuid {
+            return .uuid(identifier)
+        } else {
+            return .dynamic(vendorID: details.vendorId, productID: details.productId, serialNumber: details.serialNumber)
+        }
+    }
+
     // You can use IORegistryExplorer (Xcode additional tools)
     // to preview where these values come from
     struct Info {
         let displayProductName: String
+        /// - attention: seems to be unreliable
+        ///
+        /// Samsung CRG9 - this is 0
         let serialNumber: Int
         let yearOfManufacture: Int
         let weekOfManufacture: Int
@@ -54,8 +106,19 @@ struct DisplayMetadata {
         let productId: Int
         let horizontalImageSize: Int
         let verticalImageSize: Int
+        let uuid: String?
 
-        init(displayProductName: String, serialNumber: Int, yearOfManufacture: Int, weekOfManufacture: Int, vendorId: Int, productId: Int, horizontalImageSize: Int, verticalImageSize: Int) {
+        init(
+            displayProductName: String,
+            serialNumber: Int,
+            yearOfManufacture: Int,
+            weekOfManufacture: Int,
+            vendorId: Int,
+            productId: Int,
+            horizontalImageSize: Int,
+            verticalImageSize: Int,
+            uuid: String?
+        ) {
             self.displayProductName = displayProductName
             self.serialNumber = serialNumber
             self.yearOfManufacture = yearOfManufacture
@@ -64,6 +127,7 @@ struct DisplayMetadata {
             self.productId = productId
             self.horizontalImageSize = horizontalImageSize
             self.verticalImageSize = verticalImageSize
+            self.uuid = uuid
         }
 
         init?(from dictionary: NSDictionary) {
@@ -80,6 +144,8 @@ struct DisplayMetadata {
             else {
                 return nil
             }
+            // TODO: Check if this is applicable to other monitors as well
+            let uuid = dictionary["kCGDisplayUUID"] as? String
 
             self.init(
                 displayProductName: displayName as String,
@@ -89,7 +155,8 @@ struct DisplayMetadata {
                 vendorId: vendorId,
                 productId: productId,
                 horizontalImageSize: horizontalImageSize,
-                verticalImageSize: verticalImageSize
+                verticalImageSize: verticalImageSize,
+                uuid: uuid
             )
         }
     }
