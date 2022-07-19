@@ -21,7 +21,7 @@ final class UserData: ObservableObject, Loggable {
     /// Should a display not support a persistent identifier and settings cannot be saved,
     /// this is the default trigger value.
     @Published var defaultTriggerValue: Float = 0.27
-    @Published var displaySettings: [String: DisplaySettings] = [:]
+    @Published var displaySettings: [PersistentIdentifier: DisplaySettings] = [:]
 
     // MARK: - Public Properties
 
@@ -78,9 +78,9 @@ extension UserData {
     /// - Attention: if the display with the passed identifier does not have settings in `UserData`, it will be created
     /// - Parameter persistentIdentifier: The display for which to publish changes of the settings for.
     /// - Returns: Non-failing publisher that fires when the `DisplaySettings` are changed.
-    func settingsPublisher(for persistentIdentifier: Display.PersistentIdentifier) -> AnyPublisher<DisplaySettings, Never> {
+    func settingsPublisher(for persistentIdentifier: PersistentIdentifier) -> AnyPublisher<DisplaySettings, Never> {
         if displaySettings[persistentIdentifier] == nil {
-            displaySettings[persistentIdentifier] = DisplaySettings(id: persistentIdentifier)
+            displaySettings[persistentIdentifier] = DisplaySettings(id: persistentIdentifier.id)
         }
 
         return $displaySettings
@@ -92,9 +92,9 @@ extension UserData {
     ///
     /// - Parameter persistentIdentifier: The identifier for the display. If `UserData` does not contain this display already, default settings will be created.
     /// - Returns: `Binding` where the `switchValue` can be changed for the display
-    func switchBinding(for persistentIdentifier: Display.PersistentIdentifier) -> Binding<Float> {
+    func switchBinding(for persistentIdentifier: PersistentIdentifier) -> Binding<Float> {
         if displaySettings[persistentIdentifier] == nil {
-            displaySettings[persistentIdentifier] = DisplaySettings(id: persistentIdentifier)
+            displaySettings[persistentIdentifier] = DisplaySettings(id: persistentIdentifier.id)
         }
 
         return Binding(
@@ -140,7 +140,7 @@ extension UserData: Codable {
 
         isAppEnabled = try container.decode(Bool.self, forKey: .isAppEnabled)
         defaultTriggerValue = try container.decode(Float.self, forKey: .defaultTriggerValue)
-        displaySettings = try container.decode([String: UserData.DisplaySettings].self, forKey: .displaySettings)
+        displaySettings = try container.decode([PersistentIdentifier: UserData.DisplaySettings].self, forKey: .displaySettings)
     }
 
     func encode(to encoder: Encoder) throws {

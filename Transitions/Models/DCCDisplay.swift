@@ -33,8 +33,8 @@ class DDCDisplay {
             .asyncMap { [ddc] _ in
                 await ddc.readBrightness()
             }
-            .handleEvents(receiveOutput: { reading in
-                print("Received new external display reading: \(reading)")
+            .handleEvents(receiveOutput: { [weak self] reading in
+                self?.log.debug("Received new external display reading: \(reading.debugDescription)")
             })
             .receive(on: DispatchQueue.main)
             .assignWeakly(to: \._reading, on: self)
@@ -75,3 +75,5 @@ extension DDCDisplay: Display {
         $_reading.eraseToAnyPublisher()
     }
 }
+
+extension DDCDisplay: Loggable {}
