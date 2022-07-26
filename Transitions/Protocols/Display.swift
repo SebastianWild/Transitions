@@ -42,7 +42,7 @@ extension Display {
         let info = DisplayMetadata.Info(from: CoreDisplay_DisplayCreateInfoDictionary(id)?.takeRetainedValue() ?? NSDictionary())
 
         return DisplayMetadata(
-            name: info?.displayProductName ?? name,
+            name: info?.displayProductName ?? (isInternalDisplay ? "Internal Display" : "External display \(id)"),
             id: id,
             info: info
         )
