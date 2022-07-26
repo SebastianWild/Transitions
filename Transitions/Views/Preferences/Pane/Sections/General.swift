@@ -70,7 +70,7 @@ extension Preferences.Section.General {
                 case let .success(display):
                     TriggerSliderView(
                         display: display,
-                        triggerValue: userData.switchBinding(for: display.persistentIdentifier!)
+                        triggerValue: userData.switchBindingOrDefault(for: display)
                     )
                 case let .failure(error):
                     error

@@ -92,21 +92,33 @@ extension UserData {
     ///
     /// - Parameter persistentIdentifier: The identifier for the display. If `UserData` does not contain this display already, default settings will be created.
     /// - Returns: `Binding` where the `switchValue` can be changed for the display
-    func switchBinding(for persistentIdentifier: PersistentIdentifier) -> Binding<Float> {
-        if displaySettings[persistentIdentifier] == nil {
-            displaySettings[persistentIdentifier] = DisplaySettings(id: persistentIdentifier.id)
+    func switchBindingOrDefault(for display: Display) -> Binding<Float> {
+        guard let identifier = display.persistentIdentifier else {
+            log.warning("Unable to get persistent identifier for display ID \(display.id, privacy: .public). Returning Binding for default trigger value!")
+            return Binding(
+                get: { [weak self] in
+                    self?.defaultTriggerValue ?? 0.0
+                },
+                set: { [weak self] newValue in
+                    self?.defaultTriggerValue = newValue
+                }
+            )
+        }
+
+        if displaySettings[identifier] == nil {
+            displaySettings[identifier] = DisplaySettings(id: identifier.id)
         }
 
         return Binding(
             get: { [weak self] in
-                self?.displaySettings[persistentIdentifier]?.switchValue ?? 0.0
+                self?.displaySettings[identifier]?.switchValue ?? 0.0
             },
             set: { [weak self] newValue in
                 guard let self = self else {
                     return
                 }
 
-                self.displaySettings[persistentIdentifier]?.switchValue = newValue
+                self.displaySettings[identifier]?.switchValue = newValue
             }
         )
     }
