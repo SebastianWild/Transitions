@@ -134,7 +134,6 @@ struct DisplayMetadata {
             guard
                 let displayProductNameDict = dictionary[kDisplayProductName] as? NSDictionary,
                 let displayName = displayProductNameDict[Locale.current.identifier] as? NSString,
-                let serialNumber = dictionary[kDisplaySerialNumber] as? Int,
                 let yearOfManufacture = dictionary[kDisplayYearOfManufacture] as? Int,
                 let weekOfManufacture = dictionary[kDisplayWeekOfManufacture] as? Int,
                 let vendorId = dictionary[kDisplayVendorID] as? Int,
@@ -146,6 +145,8 @@ struct DisplayMetadata {
             }
             // TODO: Check if this is applicable to other monitors as well
             let uuid = dictionary["kCGDisplayUUID"] as? String
+            // TODO: Should we gracefully fail if other fields are not reliable?
+            let serialNumber = (dictionary[kDisplaySerialNumber] as? Int) ?? 0
 
             self.init(
                 displayProductName: displayName as String,
