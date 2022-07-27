@@ -31,6 +31,22 @@ archive the app, but do not create a DMG
 
 archive the app, and create a DMG
 
+### mac bumpversion
+
+```sh
+[bundle exec] fastlane mac bumpversion
+```
+
+Bump the version number
+
+### mac bumpbuild
+
+```sh
+[bundle exec] fastlane mac bumpbuild
+```
+
+Bump the build number
+
 ----
 
 This README.md is auto-generated and will be re-generated every time [_fastlane_](https://fastlane.tools) is run.

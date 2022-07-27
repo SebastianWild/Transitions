@@ -28,4 +28,24 @@ platform :mac do
       sh "./BuildTools/create-dmg.sh"
     end
   end
+
+  desc "Bump the version number"
+  lane :bumpversion do
+    version = increment_version_number
+    build = increment_build_number(build_number: 1)
+    commit_version_bump(
+      xcodeproj: "Transitions.xcodeproj",
+      message: "Bump version to #{version} (build #{build})"
+    )
+  end
+
+  desc "Bump the build number"
+  lane :bumpbuild do
+    version = get_version_number
+    build = increment_build_number
+    commit_version_bump(
+      xcodeproj: "Transitions.xcodeproj",
+      message: "Bump build to #{version} (build #{build})"
+    )
+  end
 end
