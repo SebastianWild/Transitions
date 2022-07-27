@@ -21,7 +21,15 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 [bundle exec] fastlane mac development
 ```
 
-Description of what the lane does
+archive the app, but do not create a DMG
+
+### mac release
+
+```sh
+[bundle exec] fastlane mac release
+```
+
+archive the app, and create a DMG
 
 ----
 

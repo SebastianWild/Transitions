@@ -16,8 +16,16 @@
 default_platform(:mac)
 
 platform :mac do
-  desc "Description of what the lane does"
+  desc "archive the app, but do not create a DMG"
   lane :development do
     gym
+  end
+
+  desc "archive the app, and create a DMG"
+  lane :release do
+    gym
+    Dir.chdir("..") do
+      sh "./BuildTools/create-dmg.sh"
+    end
   end
 end
