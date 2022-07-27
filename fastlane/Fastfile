@@ -30,8 +30,10 @@ platform :mac do
   end
 
   desc "Bump the version number"
-  lane :bumpversion do
-    version = increment_version_number
+  lane :bumpversion do |options|
+    version = increment_version_number(
+      bump_type: options[:bump_type] ||= "patch",
+    )
     build = increment_build_number(build_number: 1)
     commit_version_bump(
       xcodeproj: "Transitions.xcodeproj",
