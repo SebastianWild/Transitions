@@ -886,6 +886,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "Transitions/Preview\\ Content/Preview\\ Assets.xcassets";
 				DEVELOPMENT_TEAM = MJGRJBXP25;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -914,6 +915,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "Transitions/Preview\\ Content/Preview\\ Assets.xcassets";
 				DEVELOPMENT_TEAM = MJGRJBXP25;
 				ENABLE_HARDENED_RUNTIME = YES;
