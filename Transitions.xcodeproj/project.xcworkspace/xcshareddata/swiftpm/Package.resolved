@@ -1,43 +1,40 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "DDC.swift",
-        "repositoryURL": "https://github.com/reitermarkus/DDC.swift",
-        "state": {
-          "branch": "master",
-          "revision": "15b3ef8235a831e0d7812dbdf12d6a4bb16d3bd6",
-          "version": null
-        }
-      },
-      {
-        "package": "LaunchAtLogin",
-        "repositoryURL": "https://github.com/sindresorhus/LaunchAtLogin.git",
-        "state": {
-          "branch": null,
-          "revision": "e8171b3e38a2816f579f58f3dac1522aa39efe41",
-          "version": "4.2.0"
-        }
-      },
-      {
-        "package": "Preferences",
-        "repositoryURL": "https://github.com/sindresorhus/Preferences.git",
-        "state": {
-          "branch": null,
-          "revision": "ffeaaad1def45d0625720dc1adae3789cd9c167d",
-          "version": "2.5.0"
-        }
-      },
-      {
-        "package": "Sliders",
-        "repositoryURL": "https://github.com/spacenation/swiftui-sliders",
-        "state": {
-          "branch": null,
-          "revision": "518bed3bfc7bd522f3c49404a0d1efb98fa1bf2c",
-          "version": null
-        }
+  "pins" : [
+    {
+      "identity" : "ddc.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/reitermarkus/DDC.swift",
+      "state" : {
+        "branch" : "master",
+        "revision" : "15b3ef8235a831e0d7812dbdf12d6a4bb16d3bd6"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "launchatlogin",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sindresorhus/LaunchAtLogin.git",
+      "state" : {
+        "revision" : "e8171b3e38a2816f579f58f3dac1522aa39efe41",
+        "version" : "4.2.0"
+      }
+    },
+    {
+      "identity" : "preferences",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sindresorhus/Preferences.git",
+      "state" : {
+        "revision" : "ffeaaad1def45d0625720dc1adae3789cd9c167d",
+        "version" : "2.5.0"
+      }
+    },
+    {
+      "identity" : "swiftui-sliders",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/spacenation/swiftui-sliders",
+      "state" : {
+        "revision" : "518bed3bfc7bd522f3c49404a0d1efb98fa1bf2c"
+      }
+    }
+  ],
+  "version" : 2
 }

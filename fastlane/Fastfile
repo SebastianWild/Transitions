@@ -1,0 +1,66 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:mac)
+
+platform :mac do
+  desc "archive the app, but do not create a DMG"
+  lane :development do
+    gym
+  end
+
+  desc "archive the app, notarize, and create a DMG"
+  lane :release do
+    gym
+    # see: https://github.com/fastlane/fastlane/issues/16095#issuecomment-623714214
+    # In order to avoid having to set an envionment variable, we fetch the app specific password from the keychain:
+    serviceName = "XCODE_NOTARIZE_PASSWORD"
+    accountName = CredentialsManager::AppfileConfig.try_fetch_value(:apple_id)
+    cmd = "security find-generic-password -a #{accountName} -s #{serviceName} -w -g | tr -d '\n'"   # Account name == email
+    ENV["FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD"] = sh( command:cmd, log:false)
+    
+    notarize(
+      package: ".build/Transitions.app",
+      asc_provider: "MJGRJBXP25",    # see: https://github.com/fastlane/fastlane/issues/19686
+      bundle_id: "dev.sebaswild.transitions",
+      verbose: true
+    )
+    Dir.chdir("..") do
+      sh "./BuildTools/create-dmg.sh"
+    end
+  end
+
+  desc "Bump the version number"
+  lane :bumpversion do |options|
+    version = increment_version_number(
+      bump_type: options[:bump_type] ||= "patch",
+    )
+    build = increment_build_number(build_number: 1)
+    commit_version_bump(
+      xcodeproj: "Transitions.xcodeproj",
+      message: "Bump version to #{version} (build #{build})"
+    )
+  end
+
+  desc "Bump the build number"
+  lane :bumpbuild do
+    version = get_version_number
+    build = increment_build_number
+    commit_version_bump(
+      xcodeproj: "Transitions.xcodeproj",
+      message: "Bump build to #{version} (build #{build})"
+    )
+  end
+end
