@@ -29,7 +29,7 @@ archive the app, but do not create a DMG
 [bundle exec] fastlane mac release
 ```
 
-archive the app, and create a DMG
+archive the app, notarize, and create a DMG
 
 ### mac bumpversion
 

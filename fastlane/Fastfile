@@ -21,9 +21,22 @@ platform :mac do
     gym
   end
 
-  desc "archive the app, and create a DMG"
+  desc "archive the app, notarize, and create a DMG"
   lane :release do
     gym
+    # see: https://github.com/fastlane/fastlane/issues/16095#issuecomment-623714214
+    # In order to avoid having to set an envionment variable, we fetch the app specific password from the keychain:
+    serviceName = "XCODE_NOTARIZE_PASSWORD"
+    accountName = CredentialsManager::AppfileConfig.try_fetch_value(:apple_id)
+    cmd = "security find-generic-password -a #{accountName} -s #{serviceName} -w -g | tr -d '\n'"   # Account name == email
+    ENV["FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD"] = sh( command:cmd, log:false)
+    
+    notarize(
+      package: ".build/Transitions.app",
+      asc_provider: "MJGRJBXP25",    # see: https://github.com/fastlane/fastlane/issues/19686
+      bundle_id: "dev.sebaswild.transitions",
+      verbose: true
+    )
     Dir.chdir("..") do
       sh "./BuildTools/create-dmg.sh"
     end
