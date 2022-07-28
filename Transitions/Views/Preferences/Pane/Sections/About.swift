@@ -59,8 +59,8 @@ extension Preferences.Section.About {
                 }
 
                 HStack {
-                    ForEach(Dependencies.allCases.indices) {
-                        Dependencies.allCases[$0].description
+                    ForEach(Dependencies.allCases, id: \.self) {
+                        $0.description
                     }
                 }
             }

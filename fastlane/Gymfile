@@ -7,9 +7,11 @@
 # Remove the # in front of the line to enable the option
 
 sdk("macosx")
+scheme("Transitions")
 output_directory("./.build")
 export_team_id("MJGRJBXP25")
-export_options({
-    scheme: "Transitions",
-    method: "developer-id"
-})
+export_method("developer-id")
+# export_options({
+#     scheme: "Transitions",
+#     method: "developer-id"
+# })
