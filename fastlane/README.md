@@ -15,6 +15,22 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ## Mac
 
+### mac setup
+
+```sh
+[bundle exec] fastlane mac setup
+```
+
+setup lane. Configure environment variables, check if running on CI, etc.
+
+### mac test
+
+```sh
+[bundle exec] fastlane mac test
+```
+
+run tests
+
 ### mac development
 
 ```sh

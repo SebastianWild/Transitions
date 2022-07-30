@@ -21,7 +21,7 @@ class EDIDUUIDTests: XCTestCase {
     }
 
     func testGetManufactureDate() {
-        let (week, year) = ediduuid.manufactureDate
+        let (week, year) = ediduuid.manufactureDate ?? (-1, -1)
         XCTAssertEqual(week, 43)
         XCTAssertEqual(year, 2018)
     }
