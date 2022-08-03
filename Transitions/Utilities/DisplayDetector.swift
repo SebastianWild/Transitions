@@ -8,7 +8,7 @@ import Foundation
 import SwiftUI
 
 /// `DisplayDetector` is responsible for detecting available displays
-class DisplayDetector: ObservableObject {
+class DisplayDetector: ObservableObject, Loggable {
     @Published private(set) var displays: [Display] = []
 
     private var nsScreenUpdateCancellable: AnyCancellable?
@@ -18,6 +18,9 @@ class DisplayDetector: ObservableObject {
     ) {
         nsScreenUpdateCancellable = notificationCenter.publisher(for: NSApplication.didChangeScreenParametersNotification)
             .receive(on: DispatchQueue.main)
+            .handleEvents(receiveOutput: { [weak self] _ in
+                self?.log.info("Updating displays")
+            })
             .sink { [weak self] _ in
                 self?.updateDisplays()
             }

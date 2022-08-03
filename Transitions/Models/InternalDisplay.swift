@@ -7,7 +7,7 @@ import Cocoa
 import Combine
 import Foundation
 
-class InternalDisplay: Display {
+class InternalDisplay: Display, Loggable {
     let id: CGDirectDisplayID
     var name: String
     let isInternalDisplay = true
@@ -34,13 +34,17 @@ class InternalDisplay: Display {
 
     convenience init() throws {
         guard let nsScreen = NSScreen.internalDisplay else {
+            InternalDisplay.log.warning("Could not create InternalDisplay - no internal display found")
             throw InternalDisplayError.notAvailable
         }
         try self.init(screen: nsScreen)
     }
 
     init(screen: NSScreen) throws {
-        guard let id = screen.displayID else { throw InternalDisplayError.noId }
+        guard let id = screen.displayID else {
+            InternalDisplay.log.warning("Could not create InternalDisplay - no display ID found")
+            throw InternalDisplayError.noId
+        }
 
         self.id = id
         name = screen.localizedName
@@ -55,9 +59,12 @@ class InternalDisplay: Display {
             .sink { [weak self] readingResult in
                 switch readingResult {
                 case let .success(brightness):
+                    self?.log.debug("Got internal display brightness reading: \(brightness)")
                     self?.error = nil
                     self?.brightness = brightness
                 case let .failure(error):
+                    self?.log.error("Error when reading internal display brightness: \(error.localizedDescription)")
+                    self?.log.info("Setting brightness to -1 due to error")
                     self?.error = error
                     self?.brightness = -1.0
                 }
@@ -70,19 +77,30 @@ class InternalDisplay: Display {
 
         do {
             let stdout: Data? = try Shell.run(launchPath: launchPath, args: args)
+            log.debug("Got new internal display corebrightnessdiag reading")
+
+            guard let plist = stdout, !plist.isEmpty else {
+                log.error("stdout was nil or empty")
+                return .failure(BrightnessReadError.readError(displayMetadata: metadata, original: nil))
+            }
 
             guard
-                let plist = stdout,
-                !plist.isEmpty,
                 let displayInfo = try? plistdecoder.decode(CoreBrightnessDiag.StatusInfo.self, from: plist),
                 let brightness = displayInfo.internalDisplay()?.DisplayServicesBrightness
             else {
+                log.error(
+                    """
+                    Could not decode CoreBrightnessDiag.StatusInfo plist. 
+                    Base64 data: \(plist.base64EncodedString())
+                    """
+                )
                 return .failure(BrightnessReadError.readError(displayMetadata: metadata, original: nil))
             }
 
             self.brightness = brightness
             return .success(brightness)
         } catch {
+            log.error("Error when reading internal display brightness: \(error.localizedDescription)")
             return .failure(BrightnessReadError.readError(displayMetadata: metadata, original: error))
         }
     }

@@ -20,7 +20,7 @@ enum Dependencies: CaseIterable {
                 name: "swiftui-sliders",
                 author: "SpaceNation Inc.",
                 // swiftlint:disable:next force_unwrapping
-                link: URL(string: "https://github.com/spacenation/swiftui-sliders")!,
+                link: URL(staticString: "https://github.com/spacenation/swiftui-sliders"),
                 license: .MIT
             )
         case .sliders:
@@ -28,7 +28,7 @@ enum Dependencies: CaseIterable {
                 name: "Preferences",
                 author: "Sindre Sorhus",
                 // swiftlint:disable:next force_unwrapping
-                link: URL(string: "https://github.com/sindresorhus/Preferences")!,
+                link: URL(staticString: "https://github.com/sindresorhus/Preferences"),
                 license: .MIT
             )
         case .launchAtLogin:
@@ -36,9 +36,18 @@ enum Dependencies: CaseIterable {
                 name: "LaunchAtLogin",
                 author: "Sindre Sorhus",
                 // swiftlint:disable:next force_unwrapping
-                link: URL(string: "https://github.com/sindresorhus/LaunchAtLogin")!,
+                link: URL(staticString: "https://github.com/sindresorhus/LaunchAtLogin"),
                 license: .MIT
             )
         }
+    }
+}
+
+private extension URL {
+    init(staticString: StaticString) {
+        guard let url = URL(string: "\(staticString)") else {
+            preconditionFailure("Developer error")
+        }
+        self = url
     }
 }

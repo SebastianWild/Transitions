@@ -10,13 +10,23 @@ protocol DarkModeControlling {
     static func get() throws -> Bool
 }
 
-enum DarkMode: DarkModeControlling {
+enum DarkMode: DarkModeControlling, Loggable {
     static func set(on: Bool) throws {
-        try (on ? NSAppleScript.setDarkModeOn : NSAppleScript.setDarkModeOff).execute()
+        do {
+            try (on ? NSAppleScript.setDarkModeOn : NSAppleScript.setDarkModeOff).execute()
+        } catch {
+            log.critical("Could not set dark mode to \(on), error: \(error.localizedDescription)")
+            throw error
+        }
     }
 
     static func get() throws -> Bool {
-        try NSAppleScript.getDarkMode.execute().booleanValue
+        do {
+            return try NSAppleScript.getDarkMode.execute().booleanValue
+        } catch {
+            log.critical("Could not get dark mode: \(error.localizedDescription)")
+            throw error
+        }
     }
 }
 

@@ -8,7 +8,7 @@ import Foundation
 
 /// `DisplayController` listens to brightness changes on a display and triggers toggling of the system dark mode
 /// when appropriate
-class DisplayController<Controller: DarkModeControlling> {
+class DisplayController<Controller: DarkModeControlling>: Loggable {
     private let display: Display
     private let threshold: Float
     private let controller: DarkModeControlling.Type

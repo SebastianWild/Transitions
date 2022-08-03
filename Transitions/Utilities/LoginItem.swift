@@ -6,7 +6,7 @@
 import Foundation
 import LaunchAtLogin
 
-enum LoginItem {
+enum LoginItem: Loggable {
     /**
      Adds or removed the login item for Transitions.app.
 
@@ -17,6 +17,7 @@ enum LoginItem {
             LaunchAtLogin.isEnabled
         }
         set {
+            log.info("Setting login item to \(newValue)")
             LaunchAtLogin.isEnabled = newValue
         }
     }
