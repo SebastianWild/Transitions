@@ -80,6 +80,7 @@ extension UserData {
     /// - Returns: Non-failing publisher that fires when the `DisplaySettings` are changed.
     func settingsPublisher(for persistentIdentifier: PersistentIdentifier) -> AnyPublisher<DisplaySettings, Never> {
         if displaySettings[persistentIdentifier] == nil {
+            log.info("First call to `settingsPublisher(_:)` for display with persistent identifier \(persistentIdentifier). Creating default settings.")
             displaySettings[persistentIdentifier] = DisplaySettings(id: persistentIdentifier.id)
         }
 
@@ -90,7 +91,7 @@ extension UserData {
 
     /// Get a `Binding` to the `DisplaySettings.switchValue` for a `Display`.
     ///
-    /// - Parameter persistentIdentifier: The identifier for the display. If `UserData` does not contain this display already, default settings will be created.
+    /// - Parameter display: The identifier for the display. If `UserData` does not contain this display already, default settings will be created.
     /// - Returns: `Binding` where the `switchValue` can be changed for the display
     func switchBindingOrDefault(for display: Display) -> Binding<Float> {
         guard let identifier = display.persistentIdentifier else {
@@ -147,20 +148,29 @@ extension UserData: Codable {
 
     convenience init(from decoder: Decoder) throws {
         self.init()
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-
-        isAppEnabled = try container.decode(Bool.self, forKey: .isAppEnabled)
-        defaultTriggerValue = try container.decode(Float.self, forKey: .defaultTriggerValue)
-        displaySettings = try container.decode([PersistentIdentifier: UserData.DisplaySettings].self, forKey: .displaySettings)
+            isAppEnabled = try container.decode(Bool.self, forKey: .isAppEnabled)
+            defaultTriggerValue = try container.decode(Float.self, forKey: .defaultTriggerValue)
+            displaySettings = try container.decode([PersistentIdentifier: UserData.DisplaySettings].self, forKey: .displaySettings)
+        } catch {
+            log.error("Error decoding UserData: \(error.localizedDescription)")
+            throw error
+        }
     }
 
     func encode(to encoder: Encoder) throws {
+        do {
         var container = encoder.container(keyedBy: CodingKeys.self)
 
         try container.encode(isAppEnabled, forKey: .isAppEnabled)
         try container.encode(defaultTriggerValue, forKey: .defaultTriggerValue)
         try container.encode(displaySettings, forKey: .displaySettings)
+        } catch {
+            log.error("Error encoding UserData: \(error.localizedDescription)")
+            throw error
+        }
     }
 }
 

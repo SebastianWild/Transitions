@@ -10,13 +10,15 @@ import AppKit
 import DDC
 import Foundation
 
-extension DDC: DDCControlling {
+extension DDC: DDCControlling, Loggable {
     func readBrightness() async -> BrightnessReading {
         guard let (current, max) = read(command: .brightness) else {
+            log.error("Failed to read brightness from Intel-DDC implementation! Error unknown.")
             return .failure(.readError(displayMetadata: nil, original: nil))
         }
 
         guard max != 0 else {
+            log.error("Got < 0 max brightness from Intel-DDC.")
             return .failure(.readError(displayMetadata: nil, original: nil))
         }
 

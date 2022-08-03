@@ -10,7 +10,7 @@ import Foundation
  The main controller that tracks available displays, changes in user settings,
  and uses those in order to toggle functionality of the app
  */
-class DisplaysController {
+class DisplaysController: Loggable {
     let displayManager = DisplayDetector()
     @Published var isStartingOnLogon: Bool = LoginItem.enabled
 
@@ -34,6 +34,7 @@ class DisplaysController {
                 if isEnabled {
                     self.primaryDisplayUpdateCancellable = self.makeDisplayUpdatePipeline(listeningOn: userData)
                 } else {
+                    self.log.info("Disabling app")
                     self.primaryDisplayUpdateCancellable?.cancel()
                 }
             }
@@ -54,6 +55,7 @@ class DisplaysController {
             .map(\.first) // The first display is the primary display
             .handleEvents(receiveOutput: { [weak self] display in
                 if display == nil {
+                    self?.log.error("Primary display was nil")
                     self?.darkModeController = nil
                 }
             })
@@ -61,14 +63,16 @@ class DisplaysController {
 
         // Configure re-creating the DarkModeController when user preferences or displays change
         return primaryDisplayChangedHandler
-            .map { display -> AnyPublisher<(Display, Float), Never> in
+            .map { [log] display -> AnyPublisher<(Display, Float), Never> in
                 var triggerPublisher: AnyPublisher<Float, Never>
                 if let persistentId = display.persistentIdentifier {
+                    log.info("Creating publisher for display \(persistentId)")
                     triggerPublisher = userData
                         .settingsPublisher(for: persistentId)
                         .map(\.switchValue)
                         .eraseToAnyPublisher()
                 } else {
+                    log.warning("Primary display has no persistent identifier, returning default publisher")
                     triggerPublisher = userData
                         .$defaultTriggerValue
                         .eraseToAnyPublisher()

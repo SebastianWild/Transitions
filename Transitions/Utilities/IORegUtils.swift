@@ -10,16 +10,19 @@ import Foundation
  - MacMini9,1's HDMI port does not work with DDC
  */
 
-enum IORegUtils {
+enum IORegUtils: Loggable {
     static func service(for displayID: CGDirectDisplayID) -> IORegService? {
-        guard displayID.metadata.info != nil else { return nil }
+        guard displayID.metadata.info != nil else {
+            log.warning("Attempted to get IOReg service for display does not have info!")
+            return nil
+        }
         return IORegService.forMatching()
             .sorted(by: { $0.matchScore(comparedTo: displayID.metadata) > $1.matchScore(comparedTo: displayID.metadata) })
             .first
     }
 }
 
-struct IORegService {
+struct IORegService: Loggable {
     var edidUUID: EDIDUUID = ""
     var productName: String = ""
     var serialNumber: Int = 0
@@ -51,59 +54,82 @@ extension IORegService {
     func matchScore(comparedTo metadata: DisplayMetadata) -> MatchScore {
         guard let info = metadata.info else { return -1 }
 
+        log.info("""
+                 Scoring display \(metadata.id) against service:
+                 \(debugDescription)
+                 """)
+
         var score = 0
         // EDID UUID comparing
         if info.vendorId == edidUUID.vendorID {
             score += 1
+            log.debug("Vendor ID match. Score \(score)")
         }
         if info.productId == edidUUID.productID {
             score += 1
+            log.debug("Product ID match. Score \(score)")
         }
         if info.horizontalImageSize == edidUUID.horizontalImageSize {
             score += 1
+            log.debug("Horizontal image size match. Score \(score)")
         }
         if info.verticalImageSize == edidUUID.verticalImageSize {
             score += 1
+            log.debug("Vertical image size match. Score \(score)")
         }
         if info.weekOfManufacture == edidUUID.manufactureDate?.week {
             score += 1
+            log.debug("Week of manufacture match. Score \(score)")
         }
         if info.yearOfManufacture == edidUUID.manufactureDate?.year {
             score += 1
+            log.debug("Year of manufacture match. Score \(score)")
         }
 
         if info.serialNumber == serialNumber {
             score += 1
+            log.debug("Serial number match. Score \(score)")
         }
         if info.displayProductName == productName {
             score += 1
+            log.debug("Display product name match. Score \(score)")
         }
 
         if serviceLocation == metadata.id {
             score += 1
+            log.debug("Service location match. Score \(score)")
         }
 
+        log.debug("""
+                  Scoring for service
+                  \(debugDescription)
+                  complete. Final score \(score) / \(IORegService.MatchScore.max)
+                  """)
         return score
     }
 
     /// All the `Service`s to be used for matching with DisplayCreateInfoDictionary for a specific CGDirectDisplayID
     static func forMatching() -> [IORegService] {
+        log.debug("Starting IOReg search.")
+
         var servicesForMatching = [IORegService]()
         var service = IORegService()
         var serviceLocation = 0
         for entry in IORegDisplayEntries() where entry.service != IO_OBJECT_NULL {
             // A `Service` needs both AppleCLCD2 and DCPAVServiceProxy
             if entry.class == .appleCLCD2 {
+                log.debug("Found AppleCLCD2 service. Creating IORegService.")
                 serviceLocation += 1
                 service = IORegService.makeFromAppleCLCD2(service: entry.service, location: serviceLocation)
             }
             if entry.class == .dcpAVServiceProxy {
+                log.debug("Found DCPAVServiceProxy service. Appending service for matching.")
                 // Classes matched up, finish building the service
                 service.set(dcpAVServiceProxy: entry.service)
                 servicesForMatching.append(service)
             }
         }
-
+        log.debug("Found \(servicesForMatching.count) services for matching.")
         return servicesForMatching
     }
 
@@ -130,6 +156,17 @@ extension IORegService {
         let productName = productAttributes?.value(forKey: "ProductName") as? String
         let serialNumber = productAttributes?.value(forKey: "SerialNumber") as? Int
 
+        log.debug(
+            """
+            Creating IORegService:
+            EDID UUID: \(edidUUID ?? "nil"),
+            ProductName: \(productName ?? "nil"),
+            SerialNumber: \(serialNumber == nil ? "nil" : "\(serialNumber!)")
+            Location: \(location),
+            service: nil
+            """
+        )
+
         return IORegService(
             edidUUID: edidUUID ?? "",
             productName: productName ?? "",
@@ -142,6 +179,19 @@ extension IORegService {
 
 extension IORegService.MatchScore {
     static var max: Int { 9 }
+}
+
+extension IORegService: CustomDebugStringConvertible {
+    public var debugDescription: String {
+        """
+        IORegService(
+            edidUUID: \(edidUUID),
+            productName: \(productName),
+            serialNumber: \(serialNumber),
+            serviceLocation: \(serviceLocation)
+        )
+        """
+    }
 }
 
 struct IORegDisplayEntries: Sequence, IteratorProtocol {
