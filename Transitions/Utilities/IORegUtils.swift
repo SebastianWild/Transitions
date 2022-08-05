@@ -27,7 +27,7 @@ struct IORegService: Loggable {
     var productName: String = ""
     var serialNumber: Int = 0
     var serviceLocation: Int = 0
-    var service: IOAVService?
+    var avService: IOAVService?
 }
 
 extension IORegService {
@@ -42,7 +42,7 @@ extension IORegService {
             CFStringCreateWithCString(kCFAllocatorDefault, "Location", kCFStringEncodingASCII),
             kCFAllocatorDefault, IOOptionBits(kIORegistryIterateRecursively)
         ).takeRetainedValue() as? String == "External" {
-            self.service = IOAVServiceCreateWithService(kCFAllocatorDefault, service)?.takeRetainedValue() as IOAVService
+            avService = IOAVServiceCreateWithService(kCFAllocatorDefault, service)?.takeRetainedValue() as IOAVService
         }
     }
 
@@ -172,7 +172,7 @@ extension IORegService {
             productName: productName ?? "",
             serialNumber: serialNumber ?? 0,
             serviceLocation: location,
-            service: nil
+            avService: nil
         )
     }
 }

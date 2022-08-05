@@ -11,17 +11,28 @@ import DDC
 import Foundation
 
 actor ARMDDC: Loggable {
-    let displayID: CGDirectDisplayID
+    typealias IORegUtil = (CGDirectDisplayID) -> IORegService?
+
+    /// Optional param used for error reporting purposes
+    private let displayMetadata: DisplayMetadata?
     private let service: I2CIOServiceProviding
     private var readingCancellable: AnyCancellable?
 
     init?(
-        for displayID: CGDirectDisplayID
+        for displayID: CGDirectDisplayID,
+        ioRegUtil: IORegUtil = IORegUtils.service
     ) {
-        self.displayID = displayID
-        guard let service = IORegUtils.service(for: displayID) else { return nil }
-        guard service.service != nil else { return nil }
-        self.service = I2CIOService(with: service.service!)
+        displayMetadata = displayID.metadata
+        guard let service = ioRegUtil(displayID) else { return nil }
+        guard let ioAVService = service.avService else { return nil }
+        self.service = I2CIOService(with: ioAVService)
+    }
+
+    init(
+        service: I2CIOServiceProviding
+    ) {
+        displayMetadata = nil
+        self.service = service
     }
 
     private func read(command: DDC.Command, tries _: UInt8 = 3, minReplyDelay _: UInt32 = 10000) async throws -> (current: UInt16, max: UInt16) {
@@ -126,12 +137,12 @@ extension ARMDDC: DDCControlling {
             let (current, max) = try await read(command: .brightness)
             guard max != 0 else {
                 log.error("Got < 0 max brightness from DDC.")
-                return .failure(BrightnessReadError.readError(displayMetadata: displayID.metadata, original: nil))
+                return .failure(BrightnessReadError.readError(displayMetadata: displayMetadata, original: nil))
             }
             return .success(Float(current) / Float(max))
         } catch {
             log.error("Error when reading brightness: \(error.localizedDescription)")
-            return .failure(BrightnessReadError.readError(displayMetadata: displayID.metadata, original: error))
+            return .failure(BrightnessReadError.readError(displayMetadata: displayMetadata, original: error))
         }
     }
 }
