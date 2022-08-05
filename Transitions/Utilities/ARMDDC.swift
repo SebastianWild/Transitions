@@ -19,11 +19,10 @@ actor ARMDDC: Loggable {
     private var readingCancellable: AnyCancellable?
 
     init?(
-        for displayID: CGDirectDisplayID,
-        ioRegUtil: IORegUtil = IORegUtils.service
+        for displayID: CGDirectDisplayID
     ) {
         displayMetadata = displayID.metadata
-        guard let service = ioRegUtil(displayID) else { return nil }
+        guard let service = IORegUtils.service(for: displayID) else { return nil }
         guard let ioAVService = service.avService else { return nil }
         self.service = I2CIOService(with: ioAVService)
     }
@@ -39,29 +38,22 @@ actor ARMDDC: Loggable {
         let readSleepTime = UInt64(0.01 * 1000 * 1000 * 1000) // 0.01 seconds in nanoseconds
         let attempts = 3
 
-        let send: [UInt8] = [command.rawValue]
-        var paddedSend = [UInt8(0x80 | (send.count + 1)), UInt8(send.count)] + send + [0]
-        paddedSend[paddedSend.count - 1] = paddedSend.checksum(
-            initial: send.count == 1 ? 0x6E : 0x6E ^ 0x51,
-            range: ClosedRange<Int>(uncheckedBounds: (0, paddedSend.count - 2))
-        )
+        let bytes = DDCMessage(command: command)
 
         var readError: DDCError?
         var attemptCount = 0
         repeat {
             do {
                 attemptCount += 1
-                log.debug("Writing DDC command: \(command.rawValue), with send: \(send)")
-                try writeI2COnQueue(inputBuffer: paddedSend)
+                log.debug("Writing DDC command: \(command.rawValue), with send: \(bytes)")
+                try writeI2COnQueue(inputBuffer: bytes)
                 try await Task.sleep(nanoseconds: readSleepTime)
-                log.debug("Reading DDC command: \(command.rawValue), with send: \(send)")
+                log.debug("Reading DDC command: \(command.rawValue), with send: \(bytes)")
                 let reply = try readI2COnQueue()
                 log.debug("Got DDC raw reply: \(reply)")
 
-                let max = UInt16(reply[6]) * 256 + UInt16(reply[7])
-                let current = UInt16(reply[8]) * 256 + UInt16(reply[9])
-                log.debug("Got DDC reply current: \(current) max: \(max)")
-                return (current, max)
+                log.debug("Got DDC reply current: \(reply.current) max: \(reply.max)")
+                return (reply.current, reply.max)
             } catch let error as DDCError {
                 readError = error
                 log.warning("Error when reading from DDC. Attempt \(attemptCount) of \(attempts). Error: \(error.localizedDescription)")
@@ -79,13 +71,7 @@ actor ARMDDC: Loggable {
         let writeSleepTime = UInt64(0.01 * 1000 * 1000 * 1000) // 0.01 seconds in nanoseconds
         let attempts = 3
 
-        let send: [UInt8] = [command.rawValue, UInt8(value >> 8), UInt8(value & 255)]
-
-        var paddedSend = [UInt8(0x80 | (send.count + 1)), UInt8(send.count)] + send + [0]
-        paddedSend[paddedSend.count - 1] = paddedSend.checksum(
-            initial: send.count == 1 ? 0x6E : 0x6E ^ 0x51,
-            range: ClosedRange<Int>(uncheckedBounds: (0, paddedSend.count - 2))
-        )
+        let bytes = DDCMessage(command: command, value: value)
 
         var writeError: DDCError?
         var attemptCount = 0
@@ -93,7 +79,7 @@ actor ARMDDC: Loggable {
             do {
                 attemptCount += 1
                 log.debug("Writing DDC command: \(command.rawValue), with value: \(value)")
-                try writeI2COnQueue(inputBuffer: paddedSend)
+                try writeI2COnQueue(inputBuffer: bytes)
                 log.debug("Wrote DDC command: \(command.rawValue), with value: \(value)")
             } catch let error as DDCError {
                 writeError = error
@@ -115,7 +101,7 @@ actor ARMDDC: Loggable {
         var reply = [UInt8](repeating: 0, count: 11)
         reply = try service.read(chipAddress: chipAddress, dataAddress: dataAddress, outputBufferSize: UInt32(reply.count))
 
-        if reply.checksum(initial: 0x50, range: ClosedRange(uncheckedBounds: (0, reply.count - 2))) != reply[reply.count - 1] {
+        guard reply.isValid else {
             throw DDCError.checksumValidationFailed
         }
 
@@ -144,17 +130,6 @@ extension ARMDDC: DDCControlling {
             log.error("Error when reading brightness: \(error.localizedDescription)")
             return .failure(BrightnessReadError.readError(displayMetadata: displayMetadata, original: error))
         }
-    }
-}
-
-private extension Array where Element == UInt8 {
-    func checksum(initial: UInt8, range: ClosedRange<Int>) -> UInt8 {
-        var check = initial
-        for index in range {
-            check ^= self[index]
-        }
-
-        return check
     }
 }
 

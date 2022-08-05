@@ -22,9 +22,11 @@
 		82C8374265269A9C4633239E /* I2CIOService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C834765C9413A26AD14E62 /* I2CIOService.swift */; };
 		82C838BA0C307CDD92FDEE6D /* InternalDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83D21D6C6CD1446C57DF2 /* InternalDisplay.swift */; };
 		82C839D218E18A7B37C385D8 /* AppCoordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C8306B2647294EA202DE07 /* AppCoordinating.swift */; };
+		82C83A17D7E51EA44EC63FF1 /* DDCMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83C47E9C7A8F4B2BE154B /* DDCMessage.swift */; };
 		82C83A667D45EE3683CAC014 /* Refreshable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83E4DFD708AEE56F0C9D8 /* Refreshable.swift */; };
 		82C83AA37EE62E37936BE63C /* CoreBrightnessDiag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83A61033F2F4F0B31C28C /* CoreBrightnessDiag.swift */; };
 		82C83AB18A598F510781A84F /* AppPreferenceWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83ADBB821820060ACF0E2 /* AppPreferenceWindowController.swift */; };
+		82C83B50BA585D5F67C49EA2 /* Array+DDCReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83FC060B1236152302B8D /* Array+DDCReply.swift */; };
 		82C83B841E2430C9E54723E9 /* DisplaysController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83E4158A55D02EEE50345 /* DisplaysController.swift */; };
 		82C83C076F574DD927C141FB /* LoginItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83AAC71530778D48F950F /* LoginItem.swift */; };
 		82C83DEF3DA8B36BDC112A05 /* I2CIOServiceProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83BDC494D5F045465FD70 /* I2CIOServiceProviding.swift */; };
@@ -107,6 +109,7 @@
 		82C83AAC71530778D48F950F /* LoginItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginItem.swift; sourceTree = "<group>"; };
 		82C83ADBB821820060ACF0E2 /* AppPreferenceWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppPreferenceWindowController.swift; sourceTree = "<group>"; };
 		82C83BDC494D5F045465FD70 /* I2CIOServiceProviding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = I2CIOServiceProviding.swift; sourceTree = "<group>"; };
+		82C83C47E9C7A8F4B2BE154B /* DDCMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DDCMessage.swift; path = Transitions/Extensions/DDCMessage.swift; sourceTree = SOURCE_ROOT; };
 		82C83CB093BF0C8821CE6BE0 /* DarkMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DarkMode.swift; sourceTree = "<group>"; };
 		82C83D21D6C6CD1446C57DF2 /* InternalDisplay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternalDisplay.swift; sourceTree = "<group>"; };
 		82C83E05A4847C50CCD8615A /* IORegUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IORegUtils.swift; sourceTree = "<group>"; };
@@ -116,6 +119,7 @@
 		82C83F18D8865D3CDE7784D1 /* CoreBrightnessDiag+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreBrightnessDiag+Extensions.swift"; sourceTree = "<group>"; };
 		82C83FBECA4B42A8BD31A088 /* BrightnessReadError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrightnessReadError.swift; sourceTree = "<group>"; };
 		82C83FBFFDBE22FCFC517E4D /* DisplayTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayTests.swift; sourceTree = "<group>"; };
+		82C83FC060B1236152302B8D /* Array+DDCReply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+DDCReply.swift"; sourceTree = "<group>"; };
 		9E061493268940D900F34D59 /* Color+Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Library.swift"; sourceTree = "<group>"; };
 		9E0614972689421300F34D59 /* AppStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStrings.swift; sourceTree = "<group>"; };
 		9E06149A268949AB00F34D59 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -323,6 +327,7 @@
 				9E0CF34625FD98C000699170 /* Sizes.swift */,
 				9E4511E12402117F0000E7E0 /* UserDefaults+Extensions.swift */,
 				9E604727287E74A300CA2749 /* Loggable.swift */,
+				82C83FC060B1236152302B8D /* Array+DDCReply.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -448,6 +453,7 @@
 				9E2E3EFD270A8AB300592EF3 /* ARMDDC.swift */,
 				82C83E05A4847C50CCD8615A /* IORegUtils.swift */,
 				82C834765C9413A26AD14E62 /* I2CIOService.swift */,
+				82C83C47E9C7A8F4B2BE154B /* DDCMessage.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -687,6 +693,8 @@
 				82C830DB7F541CA094850B1C /* IORegUtils.swift in Sources */,
 				82C83DEF3DA8B36BDC112A05 /* I2CIOServiceProviding.swift in Sources */,
 				82C8374265269A9C4633239E /* I2CIOService.swift in Sources */,
+				82C83A17D7E51EA44EC63FF1 /* DDCMessage.swift in Sources */,
+				82C83B50BA585D5F67C49EA2 /* Array+DDCReply.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
