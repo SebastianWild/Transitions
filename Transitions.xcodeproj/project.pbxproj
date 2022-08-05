@@ -22,6 +22,7 @@
 		82C8374265269A9C4633239E /* I2CIOService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C834765C9413A26AD14E62 /* I2CIOService.swift */; };
 		82C838BA0C307CDD92FDEE6D /* InternalDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83D21D6C6CD1446C57DF2 /* InternalDisplay.swift */; };
 		82C839D218E18A7B37C385D8 /* AppCoordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C8306B2647294EA202DE07 /* AppCoordinating.swift */; };
+		82C83A10D95EA7362C72B6EE /* I2CIOServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C8324745D815C73EE34665 /* I2CIOServiceTests.swift */; };
 		82C83A17D7E51EA44EC63FF1 /* DDCMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83C47E9C7A8F4B2BE154B /* DDCMessage.swift */; };
 		82C83A667D45EE3683CAC014 /* Refreshable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83E4DFD708AEE56F0C9D8 /* Refreshable.swift */; };
 		82C83AA37EE62E37936BE63C /* CoreBrightnessDiag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C83A61033F2F4F0B31C28C /* CoreBrightnessDiag.swift */; };
@@ -96,6 +97,7 @@
 
 /* Begin PBXFileReference section */
 		82C8306B2647294EA202DE07 /* AppCoordinating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinating.swift; sourceTree = "<group>"; };
+		82C8324745D815C73EE34665 /* I2CIOServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = I2CIOServiceTests.swift; sourceTree = "<group>"; };
 		82C832864A9F72A369DE0007 /* DisplayController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayController.swift; sourceTree = "<group>"; };
 		82C833022A42935FF5244B64 /* NSScreen+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSScreen+Extensions.swift"; sourceTree = "<group>"; };
 		82C83457B308720F62A47F1D /* DisplayDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayDetector.swift; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 			children = (
 				9E26B27B2738B6E400869E02 /* EDIDUUIDTests.swift */,
 				82C83FBFFDBE22FCFC517E4D /* DisplayTests.swift */,
+				82C8324745D815C73EE34665 /* I2CIOServiceTests.swift */,
 			);
 			path = TransitionsTests;
 			sourceTree = "<group>";
@@ -627,6 +630,7 @@
 			files = (
 				9E26B27C2738B6E400869E02 /* EDIDUUIDTests.swift in Sources */,
 				82C8333129B2273338403956 /* DisplayTests.swift in Sources */,
+				82C83A10D95EA7362C72B6EE /* I2CIOServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
