@@ -22,6 +22,16 @@
                ReferencedContainer = "container:Transitions.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "9E7DEC04289EB7BF0076B156"
+               BuildableName = "TransitionsTests2.xctest"
+               BlueprintName = "TransitionsTests2"
+               ReferencedContainer = "container:Transitions.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

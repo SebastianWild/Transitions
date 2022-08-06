@@ -162,11 +162,11 @@ extension UserData: Codable {
 
     func encode(to encoder: Encoder) throws {
         do {
-        var container = encoder.container(keyedBy: CodingKeys.self)
+            var container = encoder.container(keyedBy: CodingKeys.self)
 
-        try container.encode(isAppEnabled, forKey: .isAppEnabled)
-        try container.encode(defaultTriggerValue, forKey: .defaultTriggerValue)
-        try container.encode(displaySettings, forKey: .displaySettings)
+            try container.encode(isAppEnabled, forKey: .isAppEnabled)
+            try container.encode(defaultTriggerValue, forKey: .defaultTriggerValue)
+            try container.encode(displaySettings, forKey: .displaySettings)
         } catch {
             log.error("Error encoding UserData: \(error.localizedDescription)")
             throw error

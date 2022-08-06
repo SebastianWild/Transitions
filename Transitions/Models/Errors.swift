@@ -16,3 +16,23 @@ enum BrightnessReadError: LocalizedError {
     /// The initial reading has not been performed
     case notPerformed
 }
+
+enum DDCError: Error, LocalizedError {
+    case checksumValidationFailed
+    case serviceUnavailable
+    case writeFailure
+    case readFailure
+
+    var localizedDescription: String {
+        switch self {
+        case .checksumValidationFailed:
+            return "DDC checksum validation failed"
+        case .serviceUnavailable:
+            return "DDC service unavailable"
+        case .writeFailure:
+            return "DDC write failed"
+        case .readFailure:
+            return "DDC read failed"
+        }
+    }
+}
