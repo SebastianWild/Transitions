@@ -7,13 +7,13 @@ import Foundation
 
 /// Wrapper to read and write DDC over I2C.
 struct I2CIOService: I2CIOServiceProviding {
-    typealias I2C = (UInt32, UInt32, inout [UInt8], UInt32) -> Int32
+    typealias I2C = (_ chipAddress: UInt32, _ dataAddress: UInt32, _ buffer: inout [UInt8], _ bufferSize: UInt32) -> Int32
 
     private let write: I2C
     private let read: I2C
 
     init(with service: IOAVService) {
-        func write(chipAddress: UInt32, dataAddress: UInt32, inputBuffer: inout [UInt8], outputBufferSize: UInt32) -> Int32 {
+        func write(chipAddress: UInt32, dataAddress: UInt32, inputBuffer: inout [UInt8], outputBufferSize _: UInt32) -> Int32 {
             IOAVServiceWriteI2C(service, chipAddress, dataAddress, &inputBuffer, UInt32(inputBuffer.count))
         }
         func read(chipAddress: UInt32, dataAddress: UInt32, output: inout [UInt8], outputBufferSize: UInt32) -> Int32 {

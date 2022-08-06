@@ -4,6 +4,8 @@
 //
 
 import Foundation
+import XCTest
+
 @testable import Transitions
 
 class DisplayTests: XCTestCase {}
