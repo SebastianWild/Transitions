@@ -8,4 +8,16 @@ import XCTest
 
 @testable import Transitions
 
-class DisplayTests: XCTestCase {}
+final class DisplayTests: XCTestCase {
+    // MARK: - Extension tests
+
+    func testGetPersistentIdentifier_InternalDisplay() {
+        let sut = Preview.MockDisplay(isInternal: true)
+        XCTAssertEqual(sut.persistentIdentifier, PersistentIdentifier.internalDisplay)
+    }
+
+//    func testGetPersistentIdentifier_FromMetadata() {
+//        let sut = Preview.MockDisplay()
+//        XCTAssertEqual(sut.persistentIdentifier, PersistentIdentifier.internalDisplay)
+//    }
+}
