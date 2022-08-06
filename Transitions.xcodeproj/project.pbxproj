@@ -548,9 +548,9 @@
 			mainGroup = 9E4511B62401E6160000E7E0;
 			packageReferences = (
 				9E06148E2689221D00F34D59 /* XCRemoteSwiftPackageReference "swiftui-sliders" */,
-				9E8B56A926F421B50081587F /* XCRemoteSwiftPackageReference "Preferences.git" */,
-				9E2E3EF4270A720B00592EF3 /* XCRemoteSwiftPackageReference "DDC.swift" */,
-				9EEAF274273DBA4A003944CB /* XCRemoteSwiftPackageReference "LaunchAtLogin.git" */,
+				9E8B56A926F421B50081587F /* XCRemoteSwiftPackageReference "Preferences" */,
+				9E2E3EF4270A720B00592EF3 /* XCRemoteSwiftPackageReference "DDC" */,
+				9EEAF274273DBA4A003944CB /* XCRemoteSwiftPackageReference "LaunchAtLogin" */,
 			);
 			productRefGroup = 9E4511C02401E6160000E7E0 /* Products */;
 			projectDirPath = "";
@@ -741,7 +741,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -911,7 +911,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Transitions/Transitions.entitlements;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -928,7 +928,7 @@
 				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.sebaswild.transitions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match Direct dev.sebaswild.transitions macos";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Transitions/Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1006,7 +1006,7 @@
 				revision = 518bed3bfc7bd522f3c49404a0d1efb98fa1bf2c;
 			};
 		};
-		9E2E3EF4270A720B00592EF3 /* XCRemoteSwiftPackageReference "DDC.swift" */ = {
+		9E2E3EF4270A720B00592EF3 /* XCRemoteSwiftPackageReference "DDC" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/reitermarkus/DDC.swift";
 			requirement = {
@@ -1014,7 +1014,7 @@
 				kind = branch;
 			};
 		};
-		9E8B56A926F421B50081587F /* XCRemoteSwiftPackageReference "Preferences.git" */ = {
+		9E8B56A926F421B50081587F /* XCRemoteSwiftPackageReference "Preferences" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sindresorhus/Preferences.git";
 			requirement = {
@@ -1022,7 +1022,7 @@
 				minimumVersion = 2.5.0;
 			};
 		};
-		9EC148922403391C00EBC6D2 /* XCRemoteSwiftPackageReference "Mint.git" */ = {
+		9EC148922403391C00EBC6D2 /* XCRemoteSwiftPackageReference "Mint" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/yonaskolb/Mint.git";
 			requirement = {
@@ -1030,7 +1030,7 @@
 				minimumVersion = 0.14.1;
 			};
 		};
-		9EEAF274273DBA4A003944CB /* XCRemoteSwiftPackageReference "LaunchAtLogin.git" */ = {
+		9EEAF274273DBA4A003944CB /* XCRemoteSwiftPackageReference "LaunchAtLogin" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin.git";
 			requirement = {
@@ -1048,22 +1048,22 @@
 		};
 		9E2E3EF5270A720B00592EF3 /* DDC */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9E2E3EF4270A720B00592EF3 /* XCRemoteSwiftPackageReference "DDC.swift" */;
+			package = 9E2E3EF4270A720B00592EF3 /* XCRemoteSwiftPackageReference "DDC" */;
 			productName = DDC;
 		};
 		9E8B56AA26F421B50081587F /* Preferences */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9E8B56A926F421B50081587F /* XCRemoteSwiftPackageReference "Preferences.git" */;
+			package = 9E8B56A926F421B50081587F /* XCRemoteSwiftPackageReference "Preferences" */;
 			productName = Preferences;
 		};
 		9EC148932403392600EBC6D2 /* mint */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9EC148922403391C00EBC6D2 /* XCRemoteSwiftPackageReference "Mint.git" */;
+			package = 9EC148922403391C00EBC6D2 /* XCRemoteSwiftPackageReference "Mint" */;
 			productName = mint;
 		};
 		9EEAF275273DBA4A003944CB /* LaunchAtLogin */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9EEAF274273DBA4A003944CB /* XCRemoteSwiftPackageReference "LaunchAtLogin.git" */;
+			package = 9EEAF274273DBA4A003944CB /* XCRemoteSwiftPackageReference "LaunchAtLogin" */;
 			productName = LaunchAtLogin;
 		};
 /* End XCSwiftPackageProductDependency section */
