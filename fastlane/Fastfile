@@ -44,7 +44,11 @@ platform :mac do
   lane :test do
     setup
 
-    match(git_basic_authorization: ENV["FASTLANE_MATCH_REPO_BASIC_AUTH"], readonly: is_ci)
+    match(
+        git_basic_authorization: ENV["FASTLANE_MATCH_REPO_BASIC_AUTH"],
+        readonly: is_ci,
+        type: "development"
+    )
     # TODO: Currently, Test target is configured to launch Transitions.app
     # This should not be needed as currently we just have pure logic test.
     # However all combinations tried so far error out with:
