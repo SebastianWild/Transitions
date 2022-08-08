@@ -21,3 +21,12 @@ enum CoreBrightnessDiag {
         let DisplayServicesIsBuiltInDisplay: Bool?
     }
 }
+
+extension CoreBrightnessDiag.StatusInfo: CustomDebugStringConvertible {
+    public var debugDescription: String {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        let data = try? encoder.encode(self)
+        return String(data: data ?? Data(), encoding: .utf8) ?? "nil"
+    }
+}
