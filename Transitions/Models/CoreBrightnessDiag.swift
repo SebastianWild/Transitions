@@ -5,28 +5,68 @@
 
 import Foundation
 
-// swiftlint:disable identifier_name
-enum CoreBrightnessDiag {
-    struct StatusInfo: Codable {
-        // note: most things are omitted
-        let CBDisplays: [String: CBDisplay]
-    }
-
-    struct CBDisplay: Codable {
-        let Display: Display
-    }
-
-    struct Display: Codable {
-        let DisplayServicesBrightness: Float?
-        let DisplayServicesIsBuiltInDisplay: Bool?
-    }
+protocol InternalDisplayBrightnessReadable: Decodable {
+    // swiftlint:disable identifier_name
+    var DisplayServicesBrightness: Float? { get }
+    // swiftlint:disable identifier_name
+    var DisplayServicesIsBuiltInDisplay: Bool? { get }
 }
 
-extension CoreBrightnessDiag.StatusInfo: CustomDebugStringConvertible {
-    public var debugDescription: String {
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .prettyPrinted
-        let data = try? encoder.encode(self)
-        return String(data: data ?? Data(), encoding: .utf8) ?? "nil"
+// swiftlint:disable identifier_name
+enum CoreBrightnessDiag {
+    struct StatusInfo: Decodable, InternalDisplayBrightnessReadable {
+        // note: most things are omitted
+        let CBDisplays: [String: InternalDisplayBrightnessReadable]
+
+        var DisplayServicesBrightness: Float? {
+            CBDisplays.first?.value.DisplayServicesBrightness
+        }
+
+        var DisplayServicesIsBuiltInDisplay: Bool? {
+            CBDisplays.first?.value.DisplayServicesIsBuiltInDisplay
+        }
+
+        init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            if let cbDisplays = try? container.decode([String: CBDisplay].self, forKey: .CBDisplays) as [String: InternalDisplayBrightnessReadable] {
+                CBDisplays = cbDisplays
+            } else if let displays = try? container.decode([String: Display].self, forKey: .CBDisplays) as [String: InternalDisplayBrightnessReadable] {
+                CBDisplays = displays
+            } else {
+                throw DecodingError.dataCorruptedError(
+                    in: container,
+                    debugDescription: "Expected CBDisplays or CBDisplays.CBDisplay"
+                )
+            }
+        }
+    }
+
+//    struct MinimalStatusInfo: Codable, InternalDisplayBrightnessReadable {
+//        let CBDisplays: [String: Display]
+//
+//        var DisplayServicesBrightness: Float? {
+//            CBDisplays.first?.value.Display.DisplayServicesBrightness
+//        }
+//
+//        var DisplayServicesIsBuiltInDisplay: Bool? {
+//            CBDisplays.first?.value.Display.DisplayServicesIsBuiltInDisplay
+//        }
+//    }
+
+    struct CBDisplay: Decodable, InternalDisplayBrightnessReadable {
+        let Display: Display
+
+        var DisplayServicesBrightness: Float? {
+            Display.DisplayServicesBrightness
+        }
+
+        var DisplayServicesIsBuiltInDisplay: Bool? {
+            Display.DisplayServicesIsBuiltInDisplay
+        }
+    }
+
+    struct Display: Decodable, InternalDisplayBrightnessReadable {
+        let DisplayServicesBrightness: Float?
+        let DisplayServicesIsBuiltInDisplay: Bool?
     }
 }

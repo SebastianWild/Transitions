@@ -55,9 +55,9 @@ extension IORegService {
         guard let info = metadata.info else { return -1 }
 
         log.info("""
-                 Scoring display \(metadata.id) against service:
-                 \(debugDescription)
-                 """)
+        Scoring display \(metadata.id) against service:
+        \(debugDescription)
+        """)
 
         var score = 0
         // EDID UUID comparing
@@ -101,10 +101,10 @@ extension IORegService {
         }
 
         log.debug("""
-                  Scoring for service
-                  \(debugDescription)
-                  complete. Final score \(score) / \(IORegService.MatchScore.max)
-                  """)
+        Scoring for service
+        \(debugDescription)
+        complete. Final score \(score) / \(IORegService.MatchScore.max)
+        """)
         return score
     }
 
