@@ -31,6 +31,8 @@ class DisplayController<Controller: DarkModeControlling>: Loggable {
             .compactMap {
                 try? $0.get()
             }
+            // The brightness change publisher never fails, so negative display brightnesses are considered errors
+            .filter { $0 > 0 }
             .compactMap { brightness -> (Bool, Float)? in
                 guard let isDarkModeEnabled = try? DarkMode.get() else { return nil }
 
