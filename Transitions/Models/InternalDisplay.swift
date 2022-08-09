@@ -84,14 +84,12 @@ class InternalDisplay: Display, Loggable {
                 return .failure(BrightnessReadError.readError(displayMetadata: metadata, original: nil))
             }
 
-            guard
-                let displayInfo = try? plistdecoder.decode(CoreBrightnessDiag.StatusInfo.self, from: plist),
-                let brightness = displayInfo.internalDisplay()?.DisplayServicesBrightness
-            else {
+            let displayInfo = try plistdecoder.decode(CoreBrightnessDiag.StatusInfo.self, from: plist)
+
+            guard let brightness = displayInfo.internalDisplay()?.DisplayServicesBrightness else {
                 log.error(
                     """
-                    Could not decode CoreBrightnessDiag.StatusInfo plist. 
-                    Base64 data: \(plist.base64EncodedString())
+                    Display info decoded successfully, but no DisplayServicesBrightness found: \(displayInfo.debugDescription)
                     """
                 )
                 return .failure(BrightnessReadError.readError(displayMetadata: metadata, original: nil))
