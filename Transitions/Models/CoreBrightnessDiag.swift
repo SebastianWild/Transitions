@@ -14,7 +14,7 @@ protocol InternalDisplayBrightnessReadable: Decodable {
 
 // swiftlint:disable identifier_name
 enum CoreBrightnessDiag {
-    struct StatusInfo: Decodable, InternalDisplayBrightnessReadable {
+    struct StatusInfo: Decodable, InternalDisplayBrightnessReadable, CustomDebugStringConvertible {
         // note: most things are omitted
         let CBDisplays: [String: InternalDisplayBrightnessReadable]
 
@@ -26,6 +26,17 @@ enum CoreBrightnessDiag {
             CBDisplays.first?.value.DisplayServicesIsBuiltInDisplay
         }
 
+        var debugDescription: String {
+            let brightness = DisplayServicesBrightness != nil ? "\(DisplayServicesBrightness!)" : "nil"
+            let isInternal = DisplayServicesIsBuiltInDisplay != nil ? "\(DisplayServicesIsBuiltInDisplay!)" : "nil"
+
+            return
+                """
+                DisplayServicesBrightness: \(brightness)
+                DisplayServicesIsBuiltInDisplay: \(isInternal)
+                """
+        }
+
         init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             if let cbDisplays = try? container.decode([String: CBDisplay].self, forKey: .CBDisplays) as [String: InternalDisplayBrightnessReadable] {
@@ -33,25 +44,17 @@ enum CoreBrightnessDiag {
             } else if let displays = try? container.decode([String: Display].self, forKey: .CBDisplays) as [String: InternalDisplayBrightnessReadable] {
                 CBDisplays = displays
             } else {
-                throw DecodingError.dataCorruptedError(
-                    in: container,
-                    debugDescription: "Expected CBDisplays or CBDisplays.CBDisplay"
+                throw DecodingError.typeMismatch(
+                    StatusInfo.self,
+                    .init(codingPath: [CodingKeys.CBDisplays], debugDescription: "Could not decode CBDisplay or Display")
                 )
             }
         }
-    }
 
-//    struct MinimalStatusInfo: Codable, InternalDisplayBrightnessReadable {
-//        let CBDisplays: [String: Display]
-//
-//        var DisplayServicesBrightness: Float? {
-//            CBDisplays.first?.value.Display.DisplayServicesBrightness
-//        }
-//
-//        var DisplayServicesIsBuiltInDisplay: Bool? {
-//            CBDisplays.first?.value.Display.DisplayServicesIsBuiltInDisplay
-//        }
-//    }
+        enum CodingKeys: String, CodingKey {
+            case CBDisplays
+        }
+    }
 
     struct CBDisplay: Decodable, InternalDisplayBrightnessReadable {
         let Display: Display

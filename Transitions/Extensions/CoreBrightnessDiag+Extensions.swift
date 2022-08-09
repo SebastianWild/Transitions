@@ -6,11 +6,10 @@
 import Foundation
 
 extension CoreBrightnessDiag.StatusInfo {
-    @available(*, deprecated, message: "Use InternalDisplayBrightnessReadable instead")
     /// Attempts to find the CoreBrightnessDiag status-info output for the internal display
-    func internalDisplay() -> CoreBrightnessDiag.Display? {
+    func internalDisplay() -> InternalDisplayBrightnessReadable? {
         CBDisplays.first { _, CBDisplay in
-            CBDisplay.Display.DisplayServicesIsBuiltInDisplay ?? false
-        }.map(\.1.Display)
+            CBDisplay.DisplayServicesIsBuiltInDisplay ?? false
+        }.map(\.1)
     }
 }
