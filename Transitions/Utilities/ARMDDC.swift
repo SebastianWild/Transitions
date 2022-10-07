@@ -38,7 +38,7 @@ actor ARMDDC: Loggable {
         )
 
         var readError: DDCError?
-        var attemptCount = 0
+        var attemptCount = 1
         repeat {
             do {
                 attemptCount += 1
